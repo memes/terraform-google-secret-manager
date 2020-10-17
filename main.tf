@@ -18,10 +18,13 @@ resource "google_secret_manager_secret" "secret" {
   labels    = var.labels
   replication {
     dynamic "user_managed" {
-      for_each = var.replication_locations
+      for_each = length(var.replication_locations) > 0 ? [1] : []
       content {
-        replicas {
-          location = user_managed.each.value
+        dynamic "replicas" {
+          for_each = var.replication_locations
+          content {
+            location = replicas.value
+          }
         }
       }
     }
