@@ -1,0 +1,34 @@
+# spell-checker: ignore fileignoreconfig
+fileignoreconfig:
+- filename: .github/workflows/pre-commit.yml
+  checksum: 079f171fdbd654d9e637f509bd9372cfc44f959ae4ff4d56d1cd810577f3ffd6
+- filename: examples/accessors/main.tf
+  checksum: 3cc433aa2611b1f9bdc5174836a9fd365a9d166ba68e2ff31c66e7e2f68aba5c
+- filename: examples/accessors/terraform.tfvars.example
+  checksum: 19a11999bd462787fcc7f2ce4ee0373948e21960f43bb9df7a6b12f656535a9f
+- filename: examples/simple/terraform.tfvars.example
+  checksum: 2fb1fc11ef5cf772298079a10b56d09b9c49a797c3a9cc47f269f60dd454bde2
+- filename: examples/user-managed-replication-accessors/terraform.tfvars.example
+  checksum: 93f0ac0315438d895b9716e4893ef3651858807a5c0c4a1c48de9b494c9a56a4
+- filename: examples/user-managed-replication/main.tf
+  checksum: ad68f7a4782f653dfccfb15d2ecc9acacbd977df437d6296f708b30779067340
+- filename: examples/user-managed-replication/terraform.tfvars.example
+  checksum: d619606a155c5b9a63def97d621913240b58f8d36672d005a0cb39bccda26c1b
+- filename: README.md
+  checksum: 0ab3c67583bd72d6e47b533ec72557f59869e2f898dc47b47e1c90bcb7ecd1cc
+- filename: examples/generated-secret/main.tf
+  checksum: 37c8edd39b841077663467bd9053e4041092b05b040f107bd8fcb2b1adb04670
+- filename: modules/random/main.tf
+  checksum: c89587d5635eda472e253d37918beceb418d7613f7785f883f34df0446c7d212
+- filename: main.tf
+  checksum: cb511c9a0a52e6e5cef748e70db76c8f17d0d1d19fc0a3922daaaf7d0627372e
+- filename: examples/simple/main.tf
+  checksum: b26086277af49d853473caea9f0bbbb62ebb6b7fd16ccde74f57f9d0d9b63444
+- filename: variables.tf
+  checksum: 18b37a92962a5d303cb54ce9f6d039252d5fe53befc0823d6297f95b52fa2240
+- filename: examples/user-managed-replication-accessors/main.tf
+  checksum: 941121157484e42ad577b8eed8381a02bd6b20c770d6da143fb4b23acbdfbd7e
+- filename: modules/random/README.md
+  checksum: 81673a5b74c6531edb37807ad5170474366bab1d26124585090247afb4423eff
+- filename: modules/random/variables.tf
+  checksum: 3b8afa99f58649680dba2c3409c5a316730ec5381692355f9f532add1048a47d
