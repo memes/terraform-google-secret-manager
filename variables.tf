@@ -40,7 +40,7 @@ variable "secret" {
   type = string
   validation {
     condition     = length(var.secret) > 0
-    error_message = "The secret must be a string that contains at least 1 character"
+    error_message = "The secret must be a string that contains at least 1 character."
   }
   description = <<EOD
 The secret payload to store in Secret Manager. Binary values should be base64
