@@ -13,14 +13,14 @@ terraform {
 
 # Create a slot for the secret in Secret Manager
 resource "google_secret_manager_secret" "secret" {
-  project = var.project_id
-  id      = var.id
-  labels  = var.labels
+  project   = var.project_id
+  secret_id = var.id
+  labels    = var.labels
   replication {
     dynamic "user_managed" {
       for_each = var.replication_locations
       content {
-        replicas = {
+        replicas {
           location = user_managed.each.value
         }
       }
