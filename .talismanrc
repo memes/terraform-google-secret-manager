@@ -32,3 +32,7 @@ fileignoreconfig:
   checksum: 81673a5b74c6531edb37807ad5170474366bab1d26124585090247afb4423eff
 - filename: modules/random/variables.tf
   checksum: 3b8afa99f58649680dba2c3409c5a316730ec5381692355f9f532add1048a47d
+- filename: examples/all-options-generated/variables.tf
+  checksum: 082d6e9a437531240966173d9365f3b1d11ef47d33747ab54c6c649f5abe278c
+- filename: examples/all-options-generated/README.md
+  checksum: 5c6a2b3aaf852547f7bfd0714fc730dcd08117fe8bf6b7b1454832ecc56f9e54

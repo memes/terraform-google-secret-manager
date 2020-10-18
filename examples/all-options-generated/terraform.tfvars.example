@@ -1,0 +1,20 @@
+# Example TF vars file
+project_id = "my-project-id"
+id = "my-secret-id"
+length = 24
+has_upper_chars = true
+min_upper_chars = 2
+has_lower_chars = true
+min_lower_chars = 2
+has_numeric_chars = true
+min_numeric_chars = 2
+has_special_chars = true
+min_special_chars = 2
+special_char_set = "#$%^&*"
+replication_locations = ["us-east1", "us-west1"]
+accessors = ["serviceAccount:my-service@my-project-id.iam.gserviceaccount.com", "user:jane@doe.com", "group:devops@example.com"]
+labels = {
+    "stage": "dev",
+    "cost_center": "product_dev",
+    "owner": "jane_at_example_com"
+}
