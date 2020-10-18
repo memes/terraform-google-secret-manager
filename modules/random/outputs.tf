@@ -1,5 +1,5 @@
 output "id" {
-  value       = google_secmoduleret_manager_secret.secret.id
+  value       = module.secret.id
   description = <<EOD
 The id of the Secret Manager key that contains the secret.
 EOD
