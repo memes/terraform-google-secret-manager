@@ -63,7 +63,7 @@ variable "length" {
   default = 16
   validation {
     condition     = floor(var.length) == var.length && var.length >= 1
-    error_message = "length must be an integer greater than zero."
+    error_message = "Generated secret length must be an integer greater than zero."
   }
   description = <<EOD
 The length of the random string to generate for secret value. Default is 16.
@@ -84,7 +84,7 @@ variable "min_upper_chars" {
   default = 0
   validation {
     condition     = floor(var.min_upper_chars) == var.min_upper_chars && var.min_upper_chars >= 0
-    error_message = "min_upper_chars must be an integer >= 0."
+    error_message = "Generated secret min_upper_chars must be an integer >= 0."
   }
   description = <<EOD
 The minimum number of uppercase characters to include in the generated secret.
@@ -109,7 +109,7 @@ variable "min_lower_chars" {
   default = 0
   validation {
     condition     = floor(var.min_lower_chars) == var.min_lower_chars && var.min_lower_chars >= 0
-    error_message = "min_lower_chars must be an integer >= 0."
+    error_message = "Generated secret min_lower_chars must be an integer >= 0."
   }
   description = <<EOD
 The minimum number of lowercase characters to include in the generated secret.
@@ -134,7 +134,7 @@ variable "min_numeric_chars" {
   default = 0
   validation {
     condition     = floor(var.min_numeric_chars) == var.min_numeric_chars && var.min_numeric_chars >= 0
-    error_message = "min_numeric_chars must be an integer >= 0."
+    error_message = "Generated secret min_numeric_chars must be an integer >= 0."
   }
   description = <<EOD
 The minimum number of numeric characters to include in the generated secret.
@@ -159,7 +159,7 @@ variable "min_special_chars" {
   default = 0
   validation {
     condition     = floor(var.min_special_chars) == var.min_special_chars && var.min_special_chars >= 0
-    error_message = "min_special_chars must be an integer >= 0."
+    error_message = "Generated secret min_special_chars must be an integer >= 0."
   }
   description = <<EOD
 The minimum number of special characters to include in the generated secret.
