@@ -36,3 +36,15 @@ fileignoreconfig:
   checksum: 082d6e9a437531240966173d9365f3b1d11ef47d33747ab54c6c649f5abe278c
 - filename: examples/all-options-generated/README.md
   checksum: 5c6a2b3aaf852547f7bfd0714fc730dcd08117fe8bf6b7b1454832ecc56f9e54
+- filename: examples/accessors/README.md
+  checksum: 25ad662157f5df1c5fde0775eafd04d11f81cba6fccbaa369657cd7411453161
+- filename: examples/simple/README.md
+  checksum: 93db91db73f990af0b6102fb40fc53e46719eef2d7244983b6933de68e073fb9
+- filename: examples/user-managed-replication-accessors/README.md
+  checksum: 3d7e7585d9bee2001d442be5a0f30066328bac2d46d8e7e71f07b88daa7a5ef7
+- filename: examples/user-managed-replication/README.md
+  checksum: 99a783cfec7f2417ff5cbd016abf88f5a1670e3f5c0f503f0823afb94a23c991
+- filename: examples/auto-replication-accessors/terraform.tfvars.example
+  checksum: 7407589fece6bcacdfd31acce42fc32b8d3ee6caa373706aec2ce53368adb83f
+- filename: examples/user-managed-replication
+  checksum: 8312eafa25f040eaf87f070422f0d3270f4b775e42bde3e211ac4426134569e4

@@ -11,29 +11,13 @@ replication.
 |Replication|&check;|User specified regions will be  used for replication.|
 |Secret Value||User specified.|
 
-<!-- spell-checker:ignore markdownlint -->
-<!-- markdownlint-disable MD033 MD034-->
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## Requirements
+<!-- spell-checker: disable -->
+### Example terraform.tfvars
 
-No requirements.
-
-## Providers
-
-No provider.
-
-## Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| id | The secret identifier to create; this value must be unique within the project. | `string` | n/a | yes |
-| project\_id | The GCP project identifier where the secret will be created. | `string` | n/a | yes |
-| replication\_locations | A list of replication locations for the secret. | `list(string)` | `[]` | no |
-| secret | The secret payload to store in Secret Manager. | `string` | n/a | yes |
-
-## Outputs
-
-No output.
-
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-<!-- markdownlint-enable MD033 MD034 -->
+```properties
+# Example TF vars file
+project_id = "my-project-id"
+id = "my-secret-id"
+secret = "T0pS3cretP@ssword!"
+replication_locations = ["us-east1", "us-west1"]
+```
