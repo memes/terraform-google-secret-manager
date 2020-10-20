@@ -5,7 +5,8 @@ in GCP [Secret Manager](https://cloud.google.com/secret-manager).
 
 ```hcl
 module "secret" {
-  source = "git::https://github.com/memes/terraform-google-secret-manager?ref=1.0.0"
+  source = "memes/terraform-google-secret-manager"
+  version = "1.0.0"
   project_id = "my-project-id"
   id = "my-secret"
   secret = "T0pS3cret!"

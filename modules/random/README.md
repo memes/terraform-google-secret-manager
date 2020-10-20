@@ -9,7 +9,8 @@ E.g. to create and store a random alphanumeric password of 8 chars that
 
 ```hcl
 module "secret" {
-  source = "git::https://github.com/memes/terraform-google-secret-manager//modules/random?ref=1.0.0"
+  source = "memes/terraform-google-secret-manager//modules/random"
+  version = "1.0.0"
   project_id = "my-project-id"
   id = "my-secret"
   # By default, random secret value will include 16 uppercase,lowercase, numbers,
