@@ -22,13 +22,13 @@ module "secret" {
 | Name | Version |
 |------|---------|
 | terraform | ~> 0.13 |
-| google | ~> 3.40 |
+| google | ~> 3.44 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| google | ~> 3.40 |
+| google | ~> 3.44 |
 
 ## Inputs
 
