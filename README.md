@@ -1,7 +1,9 @@
-# Secret Manager
+# GCP Secret Manager for Terraform 0.12
+
+> NOTE: This module is from the Terraform 0.12 supporting branch - use 1.x releases for Terraform 0.13+
 
 This module provides an opinionated wrapper around creating and managing secret values
-in GCP [Secret Manager](https://cloud.google.com/secret-manager) with Terraform 0.13.
+in GCP [Secret Manager](https://cloud.google.com/secret-manager) with Terraform 0.12.
 
 Given a project identifier, the module will create a new secret, or update an
 existing secret version, so that it contains the value provided. An optional list
@@ -11,7 +13,7 @@ the identifiers will be granted `roles/secretmanager.secretAccessor` on th
 ```hcl
 module "secret" {
   source = "memes/secret-manager/google"
-  version = "1.0.0"
+  version = "0.12.0"
   project_id = "my-project-id"
   id = "my-secret"
   secret = "T0pS3cret!"
@@ -25,7 +27,7 @@ generated value.
 ```hcl
 module "secret" {
   source = "memes/secret-manager/google//modules/random"
-  version = "1.0.0"
+  version = "0.12.0"
   project_id = "my-project-id"
   id = "my-secret"
   # My application requires a 12 character alphanumeric password that must
@@ -43,7 +45,7 @@ module "secret" {
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 0.13 |
+| terraform | ~> 0.12 |
 | google | ~> 3.44 |
 
 ## Providers

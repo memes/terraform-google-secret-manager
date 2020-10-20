@@ -1,10 +1,12 @@
-# This module has been tested with Terraform 0.13 only.
-#
+# This module is for use with Terraform 0.12; see the "1.x" releases for
+# Terraform 0.13 supported module.
+
 terraform {
-  required_version = "~> 0.13"
+  required_version = "~> 0.12"
   required_providers {
     google = "~> 3.44"
   }
+  experiments = [variable_validation]
 }
 
 # Create a random value for secret
