@@ -2,7 +2,7 @@
 # access control to the secret value.
 
 module "secret" {
-  source                = "memes/terraform-google-secret-manager"
+  source                = "memes/secret-manager/google"
   version               = "1.0.0"
   project_id            = var.project_id
   id                    = var.id

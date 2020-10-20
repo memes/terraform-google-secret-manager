@@ -10,7 +10,7 @@ the identifiers will be granted `roles/secretmanager.secretAccessor` on th
 
 ```hcl
 module "secret" {
-  source = "memes/terraform-google-secret-manager"
+  source = "memes/secret-manager/google"
   version = "1.0.0"
   project_id = "my-project-id"
   id = "my-secret"
@@ -24,7 +24,7 @@ generated value.
 
 ```hcl
 module "secret" {
-  source = "memes/terraform-google-secret-manager//modules/random"
+  source = "memes/secret-manager/google//modules/random"
   version = "1.0.0"
   project_id = "my-project-id"
   id = "my-secret"

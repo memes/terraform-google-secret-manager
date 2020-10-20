@@ -9,7 +9,7 @@ E.g. to create and store a random alphanumeric password of 8 chars that
 
 ```hcl
 module "password" {
-  source = "memes/terraform-google-secret-manager//modules/random"
+  source = "memes/secret-manager/google//modules/random"
   version = "1.0.0"
   project_id = "my-project-id"
   id = "my-secret"
