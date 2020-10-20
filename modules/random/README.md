@@ -1,4 +1,6 @@
-# Randomly generated secret with Secret Manager
+# Randomly generated secret with Secret Manager for Terraform
+
+> NOTE: This module is for Terraform 0.13 - use 0.12.x releases for Terraform 0.12
 
 This sub-module provides the same variables and capabilities as the base Secret
 Manager module, but will generate a random password to use as the secret value.
@@ -10,7 +12,7 @@ E.g. to create and store a random alphanumeric password of 8 chars that
 ```hcl
 module "password" {
   source = "memes/secret-manager/google//modules/random"
-  version = "1.0.0"
+  version = "1.0.1"
   project_id = "my-project-id"
   id = "my-secret"
   # By default, random secret value will include 16 uppercase,lowercase, numbers,

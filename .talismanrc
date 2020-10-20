@@ -1,4 +1,4 @@
-# spell-checker: ignore fileignoreconfig
+# spell-checker: ignore fileignoreconfig tfvars
 fileignoreconfig:
 - filename: .github/workflows/pre-commit.yml
   checksum: 079f171fdbd654d9e637f509bd9372cfc44f959ae4ff4d56d1cd810577f3ffd6
@@ -15,7 +15,7 @@ fileignoreconfig:
 - filename: examples/user-managed-replication/terraform.tfvars.example
   checksum: d619606a155c5b9a63def97d621913240b58f8d36672d005a0cb39bccda26c1b
 - filename: README.md
-  checksum: 85bf2a63679cea092efd9205d97fa681211de49d1ea06eb86ab700b3c07ef74a
+  checksum: 85f073eecdfbba483860284dd10aa68d8f350dc3c0df2ae71dd25918d21b202f
 - filename: examples/generated-secret/main.tf
   checksum: 37c8edd39b841077663467bd9053e4041092b05b040f107bd8fcb2b1adb04670
 - filename: modules/random/main.tf
