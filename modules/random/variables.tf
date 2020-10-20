@@ -75,7 +75,7 @@ variable "has_upper_chars" {
   default     = true
   description = <<EOD
 Include uppercase alphabet characters in the generated secret. Default is true;
-set to false to exclude generating a secret containg uppercase characters.
+set to false to exclude generating a secret containing uppercase characters.
 EOD
 }
 
@@ -100,7 +100,7 @@ variable "has_lower_chars" {
   default     = true
   description = <<EOD
 Include lowercase alphabet characters in the generated secret. Default is true;
-set to false to exclude generating a secret containg lowercase characters.
+set to false to exclude generating a secret containing lowercase characters.
 EOD
 }
 
@@ -125,7 +125,7 @@ variable "has_numeric_chars" {
   default     = true
   description = <<EOD
 Include numeric characters in the generated secret. Default is true;
-set to false to exclude generating a secret containg numeric characters.
+set to false to exclude generating a secret containing numeric characters.
 EOD
 }
 
@@ -150,7 +150,7 @@ variable "has_special_chars" {
   default     = true
   description = <<EOD
 Include special characters in the generated secret. Default is true;
-set to false to exclude generating a secret containg special characters.
+set to false to exclude generating a secret containing special characters.
 EOD
 }
 

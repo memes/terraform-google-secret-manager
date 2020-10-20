@@ -40,10 +40,10 @@ module "secret" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | accessors | An optional list of IAM account identifiers that will be granted accessor (read-only)<br>permission to the secret. | `list(string)` | `[]` | no |
-| has\_lower\_chars | Include lowercase alphabet characters in the generated secret. Default is true;<br>set to false to exclude generating a secret containg lowercase characters. | `bool` | `true` | no |
-| has\_numeric\_chars | Include numeric characters in the generated secret. Default is true;<br>set to false to exclude generating a secret containg numeric characters. | `bool` | `true` | no |
-| has\_special\_chars | Include special characters in the generated secret. Default is true;<br>set to false to exclude generating a secret containg special characters. | `bool` | `true` | no |
-| has\_upper\_chars | Include uppercase alphabet characters in the generated secret. Default is true;<br>set to false to exclude generating a secret containg uppercase characters. | `bool` | `true` | no |
+| has\_lower\_chars | Include lowercase alphabet characters in the generated secret. Default is true;<br>set to false to exclude generating a secret containing lowercase characters. | `bool` | `true` | no |
+| has\_numeric\_chars | Include numeric characters in the generated secret. Default is true;<br>set to false to exclude generating a secret containing numeric characters. | `bool` | `true` | no |
+| has\_special\_chars | Include special characters in the generated secret. Default is true;<br>set to false to exclude generating a secret containing special characters. | `bool` | `true` | no |
+| has\_upper\_chars | Include uppercase alphabet characters in the generated secret. Default is true;<br>set to false to exclude generating a secret containing uppercase characters. | `bool` | `true` | no |
 | id | The secret identifier to create; this value must be unique within the project. | `string` | n/a | yes |
 | labels | An optional map of label key:value pairs to assign to the secret resources.<br>Default is an empty map. | `map(string)` | `{}` | no |
 | length | The length of the random string to generate for secret value. Default is 16. | `number` | `16` | no |
