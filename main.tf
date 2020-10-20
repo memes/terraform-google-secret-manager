@@ -1,9 +1,5 @@
-# This module has been tested with Terraform 0.12 only.
+# This module has been tested with Terraform 0.13 only.
 #
-# Note: GCS backend requires the current user to have valid application-default
-# credentials. An error like "... failed: dialing: google: could not find default
-# credenitals" indicates that the calling user must (re-)authenticate application
-# default credentials using `gcloud auth application-default login`.
 terraform {
   required_version = "~> 0.13"
   required_providers {
