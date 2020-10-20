@@ -1,6 +1,6 @@
 # Randomly generated secret with Secret Manager
 
-This sub-module provides the same interface and capabilities as the base Secret
+This sub-module provides the same variables and capabilities as the base Secret
 Manager module, but will generate a random password to use as the secret value.
 Additional fields can be used to customise the password generator.
 
@@ -8,15 +8,16 @@ E.g. to create and store a random alphanumeric password of 8 chars that
 *excludes* special characters:
 
 ```hcl
-module "secret" {
+module "password" {
   source = "memes/terraform-google-secret-manager//modules/random"
   version = "1.0.0"
   project_id = "my-project-id"
   id = "my-secret"
   # By default, random secret value will include 16 uppercase,lowercase, numbers,
-  # and special characters; let's change that for the legacy app.
+  # and special characters; let's change that for the legacy app which can only
+  # accept 8 alphanumeric chars.
   length = 8
-  special = false
+  has_special_chars = false
 }
 ```
 
