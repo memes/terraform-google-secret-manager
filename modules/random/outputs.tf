@@ -1,13 +1,14 @@
 output "id" {
   value       = module.secret.id
   description = <<EOD
-The id of the Secret Manager key that contains the secret.
+The fully-qualified id of the Secret Manager key that contains the secret.
 EOD
 }
 
-output "name" {
-  value       = module.secret.name
+output "secret_id" {
+  value       = module.secret.secret_id
   description = <<EOD
-The fully-qualified name of the Secret Manager key that contains the secret.
+The project-local id Secret Manager key that contains the secret. Should match
+the input `id`.
 EOD
 }
