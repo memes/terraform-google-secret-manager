@@ -69,8 +69,8 @@ module "secret" {
 
 | Name | Description |
 |------|-------------|
-| id | The id of the Secret Manager key that contains the secret. |
-| name | The fully-qualified name of the Secret Manager key that contains the secret. |
+| id | The fully-qualified id of the Secret Manager key that contains the secret. |
+| secret\_id | The project-local id Secret Manager key that contains the secret. Should match<br>the input `id`. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 <!-- markdownlint-enable MD033 MD034 -->
