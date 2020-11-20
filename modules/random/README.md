@@ -57,7 +57,7 @@ module "password" {
 | min\_upper\_chars | The minimum number of uppercase characters to include in the generated secret.<br>Default is 0, which allows the randomiser logic to exclude uppercase characters<br>if needed to satisfy other `min_` rules. Note that setting to 0 will not<br>guarantee uppercase characters will be excluded - set `has_upper_chars` to false<br>to exclude uppercase characters from generated secret. | `number` | `0` | no |
 | project\_id | The GCP project identifier where the secret will be created. | `string` | n/a | yes |
 | replication\_locations | An optional list of replication locations for the secret. If the value is an<br>empty list (default) then an automatic replication policy will be applied. Use<br>this if you must have replication constrained to specific locations.<br><br>E.g. to use automatic replication policy (default)<br>replication\_locations = []<br><br>E.g. to force secrets to be replicated only in us-east1 and us-west1 regions:<br>replication\_locations = [ "us-east1", "us-west1" ] | `list(string)` | `[]` | no |
-| special\_char\_set | Override the 'special' characters used by Terraform's random\_string provider to<br>the set provided. Default is the same set as used by Terraform by default. | `string` | `"!@#$%\u0026*()-_=+[]{}\u003c\u003e:?"` | no |
+| special\_char\_set | Override the 'special' characters used by Terraform's random\_string provider to<br>the set provided. Default is the same set as used by Terraform by default. | `string` | `"!@#$%&*()-_=+[]{}<>:?"` | no |
 
 ## Outputs
 
