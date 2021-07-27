@@ -12,7 +12,7 @@ E.g. to create and store a random alphanumeric password of 8 chars that
 ```hcl
 module "password" {
   source     = "memes/secret-manager/google//modules/random"
-  version    = "1.0.1"
+  version    = "1.0.3"
   project_id = "my-project-id"
   id         = "my-secret"
 
