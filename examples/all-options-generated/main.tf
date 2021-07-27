@@ -2,7 +2,7 @@
 
 module "secret" {
   source                = "memes/secret-manager/google//modules/random"
-  version               = "1.0.2"
+  version               = "1.0.3"
   project_id            = var.project_id
   id                    = var.id
   length                = var.length
