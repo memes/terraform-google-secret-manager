@@ -1,7 +1,7 @@
 # This module has been tested with Terraform 0.13 only.
 #
 terraform {
-  required_version = "~> 0.13"
+  required_version = ">= 0.13"
   required_providers {
     google = "~> 3.44"
   }
