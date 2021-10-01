@@ -20,6 +20,9 @@ resource "google_secret_manager_secret" "secret" {
           for_each = var.replication_locations
           content {
             location = replicas.value
+            customer_managed_encryption {
+              kms_key_name = contains(keys(var.replication_keys), replicas.value) ? var.replication_keys[replicas.value] : null
+            }
           }
         }
       }

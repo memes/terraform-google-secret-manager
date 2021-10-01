@@ -36,6 +36,22 @@ replication_locations = [ "us-east1", "us-west1" ]
 EOD
 }
 
+variable "replication_keys" {
+  type        = map(string)
+  default     = {}
+  description = <<EOD
+An optional map of customer managed keys per location. This needs to match the
+locations specified in `replication_locations`.
+
+E.g. replication_keys = { "us-east1": "my-key-name", "us-west1": "another-key-name" }
+EOD
+  # We cannot use the following validation because we cannot reference other variables
+  # validation {
+  #   condition     = can([for k in var.replication_keys : contains(var.replication_locations, k)])
+  #   error_message = "Each location in replication_keys must be defined in replication_locations"
+  # }
+}
+
 variable "secret" {
   type = string
   validation {
