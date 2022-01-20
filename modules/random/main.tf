@@ -26,6 +26,7 @@ module "secret" {
   project_id            = var.project_id
   id                    = var.id
   replication_locations = var.replication_locations
+  replication_keys      = var.replication_keys
   accessors             = var.accessors
   labels                = var.labels
   secret                = random_password.secret.result
