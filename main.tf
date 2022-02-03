@@ -3,7 +3,7 @@
 terraform {
   required_version = ">= 0.13"
   required_providers {
-    google = "~> 3.44"
+    google = ">= 3.44"
   }
 }
 
