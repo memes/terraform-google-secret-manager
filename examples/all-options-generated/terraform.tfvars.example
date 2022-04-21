@@ -12,6 +12,10 @@ has_special_chars = true
 min_special_chars = 2
 special_char_set = "#$%^&*"
 replication_locations = ["us-east1", "us-west1"]
+replication_keys = {
+    "us-east1" = "projects/my-project-id/locations/us-east1/keyRings/my-east-keyring/cryptoKeys/east-key"
+    "us-west1" = "projects/my-project-id/locations/us-west1/keyRings/my-east-keyring/cryptoKeys/west-key"
+}
 accessors = ["serviceAccount:my-service@my-project-id.iam.gserviceaccount.com", "user:jane@doe.com", "group:devops@example.com"]
 labels = {
     "stage": "dev",
