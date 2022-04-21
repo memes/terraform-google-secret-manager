@@ -6,7 +6,7 @@ repos:
       - id: yamllint
         files: \.(yml|yaml|talismanrc)$
         types: [file, yaml]
-        exclude: kitchen\.yml$
+        exclude: (kitchen\.yml|\.github/ISSUE_TEMPLATE/config\.yml)$
         entry: yamllint --strict
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.68.1
