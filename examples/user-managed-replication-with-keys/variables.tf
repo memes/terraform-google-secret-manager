@@ -25,3 +25,13 @@ variable "secret" {
 The secret payload to store in Secret Manager.
 EOD
 }
+
+variable "replication_keys" {
+  type        = map(string)
+  description = <<EOD
+An optional map of customer managed keys per location. This needs to match the
+locations specified in `replication_locations`.
+
+E.g. replication_keys = { "us-east1": "my-key-name", "us-west1": "another-key-name" }
+EOD
+}
