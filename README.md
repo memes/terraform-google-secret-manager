@@ -51,12 +51,6 @@ module "secret" {
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
 | <a name="requirement_google"></a> [google](#requirement\_google) | >= 3.44 |
 
-## Providers
-
-| Name | Version |
-|------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | >= 3.44 |
-
 ## Modules
 
 No modules.
@@ -73,13 +67,13 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_accessors"></a> [accessors](#input\_accessors) | An optional list of IAM account identifiers that will be granted accessor (read-only)<br>permission to the secret. | `list(string)` | `[]` | no |
 | <a name="input_id"></a> [id](#input\_id) | The secret identifier to create; this value must be unique within the project. | `string` | n/a | yes |
-| <a name="input_labels"></a> [labels](#input\_labels) | An optional map of label key:value pairs to assign to the secret resources.<br>Default is an empty map. | `map(string)` | `{}` | no |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | The GCP project identifier where the secret will be created. | `string` | n/a | yes |
+| <a name="input_secret"></a> [secret](#input\_secret) | The secret payload to store in Secret Manager. Binary values should be base64<br>encoded before use. | `string` | n/a | yes |
+| <a name="input_accessors"></a> [accessors](#input\_accessors) | An optional list of IAM account identifiers that will be granted accessor (read-only)<br>permission to the secret. | `list(string)` | `[]` | no |
+| <a name="input_labels"></a> [labels](#input\_labels) | An optional map of label key:value pairs to assign to the secret resources.<br>Default is an empty map. | `map(string)` | `{}` | no |
 | <a name="input_replication_keys"></a> [replication\_keys](#input\_replication\_keys) | An optional map of customer managed keys per location. This needs to match the<br>locations specified in `replication_locations`.<br><br>E.g. replication\_keys = { "us-east1": "my-key-name", "us-west1": "another-key-name" } | `map(string)` | `{}` | no |
 | <a name="input_replication_locations"></a> [replication\_locations](#input\_replication\_locations) | An optional list of replication locations for the secret. If the value is an<br>empty list (default) then an automatic replication policy will be applied. Use<br>this if you must have replication constrained to specific locations.<br><br>E.g. to use automatic replication policy (default)<br>replication\_locations = []<br><br>E.g. to force secrets to be replicated only in us-east1 and us-west1 regions:<br>replication\_locations = [ "us-east1", "us-west1" ] | `list(string)` | `[]` | no |
-| <a name="input_secret"></a> [secret](#input\_secret) | The secret payload to store in Secret Manager. Binary values should be base64<br>encoded before use. | `string` | n/a | yes |
 
 ## Outputs
 
