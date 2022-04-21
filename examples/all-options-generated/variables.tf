@@ -19,6 +19,16 @@ An optional list of replication locations for the secret.
 EOD
 }
 
+variable "replication_keys" {
+  type        = map(string)
+  description = <<EOD
+A map of customer managed keys per location. This needs to match the
+locations specified in `replication_locations`.
+
+E.g. replication_keys = { "us-east1": "my-key-name", "us-west1": "another-key-name" }
+EOD
+}
+
 variable "accessors" {
   type        = list(string)
   description = <<EOD

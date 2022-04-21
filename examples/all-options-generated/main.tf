@@ -16,6 +16,7 @@ module "secret" {
   min_special_chars     = var.min_special_chars
   special_char_set      = var.special_char_set
   replication_locations = var.replication_locations
+  replication_keys      = var.replication_keys
   accessors             = var.accessors
   labels                = var.labels
 }
