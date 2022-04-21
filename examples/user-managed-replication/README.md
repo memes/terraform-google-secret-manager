@@ -6,9 +6,9 @@ replication.
 ## Example at a glance
 
 |Item|Managed by Terraform|Description|
-|----|----------|
+|----|--------------------|-----------|
 |Access Control||Not managed by example; permissions to read the secret must be specified externally.|
-|Replication|&check;|User specified regions will be  used for replication.|
+|Replication|&check;|User specified locations will be  used for replication.|
 |Secret Value||User specified.|
 
 <!-- spell-checker: disable -->

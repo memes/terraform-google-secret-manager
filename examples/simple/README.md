@@ -6,7 +6,7 @@ automatically.
 ## Example at a glance
 
 |Item|Managed by Terraform|Description|
-|----|----------|
+|----|--------------------|-----------|
 |Access Control||Not managed by example; permissions to read the secret must be specified externally.|
 |Replication|&check;|Automatically managed by Secret Manager.|
 |Secret Value||User specified.|

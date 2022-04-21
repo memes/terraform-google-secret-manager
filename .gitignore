@@ -7,9 +7,20 @@
 .terraform
 *.tfstate
 *.tfstate.backup
+.terraform.lock.hcl
 
 # Don't include any local automatic variable assignment files
 terraform.tfvars
 terraform.tfvars.json
 *.auto.tfvars
 *.auto.tfvars.json
+
+# Ignore local Gemfile lock and bundler configuration
+.bundle
+Gemfile.lock
+
+# Ignore kitchen-terraform and test results
+test/ephemeral
+test/reports/*
+!test/reports/.gitkeep
+.kitchen

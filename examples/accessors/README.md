@@ -6,7 +6,7 @@ read-only access to the secret value. Secret replication is managed automaticall
 ## Example at a glance
 
 |Item|Managed by module|Description|
-|----|----------|
+|----|-----------------|-----------|
 |Access Control|&check;|User specified accounts will be granted view access to secret.|
 |Replication|&check;|Automatically managed by Secret Manager.|
 |Secret Value||User specified.|

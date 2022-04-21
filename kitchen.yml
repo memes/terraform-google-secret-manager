@@ -1,0 +1,172 @@
+# NOTE: This test-kitchen file contains ERB code to cut-down on boilerplate;
+# YAML linters will complain!
+# yamllint disable
+<%
+require 'open3'
+require 'json'
+
+# Fall back to current time and known location for report files if not present
+# in ENV
+report_dir = ENV['REPORT_DIR'] || 'test/reports'
+report_ts = ENV['REPORT_TS'] || Time.now.strftime('%Y-%m-%d-%H-%M-%S')
+
+# Parse the outputs of the test harness
+tf_output, rc = Open3.capture2('terraform -chdir=test/setup output -json')
+if rc != 0
+  abort 'Failed to capture Terraform output from test/setup'
+end
+harness_outputs = JSON.parse(tf_output).map { |k,v| [k, v['value']] }.to_h
+%>
+---
+driver:
+  name: terraform
+  command_timeout: 60
+  verify_version: true
+  variables:
+    prefix: <%= harness_outputs['prefix'] %>
+    project_id: <%= harness_outputs['project_id'] %>
+
+provisioner:
+  name: terraform
+
+verifier:
+  name: terraform
+  color: true
+
+platforms:
+  - name: local
+
+suites:
+  # - name: root-minimal
+  #   driver:
+  #     root_module_directory: test/fixtures/root
+  #     variables:
+  #       test_name: root-minimal
+  #   verifier:
+  #     systems:
+  #       - name: secrets
+  #         backend: gcp
+  #         profile_locations:
+  #           - test/profiles/secrets
+  #         reporter:
+  #           - cli
+  #           - documentation:<%= report_dir %>/<%= report_ts %>/root-minimal.txt
+  #           - junit2:<%= report_dir %>/<%= report_ts %>/root-minimal.xml
+  #           - yaml:<%= report_dir %>/<%= report_ts %>/root-minimal.yaml
+  - name: example-accessors
+    driver:
+      root_module_directory: test/fixtures/examples/accessors
+      variables:
+        test_name: example-accessors
+        accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
+        secret: terrible$ecr3t
+    verifier:
+      systems:
+        - name: secrets
+          backend: gcp
+          profile_locations:
+            - test/profiles/secrets
+          reporter:
+            - cli
+            - documentation:<%= report_dir %>/<%= report_ts %>/example-accessors.txt
+            - junit2:<%= report_dir %>/<%= report_ts %>/example-accessors.xml
+            - yaml:<%= report_dir %>/<%= report_ts %>/example-accessors.yaml
+  - name: example-all-options-generated
+    driver:
+      root_module_directory: test/fixtures/examples/all-options-generated
+      variables:
+        test_name: example-all-options-generated
+        accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
+        labels: '{<%= harness_outputs['labels'].to_a.map{|pair| sprintf('%s=\"%s\"', pair[0], pair[1])}.join(',') %>}'
+        replication_locations: '<%= harness_outputs['replication_locations'].to_s.gsub('"', '\"') %>'
+        length: '10'
+        has_upper_chars: 'true'
+        min_upper_chars: '2'
+        has_lower_chars: 'true'
+        min_lower_chars: '2'
+        has_numeric_chars: 'true'
+        min_numeric_chars: '2'
+        has_special_chars: 'true'
+        min_special_chars: '2'
+        special_char_set: '@#$%'
+    verifier:
+      systems:
+        - name: secrets
+          backend: gcp
+          profile_locations:
+            - test/profiles/secrets
+          reporter:
+            - cli
+            - documentation:<%= report_dir %>/<%= report_ts %>/example-all-options-generated.txt
+            - junit2:<%= report_dir %>/<%= report_ts %>/example-all-options-generated.xml
+            - yaml:<%= report_dir %>/<%= report_ts %>/example-all-options-generated.yaml
+  - name: example-simple
+    driver:
+      root_module_directory: test/fixtures/examples/simple
+      variables:
+        test_name: example-simple
+        secret: terrible$ecr3t
+    verifier:
+      systems:
+        - name: secrets
+          backend: gcp
+          profile_locations:
+            - test/profiles/secrets
+          reporter:
+            - cli
+            - documentation:<%= report_dir %>/<%= report_ts %>/example-simple.txt
+            - junit2:<%= report_dir %>/<%= report_ts %>/example-simple.xml
+            - yaml:<%= report_dir %>/<%= report_ts %>/example-simple.yaml
+  - name: example-simple-generated-secret
+    driver:
+      root_module_directory: test/fixtures/examples/simple-generated-secret
+      variables:
+        test_name: example-simple-generated-secret
+    verifier:
+      systems:
+        - name: secrets
+          backend: gcp
+          profile_locations:
+            - test/profiles/secrets
+          reporter:
+            - cli
+            - documentation:<%= report_dir %>/<%= report_ts %>/example-simple-generated-secret.txt
+            - junit2:<%= report_dir %>/<%= report_ts %>/example-simple-generated-secret.xml
+            - yaml:<%= report_dir %>/<%= report_ts %>/example-simple-generated-secret.yaml
+  - name: example-user-managed-replication
+    driver:
+      root_module_directory: test/fixtures/examples/user-managed-replication
+      variables:
+        test_name: example-user-managed-replication
+        secret: terrible$ecr3t
+        replication_locations: '<%= harness_outputs['replication_locations'].to_s.gsub('"', '\"') %>'
+    verifier:
+      systems:
+        - name: secrets
+          backend: gcp
+          profile_locations:
+            - test/profiles/secrets
+          reporter:
+            - cli
+            - documentation:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication.txt
+            - junit2:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication.xml
+            - yaml:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication.yaml
+  - name: example-user-managed-replication-accessors
+    driver:
+      root_module_directory: test/fixtures/examples/user-managed-replication-accessors
+      variables:
+        test_name: example-user-managed-replication-accessors
+        accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
+        secret: terrible$ecr3t
+        replication_locations: '<%= harness_outputs['replication_locations'].to_s.gsub('"', '\"') %>'
+    verifier:
+      systems:
+        - name: secrets
+          backend: gcp
+          profile_locations:
+            - test/profiles/secrets
+          reporter:
+            - cli
+            - documentation:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-accessors.txt
+            - junit2:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-accessors.xml
+            - yaml:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-accessors.yaml

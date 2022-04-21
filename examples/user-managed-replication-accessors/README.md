@@ -7,7 +7,7 @@ secret value.
 ## Example at a glance
 
 |Item|Managed by Terraform|Description|
-|----|----------|
+|----|--------------------|-----------|
 |Access Control|&check;|User specified accounts will be granted view access to secret.|
 |Replication|&check;|User specified regions will be used for replication.|
 |Secret Value||User specified.|
