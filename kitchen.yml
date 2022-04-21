@@ -190,3 +190,19 @@ suites:
             - documentation:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-with-keys.txt
             - junit2:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-with-keys.xml
             - yaml:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-with-keys.yaml
+  - name: example-empty-secret-value
+    driver:
+      root_module_directory: test/fixtures/examples/empty-secret-value
+      variables:
+        test_name: example-empty-secret-value
+    verifier:
+      systems:
+        - name: secrets
+          backend: gcp
+          profile_locations:
+            - test/profiles/secrets
+          reporter:
+            - cli
+            - documentation:<%= report_dir %>/<%= report_ts %>/example-empty-secret-value.txt
+            - junit2:<%= report_dir %>/<%= report_ts %>/example-empty-secret-value.xml
+            - yaml:<%= report_dir %>/<%= report_ts %>/example-empty-secret-value.yaml

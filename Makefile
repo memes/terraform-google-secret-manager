@@ -47,7 +47,7 @@ converge.%: test/setup/terraform.tfstate
 converge: test/setup/terraform.tfstate
 	kitchen converge
 
-EXAMPLES=accessors all-options-generated simple simple-generated-secret user-managed-replication user-managed-replication-accessors user-managed-replication-with-keys
+EXAMPLES=accessors all-options-generated simple simple-generated-secret user-managed-replication user-managed-replication-accessors user-managed-replication-with-keys empty-secret-value
 
 test/setup/terraform.tfstate: $(wildcard test/setup/*.tf) $(wildcard test/setup/*.auto.tfvars) $(wildcard test/setup/terraform.tfvars) $(addprefix test/ephemeral/,$(addsuffix /main.tf,$(EXAMPLES)))
 	terraform -chdir=test/setup init -input=false
