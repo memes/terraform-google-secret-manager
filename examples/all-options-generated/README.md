@@ -6,7 +6,7 @@ generate a random secret value, while specifying every option available.
 ## Example at a glance
 
 |Item|Managed by module|Description|
-|----|----------|
+|----|-----------------|-----------|
 |Access Control|&check;|User specified accounts will be granted view access to secret.|
 |Cloud KMS key||Not managed by example; a suitable KMS key for encryption/decryption must be created externally in matching locations.|
 |Replication|&check;|User specified locations will be  used for replication.|

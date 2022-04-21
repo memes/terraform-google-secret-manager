@@ -1,0 +1,10 @@
+# The GCP project identifier to use
+project_id  = "my-gcp-project"
+
+# Set of Secret Manager and/or KMS locations where resources will be created
+replication_locations = ["us-west1", "us-central1"]
+
+# Optional labels to add to resources
+labels = {
+    "owner" = "tester-name"
+}
