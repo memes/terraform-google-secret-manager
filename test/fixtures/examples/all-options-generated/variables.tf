@@ -54,6 +54,10 @@ variable "replication_locations" {
   type = set(string)
 }
 
+variable "replication_keys" {
+  type = map(string)
+}
+
 variable "special_char_set" {
   type = string
 }

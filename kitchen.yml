@@ -79,6 +79,7 @@ suites:
         accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
         labels: '{<%= harness_outputs['labels'].to_a.map{|pair| sprintf('%s=\"%s\"', pair[0], pair[1])}.join(',') %>}'
         replication_locations: '<%= harness_outputs['replication_locations'].to_s.gsub('"', '\"') %>'
+        replication_keys: '{<%= harness_outputs['replication_keys'].except('global').to_a.map{|pair| sprintf('%s=\"%s\"', pair[0], pair[1])}.join(',') %>}'
         length: '10'
         has_upper_chars: 'true'
         min_upper_chars: '2'
@@ -170,3 +171,22 @@ suites:
             - documentation:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-accessors.txt
             - junit2:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-accessors.xml
             - yaml:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-accessors.yaml
+  - name: example-user-managed-replication-with-keys
+    driver:
+      root_module_directory: test/fixtures/examples/user-managed-replication-with-keys
+      variables:
+        test_name: example-user-managed-replication-with-keys
+        secret: terrible$ecr3t
+        replication_locations: '<%= harness_outputs['replication_locations'].to_s.gsub('"', '\"') %>'
+        replication_keys: '{<%= harness_outputs['replication_keys'].except('global').to_a.map{|pair| sprintf('%s=\"%s\"', pair[0], pair[1])}.join(',') %>}'
+    verifier:
+      systems:
+        - name: secrets
+          backend: gcp
+          profile_locations:
+            - test/profiles/secrets
+          reporter:
+            - cli
+            - documentation:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-with-keys.txt
+            - junit2:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-with-keys.xml
+            - yaml:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-with-keys.yaml

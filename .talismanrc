@@ -51,18 +51,22 @@ fileignoreconfig:
 - filename: Makefile
   checksum: 88cce1135288125f41b2dd7f8a7bada98834dc5b4ce9e00461393fd3da850692
 - filename: kitchen.yml
-  checksum: 3680a05ceba8e8f4f9210bde567060be897c4e17240247228506879cf936d630
+  checksum: 0460962ec13ef7937b1376b5f64a5fae49fb83dca42159d82177af0297261228
 - filename: test/setup/outputs.tf
   checksum: 60ebe96d64c64ec64bc8759f53dd07f5a951a1db7cb6a2d20ac5a8260f7bb59f
 - filename: test/setup/README.md
-  checksum: fc18ab58c93467e11ee55530e75d2ec36b731119e27e009c781bc51ad4f9caf1
+  checksum: 6f56e60e82314a012414c4ce78e1663aa13d691a369a831d139b43791fa4cdb3
 - filename: test/fixtures/examples/accessors/main.tf
   checksum: 2e7d5709f33bc3f95be33c54a24dae4722ce86c3b34fa93adcb9d9a3e28adfcb
 - filename: test/fixtures/examples/simple/main.tf
   checksum: bc9c3b4351b303d73de9d3c1e4ea6046988a4ae6642f4fdf80d0729c078fd6e4
 - filename: test/setup/main.tf
-  checksum: c26e6298436367a8133c3e3d4f6eff9fcada5d9131c27f09d4b4ffb19882fc21
+  checksum: 2075673becd6754708b6326625322fe4e2fe7649e84b6a6f58c471a5c4101b7f
 - filename: test/fixtures/examples/user-managed-replication-accessors/main.tf
   checksum: 3037326fa13983c425e01b9be81129bd64069a490d2b5d17735aaff05347063f
 - filename: test/fixtures/examples/user-managed-replication/main.tf
   checksum: 29618a009dfa10eb73edc4378cc57ba7fd5732f5b114009c166f107579ed4614
+- filename: test/fixtures/examples/all-options-generated/main.tf
+  checksum: d9dab11b6bef08c3aa49015c721aad2be9528a7b44dbb769f2f2f29dd1741156
+- filename: test/fixtures/examples/user-managed-replication-with-keys/main.tf
+  checksum: a65788281b5f374a56a17729c27a44ad90af5a54156a7c850e849173dc4bb42b

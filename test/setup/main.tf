@@ -45,7 +45,7 @@ EOD
 }
 
 resource "google_kms_key_ring" "keyring" {
-  for_each = var.replication_locations
+  for_each = setunion(var.replication_locations, ["global"])
   project  = var.project_id
   name     = format("%s-%s-test", random_uuid.key_prefix.id, each.value)
   location = each.value
@@ -57,4 +57,18 @@ resource "google_kms_crypto_key" "key" {
   key_ring = each.value.id
   purpose  = "ENCRYPT_DECRYPT"
   labels   = local.labels
+}
+
+# Note: the identity cannot be destroyed once created
+resource "google_project_service_identity" "identity" {
+  provider = google-beta
+  project  = var.project_id
+  service  = "secretmanager.googleapis.com"
+}
+
+resource "google_kms_crypto_key_iam_member" "identity" {
+  for_each      = google_kms_crypto_key.key
+  crypto_key_id = each.value.id
+  role          = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+  member        = format("serviceAccount:%s", google_project_service_identity.identity.email)
 }

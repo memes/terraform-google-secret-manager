@@ -16,40 +16,40 @@
 # Default target will create necessary test harness, then launch kitchen test.
 .DEFAULT: test
 .PHONY: test.%
-test.%: test/setup/harness.tfvars
+test.%: test/setup/terraform.tfstate
 	kitchen test $*
 
 .PHONY: test
-test: test/setup/harness.tfvars
+test: test/setup/terraform.tfstate
 	kitchen test
 
 .PHONY: destroy.%
-destroy.%: test/setup/harness.tfvars
+destroy.%: test/setup/terraform.tfstate
 	kitchen destroy $*
 
 .PHONY: destroy
-destroy: test/setup/harness.tfvars
+destroy: test/setup/terraform.tfstate
 	kitchen destroy
 
 .PHONY: verify.%
-verify.%: test/setup/harness.tfvars
+verify.%: test/setup/terraform.tfstate
 	kitchen verify $*
 
 .PHONY: verify
-verify: test/setup/harness.tfvars
+verify: test/setup/terraform.tfstate
 	kitchen verify
 
 .PHONY: converge.%
-converge.%: test/setup/harness.tfvars
+converge.%: test/setup/terraform.tfstate
 	kitchen converge $*
 
 .PHONY: converge
-converge: test/setup/harness.tfvars
+converge: test/setup/terraform.tfstate
 	kitchen converge
 
-EXAMPLES=accessors all-options-generated simple simple-generated-secret user-managed-replication user-managed-replication-accessors
+EXAMPLES=accessors all-options-generated simple simple-generated-secret user-managed-replication user-managed-replication-accessors user-managed-replication-with-keys
 
-test/setup/harness.tfvars: $(wildcard test/setup/*.tf) $(wildcard test/setup/*.auto.tfvars) $(wildcard test/setup/terraform.tfvars) $(addprefix test/ephemeral/,$(addsuffix /main.tf,$(EXAMPLES)))
+test/setup/terraform.tfstate: $(wildcard test/setup/*.tf) $(wildcard test/setup/*.auto.tfvars) $(wildcard test/setup/terraform.tfvars) $(addprefix test/ephemeral/,$(addsuffix /main.tf,$(EXAMPLES)))
 	terraform -chdir=test/setup init -input=false
 	terraform -chdir=test/setup apply -input=false -auto-approve
 
@@ -66,9 +66,10 @@ test/ephemeral/%/main.tf: $(wildcard examples/%/*.tf)
 	sed -i '' -E -e '1h;2,$$H;$$!d;g' -e 's@module "secret"[ \t]*{[ \t]*\n[ \t]*source[ \t]*=[ \t]*"memes/secret-manager/google//modules/([^"]+)"\n[ \t]*version[ \t]*=[ \t]*"[^"]+"@module "secret" {\n  source = "../../../modules/\1/"@' $@
 
 .PHONY: clean
-clean: $(wildcard test/setup/harness.tfvars)
+clean: $(wildcard test/setup/terraform.tfstate)
 	if test -n "$<" && test -f "$<"; then kitchen destroy; fi
 	if test -n "$<" && test -f "$<"; then terraform -chdir=$(<D) destroy -auto-approve; fi
+	if test -n "$<" && test -f "$<"; then rm "$<"; fi
 
 .PHONY: realclean
 realclean: clean
@@ -100,6 +101,6 @@ tag.%:
 	@(grep -Eq '^## \[$(subst .,\.,$(*:v%=%))\] - [0-9]{4}(?:-[0-9]{2}){2}' CHANGELOG.md && \
 		grep -Eq '^\[$(subst .,\.,$(*:v%=%))\]: https://github.com/' CHANGELOG.md) || \
 		(echo "CHANGELOG is missing tag entry"; exit 1)
-	# @grep -Eq '^version:[ \t]*$(subst .,\.,$(*:v%=%))[ \t]*$$' test/profiles/ha-gce/inspec.yml || \
-	# 	(echo "test/profiles/ha-gce/inspec.yml has incorrect tag"; exit 1)
+	@grep -Eq '^version:[ \t]*$(subst .,\.,$(*:v%=%))[ \t]*$$' test/profiles/secrets/inspec.yml || \
+		(echo "test/profiles/secrets/inspec.yml has incorrect tag"; exit 1)
 	echo git tag -am 'Tagging release $*' $*

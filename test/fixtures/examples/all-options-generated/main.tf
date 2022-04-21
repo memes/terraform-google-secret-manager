@@ -23,6 +23,7 @@ module "test" {
   min_special_chars     = var.min_special_chars
   min_upper_chars       = var.min_upper_chars
   project_id            = var.project_id
+  replication_keys      = var.replication_keys
   replication_locations = var.replication_locations
   special_char_set      = var.special_char_set
 }
