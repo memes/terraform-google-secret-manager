@@ -80,3 +80,5 @@ fileignoreconfig:
   checksum: 114cb19fd1dc5aba4382b4e417ac11c717f18bf0ed8081c92ad3f61a58b8ecd6
 - filename: examples/user-managed-replication-with-keys/variables.tf
   checksum: 361283f75ab6060f085f2b134b4f6f0075303c1409cd49467a74b0fdaf95e1e5
+- filename: CHANGELOG.md
+  checksum: c65416e7d46d4c5fd6439a5b65d8352c729756deffb6c9632ef0e0ebaa695ac2
