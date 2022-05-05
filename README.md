@@ -48,8 +48,8 @@ module "secret" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | >= 3.44 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.14.5 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | >= 4.8 |
 
 ## Modules
 
@@ -69,7 +69,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_id"></a> [id](#input\_id) | The secret identifier to create; this value must be unique within the project. | `string` | n/a | yes |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | The GCP project identifier where the secret will be created. | `string` | n/a | yes |
-| <a name="input_secret"></a> [secret](#input\_secret) | The secret payload to store in Secret Manager. Binary values should be base64<br>encoded before use. | `string` | n/a | yes |
+| <a name="input_secret"></a> [secret](#input\_secret) | The secret payload to store in Secret Manager; if blank or null a versioned secret<br>value will NOT be created and must be populated outside of this module. Binary<br>values should be base64 encoded before use. | `string` | n/a | yes |
 | <a name="input_accessors"></a> [accessors](#input\_accessors) | An optional list of IAM account identifiers that will be granted accessor (read-only)<br>permission to the secret. | `list(string)` | `[]` | no |
 | <a name="input_labels"></a> [labels](#input\_labels) | An optional map of label key:value pairs to assign to the secret resources.<br>Default is an empty map. | `map(string)` | `{}` | no |
 | <a name="input_replication_keys"></a> [replication\_keys](#input\_replication\_keys) | An optional map of customer managed keys per location. This needs to match the<br>locations specified in `replication_locations`.<br><br>E.g. replication\_keys = { "us-east1": "my-key-name", "us-west1": "another-key-name" } | `map(string)` | `{}` | no |

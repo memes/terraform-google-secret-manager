@@ -1,4 +1,5 @@
-# This file demonstrates a minimal creation of a Secret Manager secret.
+# This file demonstrates creating a secret that does not have an initial value.
+# The value will need to be managed outside of this module.
 terraform {
   required_version = ">= 0.14.5"
   required_providers {
@@ -14,5 +15,5 @@ module "secret" {
   version    = "2.0.0"
   project_id = var.project_id
   id         = var.id
-  secret     = var.secret
+  secret     = null
 }

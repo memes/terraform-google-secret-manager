@@ -1,7 +1,7 @@
 # Generated Secret
 
-This example shows how to use the [random](modules/random) sub-module that will
-generate a random secret value which is replication automatically.
+This example shows how to use the Terraform [random](https://registry.terraform.io/providers/hashicorp/random/latest/docs)
+provider to generate a random secret value which is replication automatically.
 
 ## Example at a glance
 

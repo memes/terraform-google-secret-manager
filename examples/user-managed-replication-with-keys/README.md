@@ -1,7 +1,7 @@
 # User Managed Replication
 
 This example shows how to specify an explicit set of locations to use for secret
-replication, and use a Cloud KMS encryption key to
+replication, and use a Cloud KMS encryption key to use for secret encryption.
 
 ## Example at a glance
 

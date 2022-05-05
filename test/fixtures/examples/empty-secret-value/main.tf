@@ -9,7 +9,7 @@ terraform {
 }
 
 module "test" {
-  source     = "./../../../ephemeral/simple-generated-secret/"
+  source     = "./../../../ephemeral/empty-secret-value/"
   id         = format("%s-%s", var.prefix, var.test_name)
   project_id = var.project_id
 }

@@ -1,0 +1,3 @@
+# Example TF vars file
+project_id = "my-project-id"
+id = "my-secret-id"

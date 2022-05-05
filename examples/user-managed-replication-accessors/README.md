@@ -1,4 +1,4 @@
-# User Managed Replication
+# User Managed Replication with accessors
 
 This example shows how to specify an explicit set of locations to use for secret
 replication, and a set of IAM accounts that will have read-only access to the
