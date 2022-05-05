@@ -8,6 +8,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2022-04-20
+
+### Added
+
+### Changed
+
+- corrected version specifiers in examples
+
+### Removed
+
+## [1.1.0] - 2022-04-20
+
+### Added
+
+- Cloud KMS key examples for CMEK encryption of Secrets
+- Testing framework
+
+### Changed
+
+- Fixed bug reported by @brno32 - can't specify replication locations without
+  Cloud KMS keys (issue [#19](https://github.com/memes/terraform-google-secret-manager/issues/19))
+
+### Removed
+
 ## [1.0.5] - 2022-02-03
 
 ### Added
@@ -79,6 +103,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+[1.1.1]: https://github.com/memes/terraform-google-secret-manager/compare/v1.1.0...v1.1.1
+[1.1.0]: https://github.com/memes/terraform-google-secret-manager/compare/v1.0.5...v1.1.0
 [1.0.5]: https://github.com/memes/terraform-google-secret-manager/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/memes/terraform-google-secret-manager/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/memes/terraform-google-secret-manager/compare/v1.0.2...v1.0.3

@@ -103,4 +103,4 @@ tag.%:
 		(echo "CHANGELOG is missing tag entry"; exit 1)
 	@grep -Eq '^version:[ \t]*$(subst .,\.,$(*:v%=%))[ \t]*$$' test/profiles/secrets/inspec.yml || \
 		(echo "test/profiles/secrets/inspec.yml has incorrect tag"; exit 1)
-	echo git tag -am 'Tagging release $*' $*
+	git tag -am 'Tagging release $*' $*
