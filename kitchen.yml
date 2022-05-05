@@ -59,7 +59,7 @@ suites:
       variables:
         test_name: example-accessors
         accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
-        secret: terrible$ecr3t
+        secret: terribleS3cr3t
     verifier:
       systems:
         - name: secrets
@@ -71,25 +71,16 @@ suites:
             - documentation:<%= report_dir %>/<%= report_ts %>/example-accessors.txt
             - junit2:<%= report_dir %>/<%= report_ts %>/example-accessors.xml
             - yaml:<%= report_dir %>/<%= report_ts %>/example-accessors.yaml
-  - name: example-all-options-generated
+  - name: example-all-options
     driver:
-      root_module_directory: test/fixtures/examples/all-options-generated
+      root_module_directory: test/fixtures/examples/all-options
       variables:
-        test_name: example-all-options-generated
+        test_name: example-all-options
         accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
         labels: '{<%= harness_outputs['labels'].to_a.map{|pair| sprintf('%s=\"%s\"', pair[0], pair[1])}.join(',') %>}'
         replication_locations: '<%= harness_outputs['replication_locations'].to_s.gsub('"', '\"') %>'
         replication_keys: '{<%= harness_outputs['replication_keys'].except('global').to_a.map{|pair| sprintf('%s=\"%s\"', pair[0], pair[1])}.join(',') %>}'
-        length: '10'
-        has_upper_chars: 'true'
-        min_upper_chars: '2'
-        has_lower_chars: 'true'
-        min_lower_chars: '2'
-        has_numeric_chars: 'true'
-        min_numeric_chars: '2'
-        has_special_chars: 'true'
-        min_special_chars: '2'
-        special_char_set: '@#$%'
+        secret: terribleS3cr3t
     verifier:
       systems:
         - name: secrets
@@ -98,15 +89,15 @@ suites:
             - test/profiles/secrets
           reporter:
             - cli
-            - documentation:<%= report_dir %>/<%= report_ts %>/example-all-options-generated.txt
-            - junit2:<%= report_dir %>/<%= report_ts %>/example-all-options-generated.xml
-            - yaml:<%= report_dir %>/<%= report_ts %>/example-all-options-generated.yaml
+            - documentation:<%= report_dir %>/<%= report_ts %>/example-all-options.txt
+            - junit2:<%= report_dir %>/<%= report_ts %>/example-all-options.xml
+            - yaml:<%= report_dir %>/<%= report_ts %>/example-all-options.yaml
   - name: example-simple
     driver:
       root_module_directory: test/fixtures/examples/simple
       variables:
         test_name: example-simple
-        secret: terrible$ecr3t
+        secret: terribleS3cr3t
     verifier:
       systems:
         - name: secrets
@@ -118,28 +109,29 @@ suites:
             - documentation:<%= report_dir %>/<%= report_ts %>/example-simple.txt
             - junit2:<%= report_dir %>/<%= report_ts %>/example-simple.xml
             - yaml:<%= report_dir %>/<%= report_ts %>/example-simple.yaml
-  - name: example-simple-generated-secret
-    driver:
-      root_module_directory: test/fixtures/examples/simple-generated-secret
-      variables:
-        test_name: example-simple-generated-secret
-    verifier:
-      systems:
-        - name: secrets
-          backend: gcp
-          profile_locations:
-            - test/profiles/secrets
-          reporter:
-            - cli
-            - documentation:<%= report_dir %>/<%= report_ts %>/example-simple-generated-secret.txt
-            - junit2:<%= report_dir %>/<%= report_ts %>/example-simple-generated-secret.xml
-            - yaml:<%= report_dir %>/<%= report_ts %>/example-simple-generated-secret.yaml
+  # Disabled - need to use -target to instantiate correctly
+  # - name: example-with-random-provider
+  #   driver:
+  #     root_module_directory: test/fixtures/examples/with-random-provider
+  #     variables:
+  #       test_name: example-with-random-provider
+  #   verifier:
+  #     systems:
+  #       - name: secrets
+  #         backend: gcp
+  #         profile_locations:
+  #           - test/profiles/secrets
+  #         reporter:
+  #           - cli
+  #           - documentation:<%= report_dir %>/<%= report_ts %>/example-with-random-provider.txt
+  #           - junit2:<%= report_dir %>/<%= report_ts %>/example-with-random-provider.xml
+  #           - yaml:<%= report_dir %>/<%= report_ts %>/example-with-random-provider.yaml
   - name: example-user-managed-replication
     driver:
       root_module_directory: test/fixtures/examples/user-managed-replication
       variables:
         test_name: example-user-managed-replication
-        secret: terrible$ecr3t
+        secret: terribleS3cr3t
         replication_locations: '<%= harness_outputs['replication_locations'].to_s.gsub('"', '\"') %>'
     verifier:
       systems:
@@ -158,7 +150,7 @@ suites:
       variables:
         test_name: example-user-managed-replication-accessors
         accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
-        secret: terrible$ecr3t
+        secret: terribleS3cr3t
         replication_locations: '<%= harness_outputs['replication_locations'].to_s.gsub('"', '\"') %>'
     verifier:
       systems:
@@ -176,7 +168,7 @@ suites:
       root_module_directory: test/fixtures/examples/user-managed-replication-with-keys
       variables:
         test_name: example-user-managed-replication-with-keys
-        secret: terrible$ecr3t
+        secret: terribleS3cr3t
         replication_locations: '<%= harness_outputs['replication_locations'].to_s.gsub('"', '\"') %>'
         replication_keys: '{<%= harness_outputs['replication_keys'].except('global').to_a.map{|pair| sprintf('%s=\"%s\"', pair[0], pair[1])}.join(',') %>}'
     verifier:

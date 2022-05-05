@@ -53,14 +53,11 @@ EOD
 }
 
 variable "secret" {
-  type = string
-  validation {
-    condition     = length(var.secret) > 0
-    error_message = "The secret must be a string that contains at least 1 character."
-  }
+  type        = string
   description = <<EOD
-The secret payload to store in Secret Manager. Binary values should be base64
-encoded before use.
+The secret payload to store in Secret Manager; if blank or null a versioned secret
+value will NOT be created and must be populated outside of this module. Binary
+values should be base64 encoded before use.
 EOD
 }
 

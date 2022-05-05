@@ -15,13 +15,13 @@ fileignoreconfig:
 - filename: examples/user-managed-replication/terraform.tfvars.example
   checksum: d619606a155c5b9a63def97d621913240b58f8d36672d005a0cb39bccda26c1b
 - filename: README.md
-  checksum: bca04678c7ba1ff739ea56c9f6e48a12a92c1f244a5638e0fbb46d7ab3092481
+  checksum: d6e50d9581d079681f4c26f87f460e25a9503b146a9a9df948fa6146e1bc7ee3
 - filename: examples/generated-secret/main.tf
   checksum: 37c8edd39b841077663467bd9053e4041092b05b040f107bd8fcb2b1adb04670
 - filename: modules/random/main.tf
   checksum: 64cbbdabd2a425a9e7fd9c1db9107b5d7874befb660dbe62c9b9c5d1be9f97f2
 - filename: main.tf
-  checksum: 0b5ebe4ea938eeccd961ec942aa92e86f365b7abbf82b1037f314a9bcf5d88c5
+  checksum: f01bf0181a0c58d1fd607a3bbad5bdbd758a91a127c872f380013205c57bd34b
 - filename: examples/simple/main.tf
   checksum: b26086277af49d853473caea9f0bbbb62ebb6b7fd16ccde74f57f9d0d9b63444
 - filename: variables.tf
@@ -51,7 +51,7 @@ fileignoreconfig:
 - filename: Makefile
   checksum: 88cce1135288125f41b2dd7f8a7bada98834dc5b4ce9e00461393fd3da850692
 - filename: kitchen.yml
-  checksum: 0460962ec13ef7937b1376b5f64a5fae49fb83dca42159d82177af0297261228
+  checksum: 195fe75626bc14d18be93c4835c760b982d96149c5cf23be2f251f0beaf10d40
 - filename: test/setup/outputs.tf
   checksum: 60ebe96d64c64ec64bc8759f53dd07f5a951a1db7cb6a2d20ac5a8260f7bb59f
 - filename: test/setup/README.md
@@ -82,3 +82,11 @@ fileignoreconfig:
   checksum: 361283f75ab6060f085f2b134b4f6f0075303c1409cd49467a74b0fdaf95e1e5
 - filename: CHANGELOG.md
   checksum: c65416e7d46d4c5fd6439a5b65d8352c729756deffb6c9632ef0e0ebaa695ac2
+- filename: examples/all-options/variables.tf
+  checksum: 9ac418a296be758e18f999197e3e4f57b41778e97b667e563961ecba76207daf
+- filename: examples/all-options/main.tf
+  checksum: 348d280249c4360763beda7dc5db11cec357ccb041ee47b091223d92fe052b8a
+- filename: examples/with-random-provider/main.tf
+  checksum: 0111a9ebef71360787c8f423d932cb8003a72c1aa74d5e635044a2d2e6065262
+- filename: test/fixtures/examples/all-options/main.tf
+  checksum: a88f49fcd11cc3179f4169fd15ed20dc318435057ca31b4a9191542c3362c100

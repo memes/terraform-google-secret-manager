@@ -1,5 +1,4 @@
-# This file demonstrates applying user-defined replication options, and setting
-# access control to the secret value.
+# This file demonstrates applying all options to the module.
 terraform {
   required_version = ">= 0.14.5"
   required_providers {
@@ -15,7 +14,9 @@ module "secret" {
   version               = "2.0.0"
   project_id            = var.project_id
   id                    = var.id
-  secret                = var.secret
   replication_locations = var.replication_locations
+  replication_keys      = var.replication_keys
+  secret                = var.secret
   accessors             = var.accessors
+  labels                = var.labels
 }

@@ -1,9 +1,9 @@
 # This module has been tested with Terraform 0.13 only.
 #
 terraform {
-  required_version = ">= 0.13"
+  required_version = ">= 0.14.5"
   required_providers {
-    google = ">= 3.44"
+    google = ">= 4.8"
   }
 }
 
@@ -34,10 +34,11 @@ resource "google_secret_manager_secret" "secret" {
   }
 }
 
-# Store actual secret as the latest version.
+# Store actual secret as the latest version if it has been provided.
 resource "google_secret_manager_secret_version" "secret" {
+  for_each    = toset(compact([var.secret]))
   secret      = google_secret_manager_secret.secret.id
-  secret_data = var.secret
+  secret_data = each.value
 }
 
 # Allow the supplied accounts to read the secret value from Secret Manager
