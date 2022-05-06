@@ -37,22 +37,134 @@ platforms:
   - name: local
 
 suites:
-  # - name: root-minimal
-  #   driver:
-  #     root_module_directory: test/fixtures/root
-  #     variables:
-  #       test_name: root-minimal
-  #   verifier:
-  #     systems:
-  #       - name: secrets
-  #         backend: gcp
-  #         profile_locations:
-  #           - test/profiles/secrets
-  #         reporter:
-  #           - cli
-  #           - documentation:<%= report_dir %>/<%= report_ts %>/root-minimal.txt
-  #           - junit2:<%= report_dir %>/<%= report_ts %>/root-minimal.xml
-  #           - yaml:<%= report_dir %>/<%= report_ts %>/root-minimal.yaml
+  - name: root-minimal
+    driver:
+      root_module_directory: test/fixtures/root
+      variables:
+        test_name: root-minimal
+        secret: terribleS3cr3t
+    verifier:
+      systems:
+        - name: secrets
+          backend: gcp
+          profile_locations:
+            - test/profiles/secrets
+          reporter:
+            - cli
+            - documentation:<%= report_dir %>/<%= report_ts %>/root-minimal.txt
+            - junit2:<%= report_dir %>/<%= report_ts %>/root-minimal.xml
+            - yaml:<%= report_dir %>/<%= report_ts %>/root-minimal.yaml
+  - name: root-all
+    driver:
+      root_module_directory: test/fixtures/root
+      variables:
+        test_name: root-all
+        accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
+        labels: '{<%= harness_outputs['labels'].to_a.map{|pair| sprintf('%s=\"%s\"', pair[0], pair[1])}.join(',') %>}'
+        replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=\"%s\"}', pair[0], pair[1]['key'])}.join(',') %>}'
+        secret: terribleS3cr3t
+    verifier:
+      systems:
+        - name: secrets
+          backend: gcp
+          profile_locations:
+            - test/profiles/secrets
+          reporter:
+            - cli
+            - documentation:<%= report_dir %>/<%= report_ts %>/root-all.txt
+            - junit2:<%= report_dir %>/<%= report_ts %>/root-all.xml
+            - yaml:<%= report_dir %>/<%= report_ts %>/root-all.yaml
+  - name: root-null-secret
+    driver:
+      root_module_directory: test/fixtures/root
+      variables:
+        test_name: root-null-secret
+        # terraform-kitchen requires all values to be scalar, so use a flag in
+        # the fixture to force setting value to null
+        secret: 'null'
+        null_secret: 'true'
+    verifier:
+      systems:
+        - name: secrets
+          backend: gcp
+          profile_locations:
+            - test/profiles/secrets
+          reporter:
+            - cli
+            - documentation:<%= report_dir %>/<%= report_ts %>/root-null-secret.txt
+            - junit2:<%= report_dir %>/<%= report_ts %>/root-null-secret.xml
+            - yaml:<%= report_dir %>/<%= report_ts %>/root-null-secret.yaml
+  - name: root-empty-secret
+    driver:
+      root_module_directory: test/fixtures/root
+      variables:
+        test_name: root-empty-secret
+        secret: ''
+    verifier:
+      systems:
+        - name: secrets
+          backend: gcp
+          profile_locations:
+            - test/profiles/secrets
+          reporter:
+            - cli
+            - documentation:<%= report_dir %>/<%= report_ts %>/root-empty-secret.txt
+            - junit2:<%= report_dir %>/<%= report_ts %>/root-empty-secret.xml
+            - yaml:<%= report_dir %>/<%= report_ts %>/root-empty-secret.yaml
+  - name: root-replication-null-values
+    driver:
+      root_module_directory: test/fixtures/root
+      variables:
+        test_name: root-replication-null-keys
+        replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s=null', pair[0])}.join(',') %>}'
+        secret: terribleS3cr3t
+    verifier:
+      systems:
+        - name: secrets
+          backend: gcp
+          profile_locations:
+            - test/profiles/secrets
+          reporter:
+            - cli
+            - documentation:<%= report_dir %>/<%= report_ts %>/root-replication-null-keys.txt
+            - junit2:<%= report_dir %>/<%= report_ts %>/root-replication-null-keys.xml
+            - yaml:<%= report_dir %>/<%= report_ts %>/root-replication-null-keys.yaml
+  - name: root-replication-keys-null
+    driver:
+      root_module_directory: test/fixtures/root
+      variables:
+        test_name: root-replication-keys-null
+        replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=null}', pair[0])}.join(',') %>}'
+        secret: terribleS3cr3t
+    verifier:
+      systems:
+        - name: secrets
+          backend: gcp
+          profile_locations:
+            - test/profiles/secrets
+          reporter:
+            - cli
+            - documentation:<%= report_dir %>/<%= report_ts %>/root-replication-keys-null.txt
+            - junit2:<%= report_dir %>/<%= report_ts %>/root-replication-keys-null.xml
+            - yaml:<%= report_dir %>/<%= report_ts %>/root-replication-keys-null.yaml
+  - name: root-replication-keys-empty
+    driver:
+      root_module_directory: test/fixtures/root
+      variables:
+        test_name: root-replication-keys-empty
+        replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=\"\"}', pair[0])}.join(',') %>}'
+        secret: terribleS3cr3t
+    verifier:
+      systems:
+        - name: secrets
+          backend: gcp
+          profile_locations:
+            - test/profiles/secrets
+          reporter:
+            - cli
+            - documentation:<%= report_dir %>/<%= report_ts %>/root-replication-keys-empty.txt
+            - junit2:<%= report_dir %>/<%= report_ts %>/root-replication-keys-empty.xml
+            - yaml:<%= report_dir %>/<%= report_ts %>/root-replication-keys-empty.yaml
   - name: example-accessors
     driver:
       root_module_directory: test/fixtures/examples/accessors
@@ -78,8 +190,7 @@ suites:
         test_name: example-all-options
         accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
         labels: '{<%= harness_outputs['labels'].to_a.map{|pair| sprintf('%s=\"%s\"', pair[0], pair[1])}.join(',') %>}'
-        replication_locations: '<%= harness_outputs['replication_locations'].to_s.gsub('"', '\"') %>'
-        replication_keys: '{<%= harness_outputs['replication_keys'].except('global').to_a.map{|pair| sprintf('%s=\"%s\"', pair[0], pair[1])}.join(',') %>}'
+        replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=\"%s\"}', pair[0], pair[1]['key'])}.join(',') %>}'
         secret: terribleS3cr3t
     verifier:
       systems:
@@ -132,7 +243,7 @@ suites:
       variables:
         test_name: example-user-managed-replication
         secret: terribleS3cr3t
-        replication_locations: '<%= harness_outputs['replication_locations'].to_s.gsub('"', '\"') %>'
+        replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s=null', pair[0])}.join(',') %>}'
     verifier:
       systems:
         - name: secrets
@@ -151,7 +262,7 @@ suites:
         test_name: example-user-managed-replication-accessors
         accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
         secret: terribleS3cr3t
-        replication_locations: '<%= harness_outputs['replication_locations'].to_s.gsub('"', '\"') %>'
+        replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s=null', pair[0])}.join(',') %>}'
     verifier:
       systems:
         - name: secrets
@@ -168,9 +279,8 @@ suites:
       root_module_directory: test/fixtures/examples/user-managed-replication-with-keys
       variables:
         test_name: example-user-managed-replication-with-keys
+        replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=\"%s\"}', pair[0], pair[1]['key'])}.join(',') %>}'
         secret: terribleS3cr3t
-        replication_locations: '<%= harness_outputs['replication_locations'].to_s.gsub('"', '\"') %>'
-        replication_keys: '{<%= harness_outputs['replication_keys'].except('global').to_a.map{|pair| sprintf('%s=\"%s\"', pair[0], pair[1])}.join(',') %>}'
     verifier:
       systems:
         - name: secrets

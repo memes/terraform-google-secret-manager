@@ -9,7 +9,7 @@ repos:
         exclude: (kitchen\.yml|\.github/ISSUE_TEMPLATE/config\.yml)$
         entry: yamllint --strict
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.68.1
+    rev: v1.71.0
     hooks:
       - id: terraform_fmt
       - id: terraform_docs

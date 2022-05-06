@@ -14,14 +14,14 @@ resource "google_secret_manager_secret" "secret" {
   labels    = var.labels
   replication {
     dynamic "user_managed" {
-      for_each = length(var.replication_locations) > 0 ? [1] : []
+      for_each = length(var.replication) > 0 ? [1] : []
       content {
         dynamic "replicas" {
-          for_each = var.replication_locations
+          for_each = var.replication
           content {
-            location = replicas.value
+            location = replicas.key
             dynamic "customer_managed_encryption" {
-              for_each = toset(compact([lookup(var.replication_keys, replicas.value, "")]))
+              for_each = toset(compact([replicas.value != null ? lookup(replicas.value, "kms_key_name") : null]))
               content {
                 kms_key_name = customer_managed_encryption.value
               }
@@ -30,7 +30,7 @@ resource "google_secret_manager_secret" "secret" {
         }
       }
     }
-    automatic = length(var.replication_locations) > 0 ? null : true
+    automatic = length(var.replication) > 0 ? null : true
   }
 }
 

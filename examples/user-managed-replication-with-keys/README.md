@@ -20,9 +20,12 @@ replication, and use a Cloud KMS encryption key to use for secret encryption.
 project_id = "my-project-id"
 id = "my-secret-id"
 secret = "T0pS3cretP@ssword!"
-replication_locations = ["us-east1", "us-west1"]
-replication_keys = {
-    "us-east1" = "projects/my-project-id/locations/us-east1/keyRings/my-east-keyring/cryptoKeys/east-key"
-    "us-west1" = "projects/my-project-id/locations/us-west1/keyRings/my-east-keyring/cryptoKeys/west-key"
+replication = {
+    "us-east1" = {
+        kms_key_name = "projects/my-project-id/locations/us-east1/keyRings/my-east-keyring/cryptoKeys/east-key"
+    }
+    "us-west1" = {
+        kms_key_name = "projects/my-project-id/locations/us-west1/keyRings/my-east-keyring/cryptoKeys/west-key"
+    }
 }
 ```

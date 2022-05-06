@@ -11,11 +11,11 @@ terraform {
 }
 
 module "secret" {
-  source                = "memes/secret-manager/google"
-  version               = "2.0.0"
-  project_id            = var.project_id
-  id                    = var.id
-  secret                = var.secret
-  replication_locations = var.replication_locations
-  accessors             = var.accessors
+  source      = "memes/secret-manager/google"
+  version     = "2.0.0"
+  project_id  = var.project_id
+  id          = var.id
+  secret      = var.secret
+  replication = var.replication
+  accessors   = var.accessors
 }

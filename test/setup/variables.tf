@@ -4,8 +4,8 @@ variable "project_id" {
 }
 
 variable "replication_locations" {
-  type        = set(string)
-  description = "Set of Secret Manager and/or KMS replication_locations where resources will be created."
+  type        = list(string)
+  description = "Set of Secret Manager and/or KMS replication locations where resources will be created."
 }
 
 variable "labels" {

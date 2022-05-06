@@ -1,9 +1,16 @@
 variable "accessors" {
-  type = list(string)
+  type    = list(string)
+  default = []
 }
 
 variable "labels" {
-  type = map(string)
+  type    = map(string)
+  default = {}
+}
+
+variable "null_secret" {
+  type    = bool
+  default = false
 }
 
 variable "prefix" {
@@ -18,6 +25,7 @@ variable "replication" {
   type = map(object({
     kms_key_name = string
   }))
+  default = {}
 }
 
 variable "secret" {

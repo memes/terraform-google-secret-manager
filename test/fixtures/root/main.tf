@@ -9,10 +9,11 @@ terraform {
 }
 
 module "test" {
-  source      = "./../../../ephemeral/user-managed-replication-accessors/"
+  source      = "./../../../"
   id          = format("%s-%s", var.prefix, var.test_name)
   accessors   = var.accessors
+  labels      = var.labels
   project_id  = var.project_id
   replication = var.replication
-  secret      = var.secret
+  secret      = var.null_secret ? null : var.secret
 }
