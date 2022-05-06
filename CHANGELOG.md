@@ -8,6 +8,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2022-05-05
+
+### Added
+
+- support for empty/null `secret` value to create a Secret Manager entry without
+  a versioned value. Users must manage the secret version outside this module if
+  used. Thanks @yoelmacia for reporting the issue [#18](https://github.com/memes/terraform-google-secret-manager/issues/18).
+- `replication` object replaces the functionality of `replication_locations` and
+  `replication_keys`.
+
+### Changed
+
+- minimum supported Terraform version is >= 0.14.5
+
+### Removed
+
+- dropped the `random` submodule; there are many alternative ways to generate a
+  random password that can be used instead. See [with-random-provider](examples/with-random-provider)
+  example that reproduces the actions of the removed module.
+- removed `replication_locations` and `replication_keys` variables; use `replication`
+  object instead.
+
 ## [1.1.1] - 2022-04-20
 
 ### Added
@@ -103,6 +125,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+[2.0.0]: https://github.com/memes/terraform-google-secret-manager/compare/v1.1.0...v2.0.0
 [1.1.1]: https://github.com/memes/terraform-google-secret-manager/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/memes/terraform-google-secret-manager/compare/v1.0.5...v1.1.0
 [1.0.5]: https://github.com/memes/terraform-google-secret-manager/compare/v1.0.4...v1.0.5
