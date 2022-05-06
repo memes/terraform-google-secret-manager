@@ -21,13 +21,10 @@ variable "project_id" {
   type = string
 }
 
-variable "replication_locations" {
-  type    = set(string)
-  default = []
-}
-
-variable "replication_keys" {
-  type    = map(string)
+variable "replication" {
+  type = map(object({
+    kms_key_name = string
+  }))
   default = {}
 }
 

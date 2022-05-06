@@ -45,7 +45,7 @@ EOD
 }
 
 resource "google_kms_key_ring" "keyring" {
-  for_each = setunion(var.replication_locations, ["global"])
+  for_each = setunion(var.replication_locations)
   project  = var.project_id
   name     = format("%s-%s-test", random_uuid.key_prefix.id, each.value)
   location = each.value

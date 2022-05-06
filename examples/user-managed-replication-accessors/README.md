@@ -20,6 +20,9 @@ secret value.
 project_id = "my-project-id"
 id = "my-secret-id"
 secret = "T0pS3cretP@ssword!"
-replication_locations = ["us-east1", "us-west1"]
+replication = {
+    "us-east1" = null
+    "us-west1" = null
+}
 accessors = ["serviceAccount:my-service@my-project-id.iam.gserviceaccount.com", "user:jane@doe.com"]
 ```

@@ -12,10 +12,13 @@ The secret identifier to create; this value must be unique within the project.
 EOD
 }
 
-variable "replication_locations" {
-  type        = list(string)
+variable "replication" {
+  type = map(object({
+    kms_key_name = string
+  }))
+  default     = {}
   description = <<EOD
-A list of replication locations for the secret.
+The replication configuration for the secret.
 EOD
 }
 

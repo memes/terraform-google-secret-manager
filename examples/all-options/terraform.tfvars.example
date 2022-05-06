@@ -1,20 +1,13 @@
 # Example TF vars file
 project_id = "my-project-id"
 id = "my-secret-id"
-length = 24
-has_upper_chars = true
-min_upper_chars = 2
-has_lower_chars = true
-min_lower_chars = 2
-has_numeric_chars = true
-min_numeric_chars = 2
-has_special_chars = true
-min_special_chars = 2
-special_char_set = "#$%^&*"
-replication_locations = ["us-east1", "us-west1"]
-replication_keys = {
-    "us-east1" = "projects/my-project-id/locations/us-east1/keyRings/my-east-keyring/cryptoKeys/east-key"
-    "us-west1" = "projects/my-project-id/locations/us-west1/keyRings/my-east-keyring/cryptoKeys/west-key"
+replication = {
+    "us-east1" = {
+        kms_key_name = "projects/my-project-id/locations/us-east1/keyRings/my-east-keyring/cryptoKeys/east-key"
+    }
+    "us-west1" = {
+        kms_key_name = "projects/my-project-id/locations/us-west1/keyRings/my-east-keyring/cryptoKeys/west-key"
+    }
 }
 accessors = ["serviceAccount:my-service@my-project-id.iam.gserviceaccount.com", "user:jane@doe.com", "group:devops@example.com"]
 labels = {

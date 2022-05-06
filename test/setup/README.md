@@ -48,7 +48,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | GCP project identifier. | `string` | n/a | yes |
-| <a name="input_replication_locations"></a> [replication\_locations](#input\_replication\_locations) | Set of Secret Manager and/or KMS replication\_locations where resources will be created. | `set(string)` | n/a | yes |
+| <a name="input_replication_locations"></a> [replication\_locations](#input\_replication\_locations) | Set of Secret Manager and/or KMS replication locations where resources will be created. | `list(string)` | n/a | yes |
 | <a name="input_labels"></a> [labels](#input\_labels) | Optional additional labels to apply to resources. | `map(string)` | `{}` | no |
 
 ## Outputs
@@ -58,8 +58,7 @@ No modules.
 | <a name="output_labels"></a> [labels](#output\_labels) | The labels to use where allowed. |
 | <a name="output_prefix"></a> [prefix](#output\_prefix) | The random prefix to use for all resources in this test run. |
 | <a name="output_project_id"></a> [project\_id](#output\_project\_id) | The Google Cloud project identifier to use for resources. |
-| <a name="output_replication_keys"></a> [replication\_keys](#output\_replication\_keys) | A map of location:KMS key ids. |
-| <a name="output_replication_locations"></a> [replication\_locations](#output\_replication\_locations) | The Secret Manager and/or KMS replication locations to use for resources. |
+| <a name="output_replication"></a> [replication](#output\_replication) | A map of location:KMS key ids. |
 | <a name="output_service_account_email"></a> [service\_account\_email](#output\_service\_account\_email) | The email identifier of the generated service account. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 <!-- markdownlint-enable MD033 MD034 -->

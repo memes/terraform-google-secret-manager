@@ -20,36 +20,41 @@ The secret identifier to create; this value must be unique within the project.
 EOD
 }
 
-variable "replication_locations" {
-  type        = list(string)
-  default     = []
-  description = <<EOD
-An optional list of replication locations for the secret. If the value is an
-empty list (default) then an automatic replication policy will be applied. Use
-this if you must have replication constrained to specific locations.
-
-E.g. to use automatic replication policy (default)
-replication_locations = []
-
-E.g. to force secrets to be replicated only in us-east1 and us-west1 regions:
-replication_locations = [ "us-east1", "us-west1" ]
-EOD
-}
-
-variable "replication_keys" {
-  type        = map(string)
+variable "replication" {
+  type = map(object({
+    kms_key_name = string
+  }))
+  validation {
+    condition     = length(var.replication) == 0 || length(distinct([for k, v in var.replication : v == null ? "x" : coalesce(lookup(v, "kms_key_name"), "unspecified") == "unspecified" ? "x" : "y"])) == 1
+    error_message = "The replication must contain a Cloud KMS key for all regions, or an empty string/null for all regions."
+  }
   default     = {}
   description = <<EOD
-An optional map of customer managed keys per location. This needs to match the
-locations specified in `replication_locations`.
+An optional map of replication configurations for the secret. If the map is empty
+(default), then automatic replication will be used for the secret. If the map is
+not empty, replication will be configured for each key (region) and, optionally,
+will use the provided Cloud KMS keys.
 
-E.g. replication_keys = { "us-east1": "my-key-name", "us-west1": "another-key-name" }
+NOTE: If Cloud KMS keys are used, a Cloud KMS key must be provided for every
+region key.
+
+E.g. to use automatic replication policy (default)
+replication = {}
+
+E.g. to force secrets to be replicated only in us-east1 and us-west1 regions,
+with Google managed encryption keys
+replication = {
+  "us-east1" = null
+  "us-west1" = null
+}
+
+E.g. to force secrets to be replicated only in us-east1 and us-west1 regions, but
+use Cloud KMS keys from each region.
+replication = {
+  "us-east1" = { kms_key_name = "my-east-key-name" }
+  "us-west1" = { kms_key_name = "my-west-key-name" }
+}
 EOD
-  # We cannot use the following validation because we cannot reference other variables
-  # validation {
-  #   condition     = can([for k in var.replication_keys : contains(var.replication_locations, k)])
-  #   error_message = "Each location in replication_keys must be defined in replication_locations"
-  # }
 }
 
 variable "secret" {

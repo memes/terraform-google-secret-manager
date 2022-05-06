@@ -26,15 +26,11 @@ The Google Cloud project identifier to use for resources.
 EOD
 }
 
-output "replication_locations" {
-  value       = var.replication_locations
-  description = <<-EOD
-The Secret Manager and/or KMS replication locations to use for resources.
-EOD
-}
-
-output "replication_keys" {
-  value       = { for k, v in google_kms_crypto_key.key : split("/", v.key_ring)[3] => v.id }
+output "replication" {
+  value = merge(
+    { for v in var.replication_locations : v => null },
+    { for k, v in google_kms_crypto_key.key : split("/", v.key_ring)[3] => { key = v.id } }
+  )
   description = <<-EOD
 A map of location:KMS key ids.
 EOD

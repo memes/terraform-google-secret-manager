@@ -9,12 +9,11 @@ terraform {
 }
 
 module "test" {
-  source                = "./../../../ephemeral/all-options/"
-  id                    = format("%s-%s", var.prefix, var.test_name)
-  accessors             = var.accessors
-  labels                = var.labels
-  project_id            = var.project_id
-  replication_keys      = var.replication_keys
-  replication_locations = var.replication_locations
-  secret                = var.secret
+  source      = "./../../../ephemeral/all-options/"
+  id          = format("%s-%s", var.prefix, var.test_name)
+  accessors   = var.accessors
+  labels      = var.labels
+  project_id  = var.project_id
+  replication = var.replication
+  secret      = var.secret
 }

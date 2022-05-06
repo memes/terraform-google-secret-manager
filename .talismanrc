@@ -15,19 +15,19 @@ fileignoreconfig:
 - filename: examples/user-managed-replication/terraform.tfvars.example
   checksum: d619606a155c5b9a63def97d621913240b58f8d36672d005a0cb39bccda26c1b
 - filename: README.md
-  checksum: d6e50d9581d079681f4c26f87f460e25a9503b146a9a9df948fa6146e1bc7ee3
+  checksum: 92877d805e8077452846c87778b2a5db5394753e9287818828cd080a3728db70
 - filename: examples/generated-secret/main.tf
   checksum: 37c8edd39b841077663467bd9053e4041092b05b040f107bd8fcb2b1adb04670
 - filename: modules/random/main.tf
   checksum: 64cbbdabd2a425a9e7fd9c1db9107b5d7874befb660dbe62c9b9c5d1be9f97f2
 - filename: main.tf
-  checksum: f01bf0181a0c58d1fd607a3bbad5bdbd758a91a127c872f380013205c57bd34b
+  checksum: 9bd7f7a6266b44e8ecaeb91011a562f40cfe4caa609c52702f936d9c5a43bc0d
 - filename: examples/simple/main.tf
   checksum: b26086277af49d853473caea9f0bbbb62ebb6b7fd16ccde74f57f9d0d9b63444
 - filename: variables.tf
-  checksum: 18b37a92962a5d303cb54ce9f6d039252d5fe53befc0823d6297f95b52fa2240
+  checksum: c58645b1901328c54b510d6464d803f9de4fc466ca49b94c496d46db34d5d4cc
 - filename: examples/user-managed-replication-accessors/main.tf
-  checksum: 941121157484e42ad577b8eed8381a02bd6b20c770d6da143fb4b23acbdfbd7e
+  checksum: af29e994e68a7587c981ac1dc962a402e604caecf1942098272266706ee42d15
 - filename: modules/random/README.md
   checksum: 706d72cd7b7196521e6d6b7f2d311e422d6022208a6c56cbf0eb5aff54bda057
 - filename: modules/random/variables.tf
@@ -51,9 +51,9 @@ fileignoreconfig:
 - filename: Makefile
   checksum: 88cce1135288125f41b2dd7f8a7bada98834dc5b4ce9e00461393fd3da850692
 - filename: kitchen.yml
-  checksum: 4941fb66c91a4def8451819d93441202797ed48dcfd31d82df870d4fdd6c1006
+  checksum: 24f48ee000ba5bececcc065b270bedfe1b5cd9c2e5160f1c3cb667d17f5f5f1f
 - filename: test/setup/outputs.tf
-  checksum: 60ebe96d64c64ec64bc8759f53dd07f5a951a1db7cb6a2d20ac5a8260f7bb59f
+  checksum: 9c50d0aeea3dd946960161a60f841eea5b7d1f54b7f6594c0dcc04ab8c318023
 - filename: test/setup/README.md
   checksum: 6f56e60e82314a012414c4ce78e1663aa13d691a369a831d139b43791fa4cdb3
 - filename: test/fixtures/examples/accessors/main.tf
@@ -63,21 +63,21 @@ fileignoreconfig:
 - filename: test/setup/main.tf
   checksum: 2075673becd6754708b6326625322fe4e2fe7649e84b6a6f58c471a5c4101b7f
 - filename: test/fixtures/examples/user-managed-replication-accessors/main.tf
-  checksum: 3037326fa13983c425e01b9be81129bd64069a490d2b5d17735aaff05347063f
+  checksum: b46862cc9b22a58340e18768b99f34efab155aefee72974ffb4065a8255a04db
 - filename: test/fixtures/examples/user-managed-replication/main.tf
-  checksum: 29618a009dfa10eb73edc4378cc57ba7fd5732f5b114009c166f107579ed4614
+  checksum: 4bef7cea64907deda3de4494da3bd8e7024392dc984c582d7aba3d35d85a326d
 - filename: test/fixtures/examples/all-options-generated/main.tf
   checksum: d9dab11b6bef08c3aa49015c721aad2be9528a7b44dbb769f2f2f29dd1741156
 - filename: test/fixtures/examples/user-managed-replication-with-keys/main.tf
-  checksum: a65788281b5f374a56a17729c27a44ad90af5a54156a7c850e849173dc4bb42b
+  checksum: 400016a17982084be53b50541189d1672347c2c41633996df77f333a5b742390
 - filename: examples/user-managed-replication-with-keys/terraform.tfvars.example
   checksum: 6df509d6cda2234795d3f58144d319bef9c9046666ef2385f9f12f94b8f12f35
 - filename: examples/all-options-generated/main.tf
   checksum: b8572234be0ec2761e2880ca28e90361b9d3fda5befcee88b25f6f91e9a633eb
 - filename: examples/user-managed-replication-with-keys/main.tf
-  checksum: 40140f7b2562d7352e238f66b5625d265283c423422f43aed880dae82350fbfe
+  checksum: ab244d75fc95d706b250a90dc9db7afa511341cc6307a364534cbb3daa908140
 - filename: examples/user-managed-replication-with-keys/README.md
-  checksum: 114cb19fd1dc5aba4382b4e417ac11c717f18bf0ed8081c92ad3f61a58b8ecd6
+  checksum: ab1f5cc54093c9973afe535b58d10f96a8a38429c9e69f6b6455f11b1ae35f2a
 - filename: examples/user-managed-replication-with-keys/variables.tf
   checksum: 361283f75ab6060f085f2b134b4f6f0075303c1409cd49467a74b0fdaf95e1e5
 - filename: CHANGELOG.md
@@ -85,10 +85,18 @@ fileignoreconfig:
 - filename: examples/all-options/variables.tf
   checksum: 9ac418a296be758e18f999197e3e4f57b41778e97b667e563961ecba76207daf
 - filename: examples/all-options/main.tf
-  checksum: 348d280249c4360763beda7dc5db11cec357ccb041ee47b091223d92fe052b8a
+  checksum: 9ece2caccbaad2c1757c3f22efdf0524263828ec0169e071bdd7dbf609db723a
 - filename: examples/with-random-provider/main.tf
   checksum: 0111a9ebef71360787c8f423d932cb8003a72c1aa74d5e635044a2d2e6065262
 - filename: test/fixtures/examples/all-options/main.tf
-  checksum: a88f49fcd11cc3179f4169fd15ed20dc318435057ca31b4a9191542c3362c100
+  checksum: af483e82b9201065124a9710b8a328bfb350cbb08bca21df60c7d63b10870b04
 - filename: test/fixtures/root/main.tf
-  checksum: d74abeeb4d407a335de665d1d29edc110831a3c0970491bfcfb204a006151715
+  checksum: 0a8d2ebd6a964d9d4299f3324ea1ec94da554109ab78008bb9c066987e18b863
+- filename: examples/all-options/terraform.tfvars.example
+  checksum: 244b9a19555925b7bede1e21fead0c46f99d7486cbf0fc66f3e77636e7ae0b7e
+- filename: examples/user-managed-replication-with-keys/terraform.tfvars.example
+  checksum: 79f5b2b606dd10da32bc52656e6dc84d1dfdbd99fb97eb28fcde1ec258cffcfa
+- filename: examples/user-managed-replication/main.tf
+  checksum: 3d0bc5e4ad597079f7b610f807c4f99b88622089c167c06a8eebba290986e9dc
+- filename: examples/all-options/README.md
+  checksum: 758371447a65e07a77cd3f05587dbd6b4cae25a953579a08769da1f1ae1ac9d3

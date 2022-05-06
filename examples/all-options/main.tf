@@ -10,13 +10,12 @@ terraform {
 }
 
 module "secret" {
-  source                = "memes/secret-manager/google"
-  version               = "2.0.0"
-  project_id            = var.project_id
-  id                    = var.id
-  replication_locations = var.replication_locations
-  replication_keys      = var.replication_keys
-  secret                = var.secret
-  accessors             = var.accessors
-  labels                = var.labels
+  source      = "memes/secret-manager/google"
+  version     = "2.0.0"
+  project_id  = var.project_id
+  id          = var.id
+  replication = var.replication
+  secret      = var.secret
+  accessors   = var.accessors
+  labels      = var.labels
 }
