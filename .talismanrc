@@ -87,7 +87,7 @@ fileignoreconfig:
 - filename: examples/all-options/main.tf
   checksum: 9ece2caccbaad2c1757c3f22efdf0524263828ec0169e071bdd7dbf609db723a
 - filename: examples/with-random-provider/main.tf
-  checksum: 0111a9ebef71360787c8f423d932cb8003a72c1aa74d5e635044a2d2e6065262
+  checksum: 1871a23a6e08ba2e134e4ffbf4e38d48dbb13d3d8ee085e725da94e9264f8d3e
 - filename: test/fixtures/examples/all-options/main.tf
   checksum: af483e82b9201065124a9710b8a328bfb350cbb08bca21df60c7d63b10870b04
 - filename: test/fixtures/root/main.tf

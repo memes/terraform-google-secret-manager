@@ -15,7 +15,7 @@ terraform {
 }
 
 # Create a random value for secret
-resource "random_password" "secret" {
+resource "random_string" "secret" {
   length           = 16
   upper            = true
   min_upper        = 2
@@ -33,5 +33,5 @@ module "secret" {
   version    = "2.0.0"
   project_id = var.project_id
   id         = var.id
-  secret     = random_password.secret.result
+  secret     = random_string.secret.result
 }

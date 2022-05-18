@@ -27,6 +27,6 @@ used in `for_each` arguments. To work around this apply in two steps:
 
 ```shell
 terraform init
-terraform apply -target random_password.secret
+terraform apply -target random_string.secret
 terraform apply
 ```
