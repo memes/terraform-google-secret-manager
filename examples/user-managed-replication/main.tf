@@ -11,7 +11,7 @@ terraform {
 
 module "secret" {
   source      = "memes/secret-manager/google"
-  version     = "2.0.1"
+  version     = "2.1.0"
   project_id  = var.project_id
   id          = var.id
   secret      = var.secret
