@@ -29,7 +29,7 @@ resource "random_uuid" "key_prefix" {
 locals {
   labels = merge(var.labels, {
     purpose = "automated-testing"
-    product = "terraform-google-f5-bigip-ha"
+    product = "terraform-google-secret-manager"
     driver  = "kitchen-terraform"
   })
 }
