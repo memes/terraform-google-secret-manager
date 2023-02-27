@@ -59,6 +59,7 @@ EOD
 
 variable "secret" {
   type        = string
+  sensitive   = true
   description = <<EOD
 The secret payload to store in Secret Manager; if blank or null a versioned secret
 value will NOT be created and must be populated outside of this module. Binary
