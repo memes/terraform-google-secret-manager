@@ -21,7 +21,7 @@ fileignoreconfig:
 - filename: modules/random/main.tf
   checksum: 64cbbdabd2a425a9e7fd9c1db9107b5d7874befb660dbe62c9b9c5d1be9f97f2
 - filename: main.tf
-  checksum: 9bd7f7a6266b44e8ecaeb91011a562f40cfe4caa609c52702f936d9c5a43bc0d
+  checksum: 5c1b49174ea34816fd635dbbd8c4e41d2109f045789be3c62d02f0e4bea2c2c9
 - filename: examples/simple/main.tf
   checksum: b26086277af49d853473caea9f0bbbb62ebb6b7fd16ccde74f57f9d0d9b63444
 - filename: variables.tf
@@ -51,7 +51,7 @@ fileignoreconfig:
 - filename: Makefile
   checksum: 88cce1135288125f41b2dd7f8a7bada98834dc5b4ce9e00461393fd3da850692
 - filename: kitchen.yml
-  checksum: 24f48ee000ba5bececcc065b270bedfe1b5cd9c2e5160f1c3cb667d17f5f5f1f
+  checksum: fafd1f43822a6610df4183f5f21fe6fa631d9aa028cba5c512e20d1b8adfaa0a
 - filename: test/setup/outputs.tf
   checksum: 9c50d0aeea3dd946960161a60f841eea5b7d1f54b7f6594c0dcc04ab8c318023
 - filename: test/setup/README.md
@@ -100,3 +100,5 @@ fileignoreconfig:
   checksum: 3d0bc5e4ad597079f7b610f807c4f99b88622089c167c06a8eebba290986e9dc
 - filename: examples/all-options/README.md
   checksum: 758371447a65e07a77cd3f05587dbd6b4cae25a953579a08769da1f1ae1ac9d3
+- filename: test/fixtures/issue-51/main.tf
+  checksum: 8137269ccdf2c8a7331362d741f503688eee2aa1fb2d7400a94c16f2cd2bd4ad

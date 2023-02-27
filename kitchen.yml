@@ -162,3 +162,11 @@ suites:
       root_module_directory: test/fixtures/examples/empty-secret-value
       variables:
         test_name: example-empty-secret-value
+  - name: verify-issue-51
+    excludes:
+      - tf0-14
+    driver:
+      root_module_directory: test/fixtures/issue-51
+      variables:
+        test_name: issue-51
+        secret: terribleS3cr3t

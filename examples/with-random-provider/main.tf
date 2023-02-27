@@ -30,7 +30,7 @@ resource "random_string" "secret" {
 
 module "secret" {
   source     = "memes/secret-manager/google"
-  version    = "2.1.0"
+  version    = "2.1.1"
   project_id = var.project_id
   id         = var.id
   secret     = random_string.secret.result
