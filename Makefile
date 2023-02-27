@@ -82,25 +82,23 @@ realclean: clean
 	find . -type f -name terraform.tfstate.backup -exec rm -f {} +
 	rm -rf .kitchen
 
-# Helper to ensure code is ready for tagging
-# 1. Tag is a valid semver with v prefix (e.g. v1.0.0)
+# Helper to ensure code is ready to merge release-please PR:
 # 1. Git tree is clean
-# 2. Each module is using a valid Terraform registry source and the version matches
-#    the tag to be applied
-# 3. CHANGELOG has an entry for the tag
-# 4. Inspec controls have version matching the tag
-# if all those pass, tag HEAD with version
-.PHONY: tag.%
-tag.%:
+# 2. Each example is using a valid Terraform registry source and the version
+#    matches the version to be released
+# 3. Inspec controls have version matching the tag
+.PHONY: release-ready.%
+release-ready.%:
 	@echo '$*' | grep -Eq '^v(?:[0-9]+\.){2}[0-9]+$$' || \
-		(echo "Tag doesn't meet requirements"; exit 1)
+		(echo "Version doesn't meet requirements"; exit 1)
 	@test "$(shell git status --porcelain | wc -l | grep -Eo '[0-9]+')" == "0" || \
 		(echo "Git tree is unclean"; exit 1)
 	@find examples -type f -name main.tf -print0 | \
 		xargs -0 awk 'BEGIN{m=0;s=0;v=0}; /module "secret"/ {m=1}; m==1 && /source[ \t]*=[ \t]*"memes\/secret-manager\/google(\/\/modules\/random)?/ {s++}; m==1 && /version[ \t]*=[ \t]*"$(subst .,\.,$(*:v%=%))"/ {v++}; END{if (s==0) { printf "%s has incorrect source\n", FILENAME}; if (v==0) { printf "%s has incorrect version\n", FILENAME}; if (s==0 || v==0) { exit 1}}'
-	@(grep -Eq '^## \[$(subst .,\.,$(*:v%=%))\] - [0-9]{4}(?:-[0-9]{2}){2}' CHANGELOG.md && \
-		grep -Eq '^\[$(subst .,\.,$(*:v%=%))\]: https://github.com/' CHANGELOG.md) || \
-		(echo "CHANGELOG is missing tag entry"; exit 1)
+	# CHANGELOG is managed by release-please - testing is unnecessary
+	# @(grep -Eq '^## \[$(subst .,\.,$(*:v%=%))\] - [0-9]{4}(?:-[0-9]{2}){2}' CHANGELOG.md && \
+	# 	grep -Eq '^\[$(subst .,\.,$(*:v%=%))\]: https://github.com/' CHANGELOG.md) || \
+	# 	(echo "CHANGELOG is missing tag entry"; exit 1)
 	@grep -Eq '^version:[ \t]*$(subst .,\.,$(*:v%=%))[ \t]*$$' test/profiles/secrets/inspec.yml || \
-		(echo "test/profiles/secrets/inspec.yml has incorrect tag"; exit 1)
-	git tag -am 'Tagging release $*' $*
+		(echo "test/profiles/secrets/inspec.yml has incorrect version"; exit 1)
+	@echo "Source is ready to be released as $1"

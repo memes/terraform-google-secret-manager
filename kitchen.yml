@@ -5,17 +5,26 @@
 require 'open3'
 require 'json'
 
-# Fall back to current time and known location for report files if not present
-# in ENV
-report_dir = ENV['REPORT_DIR'] || 'test/reports'
-report_ts = ENV['REPORT_TS'] || Time.now.strftime('%Y-%m-%d-%H-%M-%S')
-
 # Parse the outputs of the test harness
 tf_output, rc = Open3.capture2('terraform -chdir=test/setup output -json')
 if rc != 0
   abort 'Failed to capture Terraform output from test/setup'
 end
 harness_outputs = JSON.parse(tf_output).map { |k,v| [k, v['value']] }.to_h
+
+def tf_client(version)
+  full_version, rc = Open3.capture2("asdf latest terraform #{version}")
+  if rc != 0
+    abort "Failed to determine latest terraform version matching #{version}"
+  end
+  client, rc = Open3.capture2("asdf where terraform #{full_version.chomp}")
+  if rc != 0
+    abort "Failed to locate installed terraform #{full_version.chomp} command"
+  end
+  "#{client.chomp}/bin/terraform"
+end
+
+tf_clients = [0.14, 0.15, 1.0, 1.1, 1.2, 1.3].map{ |v| ["tf#{v}".sub(/\W/, "-"), tf_client(v)]}.to_h
 %>
 ---
 driver:
@@ -23,7 +32,6 @@ driver:
   command_timeout: 60
   verify_version: true
   variables:
-    prefix: <%= harness_outputs['prefix'] %>
     project_id: <%= harness_outputs['project_id'] %>
 
 provisioner:
@@ -32,9 +40,20 @@ provisioner:
 verifier:
   name: terraform
   color: true
+  systems:
+    - name: secrets
+      backend: gcp
+      profile_locations:
+        - test/profiles/secrets
 
 platforms:
-  - name: local
+<% tf_clients.each do |k,v| %>
+  - name: <%= k %>
+    driver:
+      client: <%= v %>
+      variables:
+        prefix: <%= "#{harness_outputs['prefix']}-#{k}" %>
+<% end %>
 
 suites:
   - name: root-minimal
@@ -43,17 +62,6 @@ suites:
       variables:
         test_name: root-minimal
         secret: terribleS3cr3t
-    verifier:
-      systems:
-        - name: secrets
-          backend: gcp
-          profile_locations:
-            - test/profiles/secrets
-          reporter:
-            - cli
-            - documentation:<%= report_dir %>/<%= report_ts %>/root-minimal.txt
-            - junit2:<%= report_dir %>/<%= report_ts %>/root-minimal.xml
-            - yaml:<%= report_dir %>/<%= report_ts %>/root-minimal.yaml
   - name: root-all
     driver:
       root_module_directory: test/fixtures/root
@@ -63,17 +71,6 @@ suites:
         labels: '{<%= harness_outputs['labels'].to_a.map{|pair| sprintf('%s=\"%s\"', pair[0], pair[1])}.join(',') %>}'
         replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=\"%s\"}', pair[0], pair[1]['key'])}.join(',') %>}'
         secret: terribleS3cr3t
-    verifier:
-      systems:
-        - name: secrets
-          backend: gcp
-          profile_locations:
-            - test/profiles/secrets
-          reporter:
-            - cli
-            - documentation:<%= report_dir %>/<%= report_ts %>/root-all.txt
-            - junit2:<%= report_dir %>/<%= report_ts %>/root-all.xml
-            - yaml:<%= report_dir %>/<%= report_ts %>/root-all.yaml
   - name: root-null-secret
     driver:
       root_module_directory: test/fixtures/root
@@ -83,34 +80,12 @@ suites:
         # the fixture to force setting value to null
         secret: 'null'
         null_secret: 'true'
-    verifier:
-      systems:
-        - name: secrets
-          backend: gcp
-          profile_locations:
-            - test/profiles/secrets
-          reporter:
-            - cli
-            - documentation:<%= report_dir %>/<%= report_ts %>/root-null-secret.txt
-            - junit2:<%= report_dir %>/<%= report_ts %>/root-null-secret.xml
-            - yaml:<%= report_dir %>/<%= report_ts %>/root-null-secret.yaml
   - name: root-empty-secret
     driver:
       root_module_directory: test/fixtures/root
       variables:
         test_name: root-empty-secret
         secret: ''
-    verifier:
-      systems:
-        - name: secrets
-          backend: gcp
-          profile_locations:
-            - test/profiles/secrets
-          reporter:
-            - cli
-            - documentation:<%= report_dir %>/<%= report_ts %>/root-empty-secret.txt
-            - junit2:<%= report_dir %>/<%= report_ts %>/root-empty-secret.xml
-            - yaml:<%= report_dir %>/<%= report_ts %>/root-empty-secret.yaml
   - name: root-replication-null-values
     driver:
       root_module_directory: test/fixtures/root
@@ -118,17 +93,6 @@ suites:
         test_name: root-replication-null-keys
         replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s=null', pair[0])}.join(',') %>}'
         secret: terribleS3cr3t
-    verifier:
-      systems:
-        - name: secrets
-          backend: gcp
-          profile_locations:
-            - test/profiles/secrets
-          reporter:
-            - cli
-            - documentation:<%= report_dir %>/<%= report_ts %>/root-replication-null-keys.txt
-            - junit2:<%= report_dir %>/<%= report_ts %>/root-replication-null-keys.xml
-            - yaml:<%= report_dir %>/<%= report_ts %>/root-replication-null-keys.yaml
   - name: root-replication-keys-null
     driver:
       root_module_directory: test/fixtures/root
@@ -136,17 +100,6 @@ suites:
         test_name: root-replication-keys-null
         replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=null}', pair[0])}.join(',') %>}'
         secret: terribleS3cr3t
-    verifier:
-      systems:
-        - name: secrets
-          backend: gcp
-          profile_locations:
-            - test/profiles/secrets
-          reporter:
-            - cli
-            - documentation:<%= report_dir %>/<%= report_ts %>/root-replication-keys-null.txt
-            - junit2:<%= report_dir %>/<%= report_ts %>/root-replication-keys-null.xml
-            - yaml:<%= report_dir %>/<%= report_ts %>/root-replication-keys-null.yaml
   - name: root-replication-keys-empty
     driver:
       root_module_directory: test/fixtures/root
@@ -154,17 +107,6 @@ suites:
         test_name: root-replication-keys-empty
         replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=\"\"}', pair[0])}.join(',') %>}'
         secret: terribleS3cr3t
-    verifier:
-      systems:
-        - name: secrets
-          backend: gcp
-          profile_locations:
-            - test/profiles/secrets
-          reporter:
-            - cli
-            - documentation:<%= report_dir %>/<%= report_ts %>/root-replication-keys-empty.txt
-            - junit2:<%= report_dir %>/<%= report_ts %>/root-replication-keys-empty.xml
-            - yaml:<%= report_dir %>/<%= report_ts %>/root-replication-keys-empty.yaml
   - name: example-accessors
     driver:
       root_module_directory: test/fixtures/examples/accessors
@@ -172,17 +114,6 @@ suites:
         test_name: example-accessors
         accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
         secret: terribleS3cr3t
-    verifier:
-      systems:
-        - name: secrets
-          backend: gcp
-          profile_locations:
-            - test/profiles/secrets
-          reporter:
-            - cli
-            - documentation:<%= report_dir %>/<%= report_ts %>/example-accessors.txt
-            - junit2:<%= report_dir %>/<%= report_ts %>/example-accessors.xml
-            - yaml:<%= report_dir %>/<%= report_ts %>/example-accessors.yaml
   - name: example-all-options
     driver:
       root_module_directory: test/fixtures/examples/all-options
@@ -192,51 +123,18 @@ suites:
         labels: '{<%= harness_outputs['labels'].to_a.map{|pair| sprintf('%s=\"%s\"', pair[0], pair[1])}.join(',') %>}'
         replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=\"%s\"}', pair[0], pair[1]['key'])}.join(',') %>}'
         secret: terribleS3cr3t
-    verifier:
-      systems:
-        - name: secrets
-          backend: gcp
-          profile_locations:
-            - test/profiles/secrets
-          reporter:
-            - cli
-            - documentation:<%= report_dir %>/<%= report_ts %>/example-all-options.txt
-            - junit2:<%= report_dir %>/<%= report_ts %>/example-all-options.xml
-            - yaml:<%= report_dir %>/<%= report_ts %>/example-all-options.yaml
   - name: example-simple
     driver:
       root_module_directory: test/fixtures/examples/simple
       variables:
         test_name: example-simple
         secret: terribleS3cr3t
-    verifier:
-      systems:
-        - name: secrets
-          backend: gcp
-          profile_locations:
-            - test/profiles/secrets
-          reporter:
-            - cli
-            - documentation:<%= report_dir %>/<%= report_ts %>/example-simple.txt
-            - junit2:<%= report_dir %>/<%= report_ts %>/example-simple.xml
-            - yaml:<%= report_dir %>/<%= report_ts %>/example-simple.yaml
   # Disabled - need to use -target to instantiate correctly
   # - name: example-with-random-provider
   #   driver:
   #     root_module_directory: test/fixtures/examples/with-random-provider
   #     variables:
   #       test_name: example-with-random-provider
-  #   verifier:
-  #     systems:
-  #       - name: secrets
-  #         backend: gcp
-  #         profile_locations:
-  #           - test/profiles/secrets
-  #         reporter:
-  #           - cli
-  #           - documentation:<%= report_dir %>/<%= report_ts %>/example-with-random-provider.txt
-  #           - junit2:<%= report_dir %>/<%= report_ts %>/example-with-random-provider.xml
-  #           - yaml:<%= report_dir %>/<%= report_ts %>/example-with-random-provider.yaml
   - name: example-user-managed-replication
     driver:
       root_module_directory: test/fixtures/examples/user-managed-replication
@@ -244,17 +142,6 @@ suites:
         test_name: example-user-managed-replication
         secret: terribleS3cr3t
         replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s=null', pair[0])}.join(',') %>}'
-    verifier:
-      systems:
-        - name: secrets
-          backend: gcp
-          profile_locations:
-            - test/profiles/secrets
-          reporter:
-            - cli
-            - documentation:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication.txt
-            - junit2:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication.xml
-            - yaml:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication.yaml
   - name: example-user-managed-replication-accessors
     driver:
       root_module_directory: test/fixtures/examples/user-managed-replication-accessors
@@ -263,17 +150,6 @@ suites:
         accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
         secret: terribleS3cr3t
         replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s=null', pair[0])}.join(',') %>}'
-    verifier:
-      systems:
-        - name: secrets
-          backend: gcp
-          profile_locations:
-            - test/profiles/secrets
-          reporter:
-            - cli
-            - documentation:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-accessors.txt
-            - junit2:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-accessors.xml
-            - yaml:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-accessors.yaml
   - name: example-user-managed-replication-with-keys
     driver:
       root_module_directory: test/fixtures/examples/user-managed-replication-with-keys
@@ -281,30 +157,8 @@ suites:
         test_name: example-user-managed-replication-with-keys
         replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=\"%s\"}', pair[0], pair[1]['key'])}.join(',') %>}'
         secret: terribleS3cr3t
-    verifier:
-      systems:
-        - name: secrets
-          backend: gcp
-          profile_locations:
-            - test/profiles/secrets
-          reporter:
-            - cli
-            - documentation:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-with-keys.txt
-            - junit2:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-with-keys.xml
-            - yaml:<%= report_dir %>/<%= report_ts %>/example-user-managed-replication-with-keys.yaml
   - name: example-empty-secret-value
     driver:
       root_module_directory: test/fixtures/examples/empty-secret-value
       variables:
         test_name: example-empty-secret-value
-    verifier:
-      systems:
-        - name: secrets
-          backend: gcp
-          profile_locations:
-            - test/profiles/secrets
-          reporter:
-            - cli
-            - documentation:<%= report_dir %>/<%= report_ts %>/example-empty-secret-value.txt
-            - junit2:<%= report_dir %>/<%= report_ts %>/example-empty-secret-value.xml
-            - yaml:<%= report_dir %>/<%= report_ts %>/example-empty-secret-value.yaml
