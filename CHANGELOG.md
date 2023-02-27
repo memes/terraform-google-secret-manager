@@ -8,6 +8,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.1](https://github.com/memes/terraform-google-secret-manager/compare/v2.1.0...v2.1.1) (2023-02-27)
+
+
+### Bug Fixes
+
+* Mark secret variable as sensitive ([04d7ec7](https://github.com/memes/terraform-google-secret-manager/commit/04d7ec7ebe7af7847b7c5613f44604924f2570d9))
+* Support secret variable marked sensitive ([c5a9976](https://github.com/memes/terraform-google-secret-manager/commit/c5a9976c15f97d6e235fe89d755ce6813ad93054))
+
 ## [2.1.0](https://github.com/memes/terraform-google-secret-manager/compare/v2.0.0...v2.1.0) (2023-02-12)
 
 
