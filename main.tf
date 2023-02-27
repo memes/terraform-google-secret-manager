@@ -36,9 +36,9 @@ resource "google_secret_manager_secret" "secret" {
 
 # Store actual secret as the latest version if it has been provided.
 resource "google_secret_manager_secret_version" "secret" {
-  for_each    = toset(compact([var.secret]))
+  count       = length(compact([var.secret])) > 0 ? 1 : 0
   secret      = google_secret_manager_secret.secret.id
-  secret_data = each.value
+  secret_data = var.secret
 }
 
 # Allow the supplied accounts to read the secret value from Secret Manager

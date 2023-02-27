@@ -21,7 +21,7 @@ fileignoreconfig:
 - filename: modules/random/main.tf
   checksum: 64cbbdabd2a425a9e7fd9c1db9107b5d7874befb660dbe62c9b9c5d1be9f97f2
 - filename: main.tf
-  checksum: 9bd7f7a6266b44e8ecaeb91011a562f40cfe4caa609c52702f936d9c5a43bc0d
+  checksum: 5c1b49174ea34816fd635dbbd8c4e41d2109f045789be3c62d02f0e4bea2c2c9
 - filename: examples/simple/main.tf
   checksum: b26086277af49d853473caea9f0bbbb62ebb6b7fd16ccde74f57f9d0d9b63444
 - filename: variables.tf
