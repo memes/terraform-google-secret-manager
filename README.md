@@ -36,7 +36,7 @@ module "secret" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.14.5 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | >= 4.8 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | >= 4.8, <5 |
 
 ## Modules
 
