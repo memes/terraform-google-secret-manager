@@ -6,6 +6,6 @@ source 'https://rubygems.org/' do
   gem 'kitchen-terraform', '~> 6.1.0'
   group :dev do
     gem 'reek', '~> 6.1.1', require: false
-    gem 'rubocop', '~> 1.56.1', require: false
+    gem 'rubocop', '~> 1.57.1', require: false
   end
 end
