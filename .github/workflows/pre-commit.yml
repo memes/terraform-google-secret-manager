@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install talisman
         run: |
-          sudo curl -sLo /usr/local/bin/talisman https://github.com/thoughtworks/talisman/releases/download/v1.30.0/talisman_linux_amd64
+          sudo curl -sLo /usr/local/bin/talisman https://github.com/thoughtworks/talisman/releases/download/v1.31.0/talisman_linux_amd64
           sudo chmod 0755 /usr/local/bin/talisman
       - name: Install terraform-docs
         run: |
@@ -28,9 +28,9 @@ jobs:
           sudo chmod 0755 /usr/local/bin/terraform-docs
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.11'
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0.2
+          ruby-version: 3.0.6
           bundler-cache: true
       - uses: pre-commit/action@v3.0.0
