@@ -29,10 +29,13 @@ tf_clients = [0.14, 0.15, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6].map{ |v| ["tf#{v}".
 ---
 driver:
   name: terraform
-  command_timeout: 60
   verify_version: true
   variables:
     project_id: <%= harness_outputs['project_id'] %>
+
+transport:
+  name: terraform
+  command_timeout: 60
 
 provisioner:
   name: terraform
@@ -49,22 +52,25 @@ verifier:
 platforms:
 <% tf_clients.each do |k,v| %>
   - name: <%= k %>
-    driver:
+    transport:
       client: <%= v %>
+    driver:
       variables:
         prefix: <%= "#{harness_outputs['prefix']}-#{k}" %>
 <% end %>
 
 suites:
   - name: root-minimal
-    driver:
+    transport:
       root_module_directory: test/fixtures/root
+    driver:
       variables:
         test_name: root-minimal
         secret: terribleS3cr3t
   - name: root-all
-    driver:
+    transport:
       root_module_directory: test/fixtures/root
+    driver:
       variables:
         test_name: root-all
         accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
@@ -72,8 +78,9 @@ suites:
         replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=\"%s\"}', pair[0], pair[1]['key'])}.join(',') %>}'
         secret: terribleS3cr3t
   - name: root-null-secret
-    driver:
+    transport:
       root_module_directory: test/fixtures/root
+    driver:
       variables:
         test_name: root-null-secret
         # terraform-kitchen requires all values to be scalar, so use a flag in
@@ -81,42 +88,48 @@ suites:
         secret: 'null'
         null_secret: 'true'
   - name: root-empty-secret
-    driver:
+    transport:
       root_module_directory: test/fixtures/root
+    driver:
       variables:
         test_name: root-empty-secret
         secret: ''
   - name: root-replication-null-values
-    driver:
+    transport:
       root_module_directory: test/fixtures/root
+    driver:
       variables:
         test_name: root-replication-null-keys
         replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s=null', pair[0])}.join(',') %>}'
         secret: terribleS3cr3t
   - name: root-replication-keys-null
-    driver:
+    transport:
       root_module_directory: test/fixtures/root
+    driver:
       variables:
         test_name: root-replication-keys-null
         replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=null}', pair[0])}.join(',') %>}'
         secret: terribleS3cr3t
   - name: root-replication-keys-empty
-    driver:
+    transport:
       root_module_directory: test/fixtures/root
+    driver:
       variables:
         test_name: root-replication-keys-empty
         replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=\"\"}', pair[0])}.join(',') %>}'
         secret: terribleS3cr3t
   - name: example-accessors
-    driver:
+    transport:
       root_module_directory: test/fixtures/examples/accessors
+    driver:
       variables:
         test_name: example-accessors
         accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
         secret: terribleS3cr3t
   - name: example-all-options
-    driver:
+    transport:
       root_module_directory: test/fixtures/examples/all-options
+    driver:
       variables:
         test_name: example-all-options
         accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
@@ -124,8 +137,9 @@ suites:
         replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=\"%s\"}', pair[0], pair[1]['key'])}.join(',') %>}'
         secret: terribleS3cr3t
   - name: example-simple
-    driver:
+    transport:
       root_module_directory: test/fixtures/examples/simple
+    driver:
       variables:
         test_name: example-simple
         secret: terribleS3cr3t
@@ -136,37 +150,42 @@ suites:
   #     variables:
   #       test_name: example-with-random-provider
   - name: example-user-managed-replication
-    driver:
+    transport:
       root_module_directory: test/fixtures/examples/user-managed-replication
+    driver:
       variables:
         test_name: example-user-managed-replication
         secret: terribleS3cr3t
         replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s=null', pair[0])}.join(',') %>}'
   - name: example-user-managed-replication-accessors
-    driver:
+    transport:
       root_module_directory: test/fixtures/examples/user-managed-replication-accessors
+    driver:
       variables:
         test_name: example-user-managed-replication-accessors
         accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
         secret: terribleS3cr3t
         replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s=null', pair[0])}.join(',') %>}'
   - name: example-user-managed-replication-with-keys
-    driver:
+    transport:
       root_module_directory: test/fixtures/examples/user-managed-replication-with-keys
+    driver:
       variables:
         test_name: example-user-managed-replication-with-keys
         replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=\"%s\"}', pair[0], pair[1]['key'])}.join(',') %>}'
         secret: terribleS3cr3t
   - name: example-empty-secret-value
-    driver:
+    transport:
       root_module_directory: test/fixtures/examples/empty-secret-value
+    driver:
       variables:
         test_name: example-empty-secret-value
   - name: verify-issue-51
     excludes:
       - tf0-14
-    driver:
+    transport:
       root_module_directory: test/fixtures/issue-51
+    driver:
       variables:
         test_name: issue-51
         secret: terribleS3cr3t

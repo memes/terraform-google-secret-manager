@@ -17,35 +17,35 @@
 .DEFAULT: test
 .PHONY: test.%
 test.%: test/setup/terraform.tfstate
-	kitchen test $*
+	bundle exec kitchen test $*
 
 .PHONY: test
 test: test/setup/terraform.tfstate
-	kitchen test
+	bundle exec kitchen test
 
 .PHONY: destroy.%
 destroy.%: test/setup/terraform.tfstate
-	kitchen destroy $*
+	bundle exec kitchen destroy $*
 
 .PHONY: destroy
 destroy: test/setup/terraform.tfstate
-	kitchen destroy
+	bundle exec kitchen destroy
 
 .PHONY: verify.%
 verify.%: test/setup/terraform.tfstate
-	kitchen verify $*
+	bundle exec kitchen verify $*
 
 .PHONY: verify
 verify: test/setup/terraform.tfstate
-	kitchen verify
+	bundle exec kitchen verify
 
 .PHONY: converge.%
 converge.%: test/setup/terraform.tfstate
-	kitchen converge $*
+	bundle exec kitchen converge $*
 
 .PHONY: converge
 converge: test/setup/terraform.tfstate
-	kitchen converge
+	bundle exec kitchen converge
 
 EXAMPLES=accessors all-options simple with-random-provider user-managed-replication user-managed-replication-accessors user-managed-replication-with-keys empty-secret-value
 
@@ -67,7 +67,7 @@ test/ephemeral/%/main.tf: $(wildcard examples/%/*.tf)
 
 .PHONY: clean
 clean: $(wildcard test/setup/terraform.tfstate)
-	if test -n "$<" && test -f "$<"; then kitchen destroy; fi
+	if test -n "$<" && test -f "$<"; then bundle exec kitchen destroy; fi
 	if test -n "$<" && test -f "$<"; then terraform -chdir=$(<D) destroy -auto-approve; fi
 	if test -n "$<" && test -f "$<"; then rm "$<"; fi
 

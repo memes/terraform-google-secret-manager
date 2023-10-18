@@ -3,8 +3,7 @@
 ruby '3.0.6'
 
 source 'https://rubygems.org/'
-gem 'kitchen-terraform', '~> 6.1.0'
+gem 'kitchen-terraform', '~> 7.0'
 group :dev do
-  gem 'reek', '~> 6.1.1', require: false
-  gem 'rubocop', '~> 1.57.1', require: false
+  gem 'cookstyle', '~> 7.32', require: false
 end

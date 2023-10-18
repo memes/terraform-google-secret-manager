@@ -102,3 +102,21 @@ fileignoreconfig:
   checksum: 758371447a65e07a77cd3f05587dbd6b4cae25a953579a08769da1f1ae1ac9d3
 - filename: test/fixtures/issue-51/main.tf
   checksum: 8137269ccdf2c8a7331362d741f503688eee2aa1fb2d7400a94c16f2cd2bd4ad
+- filename: test/fixtures/examples/all-options/outputs.tf
+  checksum: b10d12412a0c02318c7d9c471952524730ea9826bedae999ad38ded0cbe13304
+- filename: test/fixtures/issue-51/outputs.tf
+  checksum: 11c982f1db6d85c39695798ae672c2533ac8dcd30d0c50136d6cc3f93e5f42d7
+- filename: test/fixtures/root/outputs.tf
+  checksum: 46c8d5c86a8c365f40d827d9dfaff8c61e5cbbd9ea49ab98be64edfd44f007dd
+- filename: test/fixtures/examples/accessors/outputs.tf
+  checksum: 83871d03d3593ca46eeee5117dae67fcaa6b81431b1629e9b4fbb1f706766ba8
+- filename: test/fixtures/examples/simple/outputs.tf
+  checksum: 69a11c01b76eab64303e9aa64abfb024d1250a78ffcf31d41ab3f1c9a7049ce7
+- filename: test/fixtures/examples/user-managed-replication-with-keys/outputs.tf
+  checksum: 08f9e84afe22337d5f2ee44d4fb1c49de5b00799276a7b2282fbf97d367fd816
+- filename: test/profiles/secrets/controls/secret.rb
+  checksum: b9402379146edf9ee22fe62010a3a31b2b8c14d51fe97871febff7eb708aef67
+- filename: test/fixtures/examples/user-managed-replication-accessors/outputs.tf
+  checksum: 16d3ea66d4928cf49d1c4bd7548cf1229eac6147e6cea5861923244462ad9c6d
+- filename: test/fixtures/examples/user-managed-replication/outputs.tf
+  checksum: 9feb5c2c831d2c4c9428764a47f6387f64137a4618af4c63b6f07a7aeac183ab
