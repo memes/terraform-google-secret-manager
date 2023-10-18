@@ -20,7 +20,7 @@ the identifiers will be granted `roles/secretmanager.secretAccessor` on th
 ```hcl
 module "secret" {
   source     = "memes/secret-manager/google"
-  version    = "2.1.1"
+  version    = "2.1.2"
   project_id = "my-project-id"
   id         = "my-secret"
   secret     = "T0pS3cret!"
