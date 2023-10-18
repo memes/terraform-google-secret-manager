@@ -8,6 +8,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.2](https://github.com/memes/terraform-google-secret-manager/compare/v2.1.1...v2.1.2) (2023-10-18)
+
+
+### Bug Fixes
+
+* Add &lt;5 constraint on Google provider ([fdea9c2](https://github.com/memes/terraform-google-secret-manager/commit/fdea9c25f9280674a10b5d71051b9a07f56f2f17))
+
 ## [2.1.1](https://github.com/memes/terraform-google-secret-manager/compare/v2.1.0...v2.1.1) (2023-02-27)
 
 
