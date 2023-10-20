@@ -1,6 +1,9 @@
 # Generated Secret with all options
 
-This example shows how to specify every option available.
+This example shows how to specify almost* every available option.
+
+> \* `auto_replication_kms_key_name` is left unspecified since the module will create the secret with user specified
+> encryption replication as determined by the `replication` variable.
 
 ## Example at a glance
 
@@ -18,6 +21,7 @@ This example shows how to specify every option available.
 # Example TF vars file
 project_id = "my-project-id"
 id = "my-secret-id"
+secret = "T0pS3cretP@ssword!"
 replication = {
     "us-east1" = {
         kms_key_name = "projects/my-project-id/locations/us-east1/keyRings/my-east-keyring/cryptoKeys/east-key"
@@ -28,6 +32,11 @@ replication = {
 }
 accessors = ["serviceAccount:my-service@my-project-id.iam.gserviceaccount.com", "user:jane@doe.com", "group:devops@example.com"]
 labels = {
+    "stage": "dev",
+    "cost_center": "product_dev",
+    "owner": "jane_at_example_com"
+}
+annotations = {
     "stage": "dev",
     "cost_center": "product_dev",
     "owner": "jane_at_example_com"

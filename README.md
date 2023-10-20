@@ -15,7 +15,7 @@ in GCP [Secret Manager](https://cloud.google.com/secret-manager) with Terraform
 Given a project identifier, the module will create a new secret, or update an
 existing secret version, so that it contains the value provided. An optional list
 of IAM user, group, or service account identifiers can be provided and each of
-the identifiers will be granted `roles/secretmanager.secretAccessor` on th
+the identifiers will be granted `roles/secretmanager.secretAccessor` on the secret.
 
 ```hcl
 module "secret" {
@@ -36,7 +36,7 @@ module "secret" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.14.5 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | >= 4.8, <5 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | >= 4.83 |
 
 ## Modules
 
@@ -58,8 +58,10 @@ No modules.
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | The GCP project identifier where the secret will be created. | `string` | n/a | yes |
 | <a name="input_secret"></a> [secret](#input\_secret) | The secret payload to store in Secret Manager; if blank or null a versioned secret<br>value will NOT be created and must be populated outside of this module. Binary<br>values should be base64 encoded before use. | `string` | n/a | yes |
 | <a name="input_accessors"></a> [accessors](#input\_accessors) | An optional list of IAM account identifiers that will be granted accessor (read-only)<br>permission to the secret. | `list(string)` | `[]` | no |
+| <a name="input_annotations"></a> [annotations](#input\_annotations) | An optional map of annotation key:value pairs to assign to the secret resources.<br>Default is an empty map. | `map(string)` | `{}` | no |
+| <a name="input_auto_replication_kms_key_name"></a> [auto\_replication\_kms\_key\_name](#input\_auto\_replication\_kms\_key\_name) | An optional Cloud KMS key name to use with Google managed replication. If the value is empty (default), then a Google<br>managed key will be used for encryption of the secret. See `replication` variable for examples. | `string` | `""` | no |
 | <a name="input_labels"></a> [labels](#input\_labels) | An optional map of label key:value pairs to assign to the secret resources.<br>Default is an empty map. | `map(string)` | `{}` | no |
-| <a name="input_replication"></a> [replication](#input\_replication) | An optional map of replication configurations for the secret. If the map is empty<br>(default), then automatic replication will be used for the secret. If the map is<br>not empty, replication will be configured for each key (region) and, optionally,<br>will use the provided Cloud KMS keys.<br><br>NOTE: If Cloud KMS keys are used, a Cloud KMS key must be provided for every<br>region key.<br><br>E.g. to use automatic replication policy (default)<br>replication = {}<br><br>E.g. to force secrets to be replicated only in us-east1 and us-west1 regions,<br>with Google managed encryption keys<br>replication = {<br>  "us-east1" = null<br>  "us-west1" = null<br>}<br><br>E.g. to force secrets to be replicated only in us-east1 and us-west1 regions, but<br>use Cloud KMS keys from each region.<br>replication = {<br>  "us-east1" = { kms\_key\_name = "my-east-key-name" }<br>  "us-west1" = { kms\_key\_name = "my-west-key-name" }<br>} | <pre>map(object({<br>    kms_key_name = string<br>  }))</pre> | `{}` | no |
+| <a name="input_replication"></a> [replication](#input\_replication) | An optional map of replication configurations for the secret. If the map is empty<br>(default), then automatic replication will be used for the secret. If the map is<br>not empty, replication will be configured for each key (region) and, optionally,<br>will use the provided Cloud KMS keys.<br><br>NOTE: If Cloud KMS keys are used, a Cloud KMS key must be provided for every<br>region key.<br><br>E.g. to use automatic replication policy with Google managed keys(default)<br>replication = {}<br><br>E.g. to use automatic replication policy with specific Cloud KMS key,<br>auto\_replication\_kms\_key\_name = "my-global-key-name"<br>replication = {}<br><br>E.g. to force secrets to be replicated only in us-east1 and us-west1 regions,<br>with Google managed encryption keys<br>replication = {<br>  "us-east1" = null<br>  "us-west1" = null<br>}<br><br>E.g. to force secrets to be replicated only in us-east1 and us-west1 regions, but<br>use Cloud KMS keys from each region.<br>replication = {<br>  "us-east1" = { kms\_key\_name = "my-east-key-name" }<br>  "us-west1" = { kms\_key\_name = "my-west-key-name" }<br>} | <pre>map(object({<br>    kms_key_name = string<br>  }))</pre> | `{}` | no |
 
 ## Outputs
 

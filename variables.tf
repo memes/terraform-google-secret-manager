@@ -20,6 +20,15 @@ The secret identifier to create; this value must be unique within the project.
 EOD
 }
 
+variable "auto_replication_kms_key_name" {
+  type        = string
+  default     = ""
+  description = <<EOD
+An optional Cloud KMS key name to use with Google managed replication. If the value is empty (default), then a Google
+managed key will be used for encryption of the secret. See `replication` variable for examples.
+EOD
+}
+
 variable "replication" {
   type = map(object({
     kms_key_name = string
@@ -38,7 +47,11 @@ will use the provided Cloud KMS keys.
 NOTE: If Cloud KMS keys are used, a Cloud KMS key must be provided for every
 region key.
 
-E.g. to use automatic replication policy (default)
+E.g. to use automatic replication policy with Google managed keys(default)
+replication = {}
+
+E.g. to use automatic replication policy with specific Cloud KMS key,
+auto_replication_kms_key_name = "my-global-key-name"
 replication = {}
 
 E.g. to force secrets to be replicated only in us-east1 and us-west1 regions,
@@ -85,6 +98,15 @@ variable "labels" {
   default     = {}
   description = <<EOD
 An optional map of label key:value pairs to assign to the secret resources.
+Default is an empty map.
+EOD
+}
+
+variable "annotations" {
+  type        = map(string)
+  default     = {}
+  description = <<EOD
+An optional map of annotation key:value pairs to assign to the secret resources.
 Default is an empty map.
 EOD
 }

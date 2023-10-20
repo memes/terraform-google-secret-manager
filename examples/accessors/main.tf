@@ -5,14 +5,14 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = ">= 4.18"
+      version = ">= 4.83"
     }
   }
 }
 
 module "secret" {
   source     = "memes/secret-manager/google"
-  version    = "2.1.2"
+  version    = "2.2.0"
   project_id = var.project_id
   id         = var.id
   secret     = var.secret

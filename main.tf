@@ -3,15 +3,16 @@
 terraform {
   required_version = ">= 0.14.5"
   required_providers {
-    google = ">= 4.8, <5"
+    google = ">= 4.83"
   }
 }
 
 # Create a slot for the secret in Secret Manager
 resource "google_secret_manager_secret" "secret" {
-  project   = var.project_id
-  secret_id = var.id
-  labels    = var.labels
+  project     = var.project_id
+  secret_id   = var.id
+  labels      = var.labels
+  annotations = var.annotations
   replication {
     dynamic "user_managed" {
       for_each = length(var.replication) > 0 ? [1] : []
@@ -30,7 +31,17 @@ resource "google_secret_manager_secret" "secret" {
         }
       }
     }
-    automatic = length(var.replication) > 0 ? null : true
+    dynamic "auto" {
+      for_each = length(var.replication) > 0 ? [] : [1]
+      content {
+        dynamic "customer_managed_encryption" {
+          for_each = toset(compact([var.auto_replication_kms_key_name]))
+          content {
+            kms_key_name = customer_managed_encryption.value
+          }
+        }
+      }
+    }
   }
 }
 

@@ -45,3 +45,10 @@ variable "labels" {
 An optional map of label key:value pairs to assign to the secret resources.
 EOD
 }
+
+variable "annotations" {
+  type        = map(string)
+  description = <<EOD
+An optional map of annotation key:value pairs to assign to the secret resources.
+EOD
+}
