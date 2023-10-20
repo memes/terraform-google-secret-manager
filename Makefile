@@ -91,6 +91,7 @@ realclean: clean
 release-ready.%:
 	@echo '$*' | grep -Eq '^v(?:[0-9]+\.){2}[0-9]+$$' || \
 		(echo "Version doesn't meet requirements"; exit 1)
+	@awk 'BEGIN{m=0;s=0;v=0}; /module "secret"/ {m=1}; m==1 && /source[ \t]*=[ \t]*"memes\/secret-manager\/google(\/\/modules\/random)?/ {s++}; m==1 && /version[ \t]*=[ \t]*"$(subst .,\.,$(*:v%=%))"/ {v++}; END{if (s==0) { printf "%s has incorrect source\n", FILENAME}; if (v==0) { printf "%s has incorrect version\n", FILENAME}; if (s==0 || v==0) { exit 1}}' README.md
 	@find examples -type f -name main.tf -print0 | \
 		xargs -0 awk 'BEGIN{m=0;s=0;v=0}; /module "secret"/ {m=1}; m==1 && /source[ \t]*=[ \t]*"memes\/secret-manager\/google(\/\/modules\/random)?/ {s++}; m==1 && /version[ \t]*=[ \t]*"$(subst .,\.,$(*:v%=%))"/ {v++}; END{if (s==0) { printf "%s has incorrect source\n", FILENAME}; if (v==0) { printf "%s has incorrect version\n", FILENAME}; if (s==0 || v==0) { exit 1}}'
 	@grep -Eq '^version:[ \t]*$(subst .,\.,$(*:v%=%))[ \t]*$$' test/profiles/secrets/inspec.yml || \

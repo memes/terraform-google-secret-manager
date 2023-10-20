@@ -51,7 +51,7 @@ fileignoreconfig:
 - filename: examples/user-managed-replication
   checksum: 8312eafa25f040eaf87f070422f0d3270f4b775e42bde3e211ac4426134569e4
 - filename: Makefile
-  checksum: 88cce1135288125f41b2dd7f8a7bada98834dc5b4ce9e00461393fd3da850692
+  checksum: cfe37e47713ab634d70bccbac8fbca9d82cca49c0655daf074dfc547466a5839
 - filename: kitchen.yml
   checksum: 41e955eb586174a4ed36f8fbc44cda3e7ad9a72f397806623a9e2ba8ec7f1304
 - filename: test/setup/outputs.tf
