@@ -24,7 +24,7 @@ regions = ["us-west1"]
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.14.5 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | >= 4.18 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | >= 4.83 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.1.0 |
 
 ## Modules
@@ -49,12 +49,14 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | GCP project identifier. | `string` | n/a | yes |
 | <a name="input_replication_locations"></a> [replication\_locations](#input\_replication\_locations) | Set of Secret Manager and/or KMS replication locations where resources will be created. | `list(string)` | n/a | yes |
+| <a name="input_annotations"></a> [annotations](#input\_annotations) | Optional additional annotations to apply to resources. | `map(string)` | `{}` | no |
 | <a name="input_labels"></a> [labels](#input\_labels) | Optional additional labels to apply to resources. | `map(string)` | `{}` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
+| <a name="output_annotations"></a> [annotations](#output\_annotations) | The annotations to use where allowed. |
 | <a name="output_labels"></a> [labels](#output\_labels) | The labels to use where allowed. |
 | <a name="output_prefix"></a> [prefix](#output\_prefix) | The random prefix to use for all resources in this test run. |
 | <a name="output_project_id"></a> [project\_id](#output\_project\_id) | The Google Cloud project identifier to use for resources. |

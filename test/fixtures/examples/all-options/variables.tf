@@ -27,3 +27,7 @@ variable "secret" {
 variable "test_name" {
   type = string
 }
+
+variable "annotations" {
+  type = map(string)
+}

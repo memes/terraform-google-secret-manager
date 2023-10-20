@@ -8,6 +8,11 @@ variable "labels" {
   default = {}
 }
 
+variable "annotations" {
+  type    = map(string)
+  default = {}
+}
+
 variable "null_secret" {
   type    = bool
   default = false
@@ -19,6 +24,11 @@ variable "prefix" {
 
 variable "project_id" {
   type = string
+}
+
+variable "auto_replication_kms_key_name" {
+  type    = string
+  default = ""
 }
 
 variable "replication" {

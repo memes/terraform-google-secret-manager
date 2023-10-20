@@ -12,6 +12,13 @@ The labels to use where allowed.
 EOD
 }
 
+output "annotations" {
+  value       = local.annotations
+  description = <<-EOD
+The annotations to use where allowed.
+EOD
+}
+
 output "prefix" {
   value       = random_pet.prefix.id
   description = <<-EOD
@@ -29,7 +36,7 @@ EOD
 output "replication" {
   value = merge(
     { for v in var.replication_locations : v => null },
-    { for k, v in google_kms_crypto_key.key : split("/", v.key_ring)[3] => { key = v.id } }
+    { for k, v in google_kms_crypto_key.key : split("/", v.key_ring)[3] => { kms_key_name = v.id } }
   )
   description = <<-EOD
 A map of location:KMS key ids.
