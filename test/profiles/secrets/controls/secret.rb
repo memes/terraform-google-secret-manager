@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 require 'rspec/expectations'
+require 'time'
 
 RSpec::Matchers.define :be_a_matching_superset_of do |subset|
   match do |superset|
-    sanitised_superset = superset.transform_values do |v|
+    sanitised_superset = (superset || {}).transform_values do |v|
       v.to_s == '' ? nil : v
     end
-    sanitised_subset = subset.transform_values do |v|
+    sanitised_subset = (subset || {}).transform_values do |v|
       v.to_s == '' ? nil : v
     end
     sanitised_subset.reject! do |k, v|
@@ -38,25 +39,33 @@ control 'secret' do
   end
   auto_replication_kms_key_name = inputs['auto_replication_kms_key_name'] || ''
   topics = inputs['topics'] || []
+  expected_expiration = input('output_expiration_timestamp') || ''
+  expect_expired = !expected_expiration.empty? && (Time.parse(expected_expiration) <=> Time.now).negative?
 
   describe google_secret_manager_secret(project: inputs['project_id'], name: secret_id) do
-    it { should exist }
-    its('labels') { should be_a_matching_superset_of(labels) } unless labels.empty?
-    its('annotations') { should be_a_matching_superset_of(annotations) } unless annotations.empty?
-    its('replication') { should exist }
-    if expected_replications.empty?
-      its('replication.automatic?') { should cmp true }
-      if auto_replication_kms_key_name.empty?
-        its('replication.automatic_replication.kms_key_name') { should be_nil.or be_empty }
-      else
-        its('replication.automatic_replication.kms_key_name') { should cmp auto_replication_kms_key_name }
-      end
+    if expect_expired
+      it { should_not exist }
     else
-      its('replication.user_managed?') { should cmp true }
-      its('replication.to_h') { should be_a_matching_superset_of(expected_replications) }
+      it { should exist }
+      its('labels') { should be_a_matching_superset_of(labels) } unless labels.empty?
+      its('annotations') { should be_a_matching_superset_of(annotations) } unless annotations.empty?
+      its('replication') { should exist }
+      if expected_replications.empty?
+        its('replication.automatic?') { should cmp true }
+        if auto_replication_kms_key_name.empty?
+          its('replication.automatic_replication.kms_key_name') { should be_nil.or be_empty }
+        else
+          its('replication.automatic_replication.kms_key_name') { should cmp auto_replication_kms_key_name }
+        end
+      else
+        its('replication.user_managed?') { should cmp true }
+        its('replication.to_h') { should be_a_matching_superset_of(expected_replications) }
+      end
+      its('topics') { should be_nil.or be_empty } if topics.empty?
+      its('topics') { should cmp topics } unless topics.empty?
+      its('expire_time') { should be_nil.or be_empty } if expected_expiration.empty?
+      its('expire_time') { should cmp Time.parse(expected_expiration) } unless expected_expiration.empty?
     end
-    its('topics') { should be_nil.or be_empty } if topics.empty?
-    its('topics') { should cmp topics } unless topics.empty?
   end
 end
 # rubocop:enable Metrics/BlockLength
@@ -74,9 +83,11 @@ control 'version' do
   end
   auto_replication_kms_key_version_name = inputs['auto_replication_kms_key_name'].nil? || inputs['auto_replication_kms_key_name'].empty? ? nil : %r{^#{inputs['auto_replication_kms_key_name']}/cryptoKeyVersions/[1-9][0-9]*$}
   # rubocop:enable Layout/LineLength
+  expected_expiration = input('output_expiration_timestamp') || ''
+  expect_expired = !expected_expiration.empty? && (Time.parse(expected_expiration) <=> Time.now).negative?
 
   describe google_secret_manager_secret_version(project: inputs['project_id'], name: secret_id, version: 'latest') do
-    if secret_created
+    if secret_created && !expect_expired
       it { should exist }
       its('active?') { should cmp true }
       its('disabled?') { should cmp false }
@@ -108,6 +119,12 @@ control 'accessors' do
   inputs = JSON.parse(input('output_effective_inputs_json'), { symbolize_names: false })
   secret_id = input('output_secret_id')
   accessors = inputs['accessors'] || []
+  expected_expiration = input('output_expiration_timestamp') || ''
+  expect_expired = !expected_expiration.empty? && (Time.parse(expected_expiration) <=> Time.now).negative?
+
+  only_if('Secret has expired') do
+    !expect_expired
+  end
 
   only_if('accessors list was not provided.') do
     !accessors.empty?

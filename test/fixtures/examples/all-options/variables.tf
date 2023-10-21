@@ -35,3 +35,7 @@ variable "annotations" {
 variable "topics" {
   type = list(string)
 }
+
+variable "ttl_secs" {
+  type = number
+}

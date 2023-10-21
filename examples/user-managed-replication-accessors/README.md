@@ -11,6 +11,8 @@ secret value.
 |Access Control|&check;|User specified accounts will be granted view access to secret.|
 |Replication|&check;|User specified regions will be used for replication.|
 |Secret Value||User specified.|
+|Pub/Sub Notifications||Not managed by example.|
+|TTL||Not managed by example.|
 
 <!-- spell-checker: disable -->
 ### Example terraform.tfvars

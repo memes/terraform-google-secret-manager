@@ -24,3 +24,4 @@ annotations = {
 topics = [
     "projects/my-project-id/topics/my-secret-topic",
 ]
+ttl_secs = 86400

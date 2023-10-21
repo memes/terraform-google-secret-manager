@@ -1,0 +1,7 @@
+# Example TF vars file
+project_id = "my-project-id"
+id = "my-secret-id"
+secret = "T0pS3cretP@ssword!"
+topics = [
+    'projects/my-project-id/topics/my-secret-notifications'
+]

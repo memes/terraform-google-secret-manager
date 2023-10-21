@@ -1,7 +1,6 @@
-# Automatic Replication
+# TTL: Automatic deletion of secret
 
-This example shows how to specify a secret that will have replication managed
-automatically.
+This example shows how to specify a secret that will be automatically deleted after a set period of time.
 
 ## Example at a glance
 
@@ -11,7 +10,7 @@ automatically.
 |Replication|&check;|Automatically managed by Secret Manager.|
 |Secret Value||User specified.|
 |Pub/Sub Notifications||Not managed by example.|
-|TTL||Not managed by example.|
+|TTL|&check;|Automatically deleted after specified number of seconds.|
 
 <!-- spell-checker: disable -->
 ### Example terraform.tfvars
@@ -21,4 +20,5 @@ automatically.
 project_id = "my-project-id"
 id = "my-secret-id"
 secret = "T0pS3cretP@ssword!"
+ttl_secs = 300
 ```

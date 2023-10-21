@@ -17,7 +17,7 @@ fileignoreconfig:
 - filename: examples/user-managed-replication/terraform.tfvars.example
   checksum: d619606a155c5b9a63def97d621913240b58f8d36672d005a0cb39bccda26c1b
 - filename: README.md
-  checksum: a11c943d2ecf9422142dd36ebda531ff1740ca89d0acb01db2deb00734ceb1e3
+  checksum: 53818d78251d6d84aefda17de7601e05a785a78bba5e3e4b96a513ad93b240a6
 - filename: examples/generated-secret/main.tf
   checksum: 37c8edd39b841077663467bd9053e4041092b05b040f107bd8fcb2b1adb04670
 - filename: modules/random/main.tf
@@ -53,7 +53,7 @@ fileignoreconfig:
 - filename: Makefile
   checksum: cfe37e47713ab634d70bccbac8fbca9d82cca49c0655daf074dfc547466a5839
 - filename: kitchen.yml
-  checksum: 41e955eb586174a4ed36f8fbc44cda3e7ad9a72f397806623a9e2ba8ec7f1304
+  checksum: 663daade5798f177b3b927e85621c7114c61e92542790460a97fecc42d0e2ff1
 - filename: test/setup/outputs.tf
   checksum: 2ab6d037f163e7373709bf7cfc26b4a7c5d73d8f07774cc3993c3711bd44121b
 - filename: test/setup/README.md
@@ -132,3 +132,21 @@ fileignoreconfig:
   checksum: 3430a05581607d940fb65e5720498b033984155345fb724e7ad35b3f28f93f61
 - filename: test/fixtures/examples/auto-replication-with-key/main.tf
   checksum: 4c4b25e645df7fc8140565ee2e01b0b72a0ed4ea1470e03d979b7c2dfc457895
+- filename: examples/pubsub/terraform.tfvars.example
+  checksum: 5173bce0fbcfb1728ffd1515db1389fc20ba80b8252db9a25cbdf458dd0c8e9d
+- filename: examples/ttl/terraform.tfvars.example
+  checksum: 74373765ab2c5a006a9f561ee7cfdaae7c4890573c6a0ae6e4639f2be7c9b6e0
+- filename: outputs.tf
+  checksum: 07abdebb46fbf17754c88d9ef10429b0046af6207f40ddcd0e4ff23eca7ce102
+- filename: examples/pubsub/README.md
+  checksum: f2bb26c07e1aa24cc8a5d0be79e1873a2051232143d3cfe41a3b0193d96efc99
+- filename: examples/ttl/README.md
+  checksum: 3011d0f431827f8da971a1cc570722a0d551056ce0e017a789374016d3baddf8
+- filename: examples/pubsub/main.tf
+  checksum: fa405ed23543fffae8d201e4bdc77529617e913cfc9ee9b7d9da71bc02f53b33
+- filename: test/fixtures/examples/pubsub/main.tf
+  checksum: 10cc079ad0bc050785c079544c96d35378d5f20bc25f1830810f55284952f26b
+- filename: test/fixtures/examples/ttl/main.tf
+  checksum: bd60080c0a8c21f590fad9bd256646335fb169e911841496aec814f764aca974
+- filename: examples/ttl/main.tf
+  checksum: 7b74153a9b2da33b88ef0e16c840df9005789af97cd114a3b84afe715e83928a

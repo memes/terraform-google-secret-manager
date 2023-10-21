@@ -55,8 +55,15 @@ EOD
 
 variable "topics" {
   type        = list(string)
-  default     = []
   description = <<EOD
 An optional list of Cloud Pub/Sub topics that will receive control-plane events for the secret.
+EOD
+}
+
+variable "ttl_secs" {
+  type        = number
+  description = <<EOD
+An optional time-to-live value expressed as a number of seconds; the secret will be automatically deleted after this
+duration.
 EOD
 }

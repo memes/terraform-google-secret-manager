@@ -18,4 +18,5 @@ module "test" {
   secret      = var.secret
   annotations = var.annotations
   topics      = var.topics
+  ttl_secs    = var.ttl_secs
 }

@@ -11,6 +11,8 @@ replication, and use a Cloud KMS encryption key to use for secret encryption.
 |Cloud KMS key||Not managed by example; a suitable KMS key for encryption/decryption must be created externally in matching locations.|
 |Replication|&check;|User specified locations will be  used for replication.|
 |Secret Value||User specified.|
+|Pub/Sub Notifications||Not managed by example.|
+|TTL||Not managed by example.|
 
 <!-- spell-checker: disable -->
 ### Example terraform.tfvars

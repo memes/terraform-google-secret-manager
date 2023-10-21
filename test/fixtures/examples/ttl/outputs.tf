@@ -10,11 +10,11 @@ output "secret_id" {
 }
 
 output "expiration_timestamp" {
-  value = ""
+  value = module.test.expiration_timestamp
 }
 
 output "secret_created" {
-  value = false
+  value = true
 }
 
 # The effective inputs to root module, with defaults where no value provided by test case
@@ -28,6 +28,6 @@ output "effective_inputs_json" {
     labels                        = {}
     annotations                   = {}
     topics                        = []
-    ttl_secs                      = null
+    ttl_secs                      = var.ttl_secs
   })
 }

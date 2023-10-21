@@ -13,6 +13,8 @@ This example shows how to specify almost* every available option.
 |Cloud KMS key||Not managed by example; a suitable KMS key for encryption/decryption must be created externally in matching locations.|
 |Replication|&check;|User specified locations will be  used for replication.|
 |Secret Value||User specified.|
+|Pub/Sub Notifications|&check;|Notifications sent to Pub/Sub Topic provided.|
+|TTL|&check;|Automatically deleted after specified number of seconds.|
 
 <!-- spell-checker: disable -->
 ### Example terraform.tfvars
@@ -44,4 +46,5 @@ annotations = {
 topics = [
     "projects/my-project-id/topics/my-secret-topic"
 ]
+ttl_secs = 86400
 ```

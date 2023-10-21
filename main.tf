@@ -13,6 +13,7 @@ resource "google_secret_manager_secret" "secret" {
   secret_id   = var.id
   labels      = var.labels
   annotations = var.annotations
+  ttl         = var.ttl_secs == null ? null : format("%.9fs", var.ttl_secs)
 
   replication {
     dynamic "user_managed" {

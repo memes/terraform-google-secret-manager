@@ -50,3 +50,8 @@ variable "topics" {
   type    = list(string)
   default = []
 }
+
+variable "ttl_secs" {
+  type    = number
+  default = null
+}

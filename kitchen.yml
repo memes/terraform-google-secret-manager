@@ -109,6 +109,7 @@ suites:
         replication: '<%= hash_to_input_var(regional_replication) %>'
         secret: terribleS3cr3t
         topics: '[\"<%= harness_outputs['topic'] %>\"]'
+        ttl_secs: '120'
   - name: root-null-secret
     transport:
       root_module_directory: test/fixtures/root
@@ -169,6 +170,8 @@ suites:
         labels: '<%= hash_to_input_var(harness_outputs['labels']) %>'
         replication: '<%= hash_to_input_var(regional_replication) %>'
         secret: terribleS3cr3t
+        topics: '[\"<%= harness_outputs['topic'] %>\"]'
+        ttl_secs: '120'
   - name: example-simple
     transport:
       root_module_directory: test/fixtures/examples/simple
@@ -231,3 +234,19 @@ suites:
         test_name: example-auto-replication-with-key
         auto_replication_kms_key_name: '<%= harness_outputs['replication']['global']['kms_key_name'] %>'
         secret: terribleS3cr3t
+  - name: example-pubsub
+    transport:
+      root_module_directory: test/fixtures/examples/pubsub
+    driver:
+      variables:
+        test_name: example-pubsub
+        secret: terribleS3cr3t
+        topics: '[\"<%= harness_outputs['topic'] %>\"]'
+  - name: example-ttl
+    transport:
+      root_module_directory: test/fixtures/examples/ttl
+    driver:
+      variables:
+        test_name: example-ttl
+        secret: terribleS3cr3t
+        ttl_secs: '120'

@@ -9,6 +9,10 @@ output "secret_id" {
   value = module.test.secret_id
 }
 
+output "expiration_timestamp" {
+  value = module.test.expiration_timestamp
+}
+
 output "secret_created" {
   value = var.null_secret ? false : length(compact([var.secret])) == 1
 }
@@ -23,5 +27,6 @@ output "effective_inputs_json" {
     accessors                     = var.accessors
     labels                        = var.labels
     topics                        = var.topics
+    ttl_secs                      = var.ttl_secs
   })
 }

@@ -9,6 +9,10 @@ output "secret_id" {
   value = module.test.secret_id
 }
 
+output "expiration_timestamp" {
+  value = ""
+}
+
 output "secret_created" {
   value = true
 }
@@ -22,5 +26,6 @@ output "effective_inputs" {
     accessors                     = []
     labels                        = {}
     topics                        = []
+    ttl_secs                      = null
   })
 }

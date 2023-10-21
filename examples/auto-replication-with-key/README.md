@@ -11,6 +11,8 @@ encryption key to use for secret encryption.
 |Cloud KMS key||Not managed by example; a suitable KMS key for encryption/decryption must be created externally in global location.|
 |Replication|&check;|Automatically managed by Secret Manager.|
 |Secret Value||User specified.|
+|Pub/Sub Notifications||Not managed by example.|
+|TTL||Not managed by example.|
 
 <!-- spell-checker: disable -->
 ### Example terraform.tfvars

@@ -9,6 +9,10 @@ output "secret_id" {
   value = module.test.secret_id
 }
 
+output "expiration_timestamp" {
+  value = module.test.expiration_timestamp
+}
+
 output "secret_created" {
   value = true
 }
@@ -24,5 +28,6 @@ output "effective_inputs_json" {
     labels                        = var.labels
     annotations                   = var.annotations
     topics                        = var.topics
+    ttl_secs                      = var.ttl_secs
   })
 }

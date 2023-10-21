@@ -63,11 +63,13 @@ No modules.
 | <a name="input_labels"></a> [labels](#input\_labels) | An optional map of label key:value pairs to assign to the secret resources.<br>Default is an empty map. | `map(string)` | `{}` | no |
 | <a name="input_replication"></a> [replication](#input\_replication) | An optional map of replication configurations for the secret. If the map is empty<br>(default), then automatic replication will be used for the secret. If the map is<br>not empty, replication will be configured for each key (region) and, optionally,<br>will use the provided Cloud KMS keys.<br><br>NOTE: If Cloud KMS keys are used, a Cloud KMS key must be provided for every<br>region key.<br><br>E.g. to use automatic replication policy with Google managed keys(default)<br>replication = {}<br><br>E.g. to use automatic replication policy with specific Cloud KMS key,<br>auto\_replication\_kms\_key\_name = "my-global-key-name"<br>replication = {}<br><br>E.g. to force secrets to be replicated only in us-east1 and us-west1 regions,<br>with Google managed encryption keys<br>replication = {<br>  "us-east1" = null<br>  "us-west1" = null<br>}<br><br>E.g. to force secrets to be replicated only in us-east1 and us-west1 regions, but<br>use Cloud KMS keys from each region.<br>replication = {<br>  "us-east1" = { kms\_key\_name = "my-east-key-name" }<br>  "us-west1" = { kms\_key\_name = "my-west-key-name" }<br>} | <pre>map(object({<br>    kms_key_name = string<br>  }))</pre> | `{}` | no |
 | <a name="input_topics"></a> [topics](#input\_topics) | An optional list of Cloud Pub/Sub topics that will receive control-plane events for the secret.<br>Default is an empty list. | `list(string)` | `[]` | no |
+| <a name="input_ttl_secs"></a> [ttl\_secs](#input\_ttl\_secs) | An optional time-to-live value expressed as a number of seconds; the secret will be automatically deleted after this<br>duration. If the value is null (default), there will be no time-to-live applied to the secret.<br><br>E.g. to automatically delete the secret after 5 minutes, set<br>ttl\_secs = 600 | `number` | `null` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
+| <a name="output_expiration_timestamp"></a> [expiration\_timestamp](#output\_expiration\_timestamp) | The RFC3339 formatted timestamp when the secret will automatically be removed from Secret Manager, if applicable. |
 | <a name="output_id"></a> [id](#output\_id) | The fully-qualified id of the Secret Manager key that contains the secret. |
 | <a name="output_secret_id"></a> [secret\_id](#output\_secret\_id) | The project-local id Secret Manager key that contains the secret. Should match<br>the input `id`. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

@@ -119,3 +119,19 @@ An optional list of Cloud Pub/Sub topics that will receive control-plane events 
 Default is an empty list.
 EOD
 }
+
+variable "ttl_secs" {
+  type = number
+  validation {
+    condition     = var.ttl_secs == null ? true : var.ttl_secs >= 60
+    error_message = "The ttl_secs variable must be null or a number >= 60."
+  }
+  default     = null
+  description = <<EOD
+An optional time-to-live value expressed as a number of seconds; the secret will be automatically deleted after this
+duration. If the value is null (default), there will be no time-to-live applied to the secret.
+
+E.g. to automatically delete the secret after 5 minutes, set
+ttl_secs = 600
+EOD
+}
