@@ -17,4 +17,5 @@ module "test" {
   replication = var.replication
   secret      = var.secret
   annotations = var.annotations
+  topics      = var.topics
 }

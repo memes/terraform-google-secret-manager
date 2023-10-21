@@ -42,3 +42,10 @@ output "replication" {
 A map of location:KMS key ids.
 EOD
 }
+
+output "topic" {
+  value       = google_pubsub_topic.topic.id
+  description = <<-EOD
+The Pub/Sub topic to use for tests.
+EOD
+}

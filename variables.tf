@@ -110,3 +110,12 @@ An optional map of annotation key:value pairs to assign to the secret resources.
 Default is an empty map.
 EOD
 }
+
+variable "topics" {
+  type        = list(string)
+  default     = []
+  description = <<EOD
+An optional list of Cloud Pub/Sub topics that will receive control-plane events for the secret.
+Default is an empty list.
+EOD
+}

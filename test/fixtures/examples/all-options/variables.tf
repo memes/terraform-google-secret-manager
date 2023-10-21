@@ -31,3 +31,7 @@ variable "test_name" {
 variable "annotations" {
   type = map(string)
 }
+
+variable "topics" {
+  type = list(string)
+}

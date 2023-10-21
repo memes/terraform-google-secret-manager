@@ -23,5 +23,6 @@ output "effective_inputs_json" {
     accessors                     = []
     labels                        = {}
     annotations                   = {}
+    topics                        = []
   })
 }

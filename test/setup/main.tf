@@ -65,15 +65,30 @@ resource "google_kms_crypto_key" "key" {
 }
 
 # Note: the identity cannot be destroyed once created
-resource "google_project_service_identity" "identity" {
+resource "google_project_service_identity" "secretmanager" {
   provider = google-beta
   project  = var.project_id
   service  = "secretmanager.googleapis.com"
 }
 
-resource "google_kms_crypto_key_iam_member" "identity" {
+resource "google_kms_crypto_key_iam_member" "secretmanager" {
   for_each      = google_kms_crypto_key.key
   crypto_key_id = each.value.id
   role          = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
-  member        = format("serviceAccount:%s", google_project_service_identity.identity.email)
+  member        = format("serviceAccount:%s", google_project_service_identity.secretmanager.email)
+}
+
+resource "google_pubsub_topic" "topic" {
+  project = var.project_id
+  name    = format("%s-test", random_pet.prefix.id)
+  # Set retention to minimum duration
+  message_retention_duration = "600s"
+  labels                     = local.labels
+}
+
+resource "google_pubsub_topic_iam_member" "topic" {
+  project = google_pubsub_topic.topic.project
+  topic   = google_pubsub_topic.topic.name
+  member  = format("serviceAccount:%s", google_project_service_identity.secretmanager.email)
+  role    = "roles/pubsub.publisher"
 }

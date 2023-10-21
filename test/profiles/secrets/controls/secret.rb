@@ -37,6 +37,7 @@ control 'secret' do
     v && !(v['kms_key_name'].nil? || v['kms_key_name'].empty?) ? v['kms_key_name'] : nil
   end
   auto_replication_kms_key_name = inputs['auto_replication_kms_key_name'] || ''
+  topics = inputs['topics'] || []
 
   describe google_secret_manager_secret(project: inputs['project_id'], name: secret_id) do
     it { should exist }
@@ -54,6 +55,8 @@ control 'secret' do
       its('replication.user_managed?') { should cmp true }
       its('replication.to_h') { should be_a_matching_superset_of(expected_replications) }
     end
+    its('topics') { should be_nil.or be_empty } if topics.empty?
+    its('topics') { should cmp topics } unless topics.empty?
   end
 end
 # rubocop:enable Metrics/BlockLength

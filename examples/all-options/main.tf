@@ -19,4 +19,5 @@ module "secret" {
   accessors   = var.accessors
   labels      = var.labels
   annotations = var.annotations
+  topics      = var.topics
 }

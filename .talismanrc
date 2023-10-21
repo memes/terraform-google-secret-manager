@@ -17,7 +17,7 @@ fileignoreconfig:
 - filename: examples/user-managed-replication/terraform.tfvars.example
   checksum: d619606a155c5b9a63def97d621913240b58f8d36672d005a0cb39bccda26c1b
 - filename: README.md
-  checksum: c461ea9595035f9d14448d0efecdf615d639e39cfc533afb1555395d5739f7b0
+  checksum: a11c943d2ecf9422142dd36ebda531ff1740ca89d0acb01db2deb00734ceb1e3
 - filename: examples/generated-secret/main.tf
   checksum: 37c8edd39b841077663467bd9053e4041092b05b040f107bd8fcb2b1adb04670
 - filename: modules/random/main.tf
@@ -57,7 +57,7 @@ fileignoreconfig:
 - filename: test/setup/outputs.tf
   checksum: 2ab6d037f163e7373709bf7cfc26b4a7c5d73d8f07774cc3993c3711bd44121b
 - filename: test/setup/README.md
-  checksum: 6f56e60e82314a012414c4ce78e1663aa13d691a369a831d139b43791fa4cdb3
+  checksum: d925803f3bc9dedd1431c98afc9da2c6022397ffef65e38a324163db76f3174b
 - filename: test/fixtures/examples/accessors/main.tf
   checksum: 2e7d5709f33bc3f95be33c54a24dae4722ce86c3b34fa93adcb9d9a3e28adfcb
 - filename: test/fixtures/examples/simple/main.tf

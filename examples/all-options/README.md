@@ -41,4 +41,7 @@ annotations = {
     "cost_center": "product_dev",
     "owner": "jane_at_example_com"
 }
+topics = [
+    "projects/my-project-id/topics/my-secret-topic"
+]
 ```

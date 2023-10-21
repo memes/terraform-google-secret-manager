@@ -45,3 +45,8 @@ variable "secret" {
 variable "test_name" {
   type = string
 }
+
+variable "topics" {
+  type    = list(string)
+  default = []
+}

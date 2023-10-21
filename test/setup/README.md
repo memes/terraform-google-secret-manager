@@ -35,10 +35,12 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [google-beta_google_project_service_identity.identity](https://registry.terraform.io/providers/hashicorp/google-beta/latest/docs/resources/google_project_service_identity) | resource |
+| [google-beta_google_project_service_identity.secretmanager](https://registry.terraform.io/providers/hashicorp/google-beta/latest/docs/resources/google_project_service_identity) | resource |
 | [google_kms_crypto_key.key](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_crypto_key) | resource |
-| [google_kms_crypto_key_iam_member.identity](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_crypto_key_iam_member) | resource |
+| [google_kms_crypto_key_iam_member.secretmanager](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_crypto_key_iam_member) | resource |
 | [google_kms_key_ring.keyring](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_key_ring) | resource |
+| [google_pubsub_topic.topic](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/pubsub_topic) | resource |
+| [google_pubsub_topic_iam_member.topic](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/pubsub_topic_iam_member) | resource |
 | [google_service_account.sa](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account) | resource |
 | [random_pet.prefix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/pet) | resource |
 | [random_uuid.key_prefix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid) | resource |
@@ -62,5 +64,6 @@ No modules.
 | <a name="output_project_id"></a> [project\_id](#output\_project\_id) | The Google Cloud project identifier to use for resources. |
 | <a name="output_replication"></a> [replication](#output\_replication) | A map of location:KMS key ids. |
 | <a name="output_service_account_email"></a> [service\_account\_email](#output\_service\_account\_email) | The email identifier of the generated service account. |
+| <a name="output_topic"></a> [topic](#output\_topic) | The Pub/Sub topic to use for tests. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 <!-- markdownlint-enable MD033 MD034 -->

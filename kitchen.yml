@@ -108,6 +108,7 @@ suites:
         auto_replication_kms_key_name: '<%= harness_outputs['replication']['global']['kms_key_name'] %>'
         replication: '<%= hash_to_input_var(regional_replication) %>'
         secret: terribleS3cr3t
+        topics: '[\"<%= harness_outputs['topic'] %>\"]'
   - name: root-null-secret
     transport:
       root_module_directory: test/fixtures/root

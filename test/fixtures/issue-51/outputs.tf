@@ -21,5 +21,6 @@ output "effective_inputs" {
     replication                   = {}
     accessors                     = []
     labels                        = {}
+    topics                        = []
   })
 }

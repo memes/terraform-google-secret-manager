@@ -18,4 +18,5 @@ module "test" {
   replication                   = var.replication
   secret                        = var.null_secret ? null : var.secret
   annotations                   = var.annotations
+  topics                        = var.topics
 }

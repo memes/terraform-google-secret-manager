@@ -22,5 +22,6 @@ output "effective_inputs_json" {
     replication                   = var.replication
     accessors                     = var.accessors
     labels                        = var.labels
+    topics                        = var.topics
   })
 }

@@ -52,3 +52,11 @@ variable "annotations" {
 An optional map of annotation key:value pairs to assign to the secret resources.
 EOD
 }
+
+variable "topics" {
+  type        = list(string)
+  default     = []
+  description = <<EOD
+An optional list of Cloud Pub/Sub topics that will receive control-plane events for the secret.
+EOD
+}

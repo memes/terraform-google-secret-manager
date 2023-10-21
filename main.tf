@@ -13,6 +13,7 @@ resource "google_secret_manager_secret" "secret" {
   secret_id   = var.id
   labels      = var.labels
   annotations = var.annotations
+
   replication {
     dynamic "user_managed" {
       for_each = length(var.replication) > 0 ? [1] : []
@@ -42,6 +43,22 @@ resource "google_secret_manager_secret" "secret" {
         }
       }
     }
+  }
+
+  dynamic "topics" {
+    for_each = toset(var.topics)
+    content {
+      name = topics.value
+    }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      # This module will not assign or manage `version_aliases` since it concerns itself with the creation of a secret
+      # and the API prevents assignment of aliases until the secret value exists. Users of the module may add aliases
+      # after the fact, so make sure this module ignores them.
+      version_aliases,
+    ]
   }
 }
 
