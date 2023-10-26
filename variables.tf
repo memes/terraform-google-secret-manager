@@ -21,7 +21,11 @@ EOD
 }
 
 variable "auto_replication_kms_key_name" {
-  type        = string
+  type = string
+  validation {
+    condition     = coalesce(var.auto_replication_kms_key_name, "unspecified") == "unspecified" ? true : can(regex("^projects/[a-z][a-z0-9-]{4,28}[a-z0-9]/locations/global/keyRings/[a-zA-Z0-9_-]{1,63}/cryptoKeys/[a-zA-Z0-9_-]{1,63}$", var.auto_replication_kms_key_name))
+    error_message = "The auto_replication_kms_key_name must be null, empty, or a valid global KMS key identifier."
+  }
   default     = ""
   description = <<EOD
 An optional Cloud KMS key name to use with Google managed replication. If the value is empty (default), then a Google
@@ -34,7 +38,7 @@ variable "replication" {
     kms_key_name = string
   }))
   validation {
-    condition     = length(var.replication) == 0 || length(distinct([for k, v in var.replication : v == null ? "x" : coalesce(lookup(v, "kms_key_name"), "unspecified") == "unspecified" ? "x" : "y"])) == 1
+    condition     = var.replication == null ? true : length(var.replication) == 0 || length(distinct([for k, v in var.replication : v == null ? "x" : coalesce(lookup(v, "kms_key_name"), "unspecified") == "unspecified" ? "x" : "y"])) == 1
     error_message = "The replication must contain a Cloud KMS key for all regions, or an empty string/null for all regions."
   }
   default     = {}
@@ -84,7 +88,7 @@ variable "accessors" {
   type    = list(string)
   default = []
   validation {
-    condition     = length(join("", [for acct in var.accessors : can(regex("^(?:group|serviceAccount|user):[^@]+@[^@]*$", acct)) ? "x" : ""])) == length(var.accessors)
+    condition     = var.accessors == null ? true : length(join("", [for acct in var.accessors : can(regex("^(?:group|serviceAccount|user):[^@]+@[^@]*$", acct)) ? "x" : ""])) == length(var.accessors)
     error_message = "Each accessors value must be a valid IAM account identifier; e.g. user:jdoe@company.com, group:admins@company.com, serviceAccount:service@project.iam.gserviceaccount.com."
   }
   description = <<EOD
@@ -94,7 +98,13 @@ EOD
 }
 
 variable "labels" {
-  type        = map(string)
+  type = map(string)
+  validation {
+    # GCP resource labels must be lowercase alphanumeric, underscore or hyphen,
+    # and the key must be <= 63 characters in length
+    condition     = var.labels == null ? true : length(compact([for k, v in var.labels : can(regex("^[a-z][a-z0-9_-]{0,62}$", k)) && can(regex("^[a-z0-9_-]{0,63}$", v)) ? "x" : ""])) == length(keys(var.labels))
+    error_message = "Each label key:value pair must match GCP requirements."
+  }
   default     = {}
   description = <<EOD
 An optional map of label key:value pairs to assign to the secret resources.
@@ -103,7 +113,14 @@ EOD
 }
 
 variable "annotations" {
-  type        = map(string)
+  type = map(string)
+  validation {
+    # GCP resource annotations keys must begin and end with a lowercase alphanumeric character,
+    # and period, underscore, or hyphen characters; the key must be <= 63 characters in length.
+    # The values have only a size constraint, which is unenforceable here.
+    condition     = var.annotations == null ? true : length(compact([for k, v in var.annotations : can(regex("^[a-z0-9][a-z0-9._-]{0,61}[a-z0-9]?$", k)) ? "x" : ""])) == length(keys(var.annotations))
+    error_message = "Each label key:value pair must match GCP requirements."
+  }
   default     = {}
   description = <<EOD
 An optional map of annotation key:value pairs to assign to the secret resources.
@@ -112,7 +129,11 @@ EOD
 }
 
 variable "topics" {
-  type        = list(string)
+  type = list(string)
+  validation {
+    condition     = var.topics == null ? true : length(join("", [for topic in var.topics : can(regex("^projects/[a-z][a-z0-9-]{4,28}[a-z0-9]/topics/[^/]+$", topic)) ? "x" : ""])) == length(var.topics)
+    error_message = "Each topics value must be a valid Pub/Sub Topic id."
+  }
   default     = []
   description = <<EOD
 An optional list of Cloud Pub/Sub topics that will receive control-plane events for the secret.

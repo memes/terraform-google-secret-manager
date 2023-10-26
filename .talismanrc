@@ -27,7 +27,7 @@ fileignoreconfig:
 - filename: examples/simple/main.tf
   checksum: b26086277af49d853473caea9f0bbbb62ebb6b7fd16ccde74f57f9d0d9b63444
 - filename: variables.tf
-  checksum: 95224f6924751d18b26f6def930ab78a0e15ecc34fa7f0802a6a1c13bb2b8e59
+  checksum: 83e1f659c2fed1feacd49f7a1bb6af8c46d4770ec37fe805bc607997ffe60640
 - filename: examples/user-managed-replication-accessors/main.tf
   checksum: af29e994e68a7587c981ac1dc962a402e604caecf1942098272266706ee42d15
 - filename: modules/random/README.md

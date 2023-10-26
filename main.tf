@@ -17,7 +17,7 @@ resource "google_secret_manager_secret" "secret" {
 
   replication {
     dynamic "user_managed" {
-      for_each = length(var.replication) > 0 ? [1] : []
+      for_each = try(length(var.replication), 0) > 0 ? [1] : []
       content {
         dynamic "replicas" {
           for_each = var.replication
@@ -34,7 +34,7 @@ resource "google_secret_manager_secret" "secret" {
       }
     }
     dynamic "auto" {
-      for_each = length(var.replication) > 0 ? [] : [1]
+      for_each = try(length(var.replication), 0) > 0 ? [] : [1]
       content {
         dynamic "customer_managed_encryption" {
           for_each = toset(compact([var.auto_replication_kms_key_name]))
@@ -47,7 +47,7 @@ resource "google_secret_manager_secret" "secret" {
   }
 
   dynamic "topics" {
-    for_each = toset(var.topics)
+    for_each = var.topics != null ? toset(var.topics) : []
     content {
       name = topics.value
     }
@@ -74,7 +74,7 @@ resource "google_secret_manager_secret_version" "secret" {
 # Note: this module is non-authoritative and will not remove or modify this role
 # from accounts that were granted the role outside this module.
 resource "google_secret_manager_secret_iam_member" "secret" {
-  for_each  = toset(var.accessors)
+  for_each  = var.accessors != null ? toset(var.accessors) : []
   project   = var.project_id
   secret_id = google_secret_manager_secret.secret.secret_id
   role      = "roles/secretmanager.secretAccessor"
