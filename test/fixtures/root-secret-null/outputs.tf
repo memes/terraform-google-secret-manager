@@ -10,14 +10,15 @@ output "secret_id" {
 }
 
 output "expiration_timestamp" {
-  value = ""
+  value = module.test.expiration_timestamp
 }
 
 output "secret_created" {
-  value = true
+  value = false
 }
 
-output "effective_inputs" {
+# The effective inputs to root module, with defaults where no value provided by test case
+output "effective_inputs_json" {
   value = jsonencode({
     project_id                    = var.project_id
     id                            = format("%s-%s", var.prefix, var.test_name)

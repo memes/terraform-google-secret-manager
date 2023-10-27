@@ -13,11 +13,6 @@ variable "annotations" {
   default = {}
 }
 
-variable "null_secret" {
-  type    = bool
-  default = false
-}
-
 variable "prefix" {
   type = string
 }

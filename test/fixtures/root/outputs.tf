@@ -14,7 +14,7 @@ output "expiration_timestamp" {
 }
 
 output "secret_created" {
-  value = var.null_secret ? false : length(compact([var.secret])) == 1
+  value = length(compact([var.secret])) == 1
 }
 
 # The effective inputs to root module, with defaults where no value provided by test case
@@ -28,5 +28,6 @@ output "effective_inputs_json" {
     labels                        = var.labels
     topics                        = var.topics
     ttl_secs                      = var.ttl_secs
+    annotations                   = var.annotations
   })
 }

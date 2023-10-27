@@ -17,35 +17,35 @@
 .DEFAULT: test
 .PHONY: test.%
 test.%: test/setup/terraform.tfstate
-	bundle exec kitchen test $*
+	ulimit -n 1024 && bundle exec kitchen test $*
 
 .PHONY: test
 test: test/setup/terraform.tfstate
-	bundle exec kitchen test
+	ulimit -n 1024 && bundle exec kitchen test
 
 .PHONY: destroy.%
 destroy.%: test/setup/terraform.tfstate
-	bundle exec kitchen destroy $*
+	ulimit -n 1024 && bundle exec kitchen destroy $*
 
 .PHONY: destroy
 destroy: test/setup/terraform.tfstate
-	bundle exec kitchen destroy
+	ulimit -n 1024 && bundle exec kitchen destroy
 
 .PHONY: verify.%
 verify.%: test/setup/terraform.tfstate
-	bundle exec kitchen verify $*
+	ulimit -n 1024 && bundle exec kitchen verify $*
 
 .PHONY: verify
 verify: test/setup/terraform.tfstate
-	bundle exec kitchen verify
+	ulimit -n 1024 && bundle exec kitchen verify
 
 .PHONY: converge.%
 converge.%: test/setup/terraform.tfstate
-	bundle exec kitchen converge $*
+	ulimit -n 1024 && bundle exec kitchen converge $*
 
 .PHONY: converge
 converge: test/setup/terraform.tfstate
-	bundle exec kitchen converge
+	ulimit -n 1024 && bundle exec kitchen converge
 
 EXAMPLES=accessors all-options simple with-random-provider user-managed-replication user-managed-replication-accessors user-managed-replication-with-keys empty-secret-value auto-replication-with-key pubsub ttl
 

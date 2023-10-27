@@ -53,7 +53,7 @@ fileignoreconfig:
 - filename: Makefile
   checksum: cfe37e47713ab634d70bccbac8fbca9d82cca49c0655daf074dfc547466a5839
 - filename: kitchen.yml
-  checksum: 663daade5798f177b3b927e85621c7114c61e92542790460a97fecc42d0e2ff1
+  checksum: d289e8bef6921f504fb53a094c68708ecde7001c95c02b60ba168edbe361d95a
 - filename: test/setup/outputs.tf
   checksum: 2ab6d037f163e7373709bf7cfc26b4a7c5d73d8f07774cc3993c3711bd44121b
 - filename: test/setup/README.md
@@ -93,7 +93,7 @@ fileignoreconfig:
 - filename: test/fixtures/examples/all-options/main.tf
   checksum: af483e82b9201065124a9710b8a328bfb350cbb08bca21df60c7d63b10870b04
 - filename: test/fixtures/root/main.tf
-  checksum: 8d5e746d520e55d5efd599c265b479216202da7e00267d67b6aaa8ab2b487646
+  checksum: 96a067dd3cda2dd5be023f57637f7fc0f95ad149561ff874b6dc5dc24a134008
 - filename: examples/all-options/terraform.tfvars.example
   checksum: 108bba52493f2087b0473c7a7d7699e2c360d1aaca481c7abf4f19690100253a
 - filename: examples/user-managed-replication-with-keys/terraform.tfvars.example
@@ -150,3 +150,15 @@ fileignoreconfig:
   checksum: bd60080c0a8c21f590fad9bd256646335fb169e911841496aec814f764aca974
 - filename: examples/ttl/main.tf
   checksum: 7b74153a9b2da33b88ef0e16c840df9005789af97cd114a3b84afe715e83928a
+- filename: test/fixtures/root-topics-null/main.tf
+  checksum: 743295e83bcecb76d1faf3331ce5682ac2c46e9a8dbfe9257541814a22d3b2b2
+- filename: test/fixtures/root-accessors-null/main.tf
+  checksum: 83d0d1555d2486b0a9ed7f427160c4c1d09e96d8201029253d77b05439a90301
+- filename: test/fixtures/root-auto-replication-null/main.tf
+  checksum: 04ec9b1710f868b75bc83ffe45a1b97a954f2d62bf814388ea3e5383caf2e216
+- filename: test/fixtures/root-annotations-null/main.tf
+  checksum: ffb5cd64117baba3ec0c2b19ed64d17dc1d1fc8dec543949fb4c3c9eec5bfb8a
+- filename: test/fixtures/root-labels-null/main.tf
+  checksum: 32b015e4b8732402024e0b3be46dabe36cce1454e37a88b814afb16849031e97
+- filename: test/fixtures/root-replication-null/main.tf
+  checksum: 3be334bdd0bc9f75901f56f006eea795a78affa77c3a3364b9436c1083c3558c
