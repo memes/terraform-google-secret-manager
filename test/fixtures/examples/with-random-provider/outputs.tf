@@ -24,7 +24,7 @@ output "effective_inputs_json" {
     id                            = format("%s-%s", var.prefix, var.test_name)
     auto_replication_kms_key_name = ""
     replication                   = {}
-    accessors                     = []
+    accessors                     = var.accessors
     labels                        = {}
     annotations                   = {}
     topics                        = []

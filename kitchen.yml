@@ -1,6 +1,7 @@
 # NOTE: This test-kitchen file contains ERB code to cut-down on boilerplate;
 # YAML linters will complain!
 # yamllint disable
+# spell-checker: disable
 <%
 require 'open3'
 require 'json'
@@ -265,13 +266,13 @@ suites:
       variables:
         test_name: example-simple
         secret: terribleS3cr3t
-  # Disabled - need to use -target to instantiate correctly
-  # - name: example-with-random-provider
-  #   transport:
-  #     root_module_directory: test/fixtures/examples/with-random-provider
-  #   driver:
-  #     variables:
-  #       test_name: example-with-random-provider
+  - name: example-with-random-provider
+    transport:
+      root_module_directory: test/fixtures/examples/with-random-provider
+    driver:
+      variables:
+        test_name: example-with-random-provider
+        accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
   - name: example-user-managed-replication
     transport:
       root_module_directory: test/fixtures/examples/user-managed-replication

@@ -9,3 +9,7 @@ variable "project_id" {
 variable "test_name" {
   type = string
 }
+
+variable "accessors" {
+  type = list(string)
+}

@@ -12,4 +12,5 @@ module "test" {
   source     = "./../../../ephemeral/with-random-provider/"
   id         = format("%s-%s", var.prefix, var.test_name)
   project_id = var.project_id
+  accessors  = var.accessors
 }
