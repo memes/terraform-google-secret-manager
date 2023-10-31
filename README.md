@@ -29,6 +29,27 @@ module "secret" {
 ```
 <!-- spell-checker: enable -->
 
+There are a set of examples that help show the various options available:
+
+* [Simple](examples/simple/) - minimal use-case that creates a secret with a value.
+* [Empty Secret](examples/empty-secret-value/) - use-case that creates a secret but does not assign a value; e.g. the
+   module does not a secret version.
+* [Random provider](examples/with-random-provider/) - demonstrates using the Terraform Random provider to create a
+  random secret value.
+* [Accessors](examples/accessors/) - use-case to create a secret and with read-only role granted to a set of accounts.
+* [User-managed replication](examples/user-managed-replication/) - override Google Secret Manager automatic replication
+  with a fixed set of regions.
+* [User-managed replication with Cloud KMS](examples/user-managed-replication-with-keys/) - force Google Secret Manager
+  to replication to a fixed set of regions *and* use specified Cloud KMS keys for the encryption.
+* [All Options](examples/all-options/) - use-case with user managed replication options, assigned roles, etc. The kitchen
+  sink!
+* [Automatic replication with Cloud KMS](examples/auto-replication-with-key/) - *New in v2.2.0* - use Google Secret Manager
+  automatic replication of secret, but encrypt with the specified Cloud KMS key.
+* [Pub/Sub integration](examples/pubsub/) - *New in v2.2.0* - create a Secret with integration to an existing Cloud Pub/Sub
+  Topic; Secret Manager will inform listeners of rotation and life-cycle events.
+* [Time-to-live](examples/ttl/) - *New in v2.2.0* - create a Secret with a fixed TTL; after this time the Secret will be
+  automatically destroyed.
+
 <!-- markdownlint-disable MD033 MD034-->
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements

@@ -17,7 +17,7 @@ fileignoreconfig:
 - filename: examples/user-managed-replication/terraform.tfvars.example
   checksum: d619606a155c5b9a63def97d621913240b58f8d36672d005a0cb39bccda26c1b
 - filename: README.md
-  checksum: 53818d78251d6d84aefda17de7601e05a785a78bba5e3e4b96a513ad93b240a6
+  checksum: f9a0ed259e71aa3fb728c5649afec9c327508a3931972348749a4bca7411a780
 - filename: examples/generated-secret/main.tf
   checksum: 37c8edd39b841077663467bd9053e4041092b05b040f107bd8fcb2b1adb04670
 - filename: modules/random/main.tf
