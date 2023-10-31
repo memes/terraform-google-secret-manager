@@ -89,7 +89,7 @@ fileignoreconfig:
 - filename: examples/all-options/main.tf
   checksum: 9ece2caccbaad2c1757c3f22efdf0524263828ec0169e071bdd7dbf609db723a
 - filename: examples/with-random-provider/main.tf
-  checksum: 1871a23a6e08ba2e134e4ffbf4e38d48dbb13d3d8ee085e725da94e9264f8d3e
+  checksum: 96493dbf872b9ceb6234b58f7d05bdd76323b5fb0a641b45b6000eafbd23f3ee
 - filename: test/fixtures/examples/all-options/main.tf
   checksum: af483e82b9201065124a9710b8a328bfb350cbb08bca21df60c7d63b10870b04
 - filename: test/fixtures/root/main.tf
@@ -162,3 +162,5 @@ fileignoreconfig:
   checksum: 32b015e4b8732402024e0b3be46dabe36cce1454e37a88b814afb16849031e97
 - filename: test/fixtures/root-replication-null/main.tf
   checksum: 3be334bdd0bc9f75901f56f006eea795a78affa77c3a3364b9436c1083c3558c
+- filename: examples/with-random-provider/README.md
+  checksum: 07e8aea297256f9ac6ad8f72cc2829ce457e2ed8e31d84e4e8ad5ebd7adbae12

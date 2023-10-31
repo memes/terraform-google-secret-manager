@@ -11,3 +11,11 @@ variable "id" {
 The secret identifier to create; this value must be unique within the project.
 EOD
 }
+
+variable "accessors" {
+  type        = list(string)
+  description = <<EOD
+An optional list of IAM account identifiers that will be granted accessor (read-only)
+permission to the secret.
+EOD
+}

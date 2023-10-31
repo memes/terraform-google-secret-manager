@@ -1,3 +1,7 @@
 # Example TF vars file
 project_id = "my-project-id"
 id = "my-secret-id"
+accessors = [
+  "serviceAccount:my-service@my-project-id.iam.gserviceaccount.com",
+  "user:jane@doe.com"
+]

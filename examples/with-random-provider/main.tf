@@ -28,10 +28,18 @@ resource "random_string" "secret" {
   override_special = "!@#$%&*()-_=+[]{}<>:?"
 }
 
+# Allow module to create the secret without a value
 module "secret" {
   source     = "memes/secret-manager/google"
   version    = "2.2.0"
   project_id = var.project_id
   id         = var.id
-  secret     = random_string.secret.result
+  secret     = null
+  accessors  = var.accessors
+}
+
+# Store actual secret as the latest version if it has been provided.
+resource "google_secret_manager_secret_version" "secret" {
+  secret      = module.secret.id
+  secret_data = random_string.secret.result
 }
