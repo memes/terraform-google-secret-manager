@@ -27,3 +27,15 @@ variable "secret" {
 variable "test_name" {
   type = string
 }
+
+variable "annotations" {
+  type = map(string)
+}
+
+variable "topics" {
+  type = list(string)
+}
+
+variable "ttl_secs" {
+  type = number
+}

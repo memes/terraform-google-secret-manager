@@ -4,18 +4,21 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = ">= 4.18"
+      version = ">= 4.83"
     }
   }
 }
 
 module "secret" {
   source      = "memes/secret-manager/google"
-  version     = "2.1.2"
+  version     = "2.2.0"
   project_id  = var.project_id
   id          = var.id
   replication = var.replication
   secret      = var.secret
   accessors   = var.accessors
   labels      = var.labels
+  annotations = var.annotations
+  topics      = var.topics
+  ttl_secs    = var.ttl_secs
 }

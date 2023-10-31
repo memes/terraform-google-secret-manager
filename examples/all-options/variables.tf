@@ -45,3 +45,25 @@ variable "labels" {
 An optional map of label key:value pairs to assign to the secret resources.
 EOD
 }
+
+variable "annotations" {
+  type        = map(string)
+  description = <<EOD
+An optional map of annotation key:value pairs to assign to the secret resources.
+EOD
+}
+
+variable "topics" {
+  type        = list(string)
+  description = <<EOD
+An optional list of Cloud Pub/Sub topics that will receive control-plane events for the secret.
+EOD
+}
+
+variable "ttl_secs" {
+  type        = number
+  description = <<EOD
+An optional time-to-live value expressed as a number of seconds; the secret will be automatically deleted after this
+duration.
+EOD
+}

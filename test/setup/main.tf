@@ -3,7 +3,7 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = ">= 4.18"
+      version = ">= 4.83"
     }
     random = {
       source  = "hashicorp/random"
@@ -32,6 +32,11 @@ locals {
     product = "terraform-google-secret-manager"
     driver  = "kitchen-terraform"
   })
+  annotations = merge(var.annotations, {
+    purpose = "automated-testing"
+    product = "github.com/memes/terraform-google-secret-manager"
+    driver  = "kitchen-terraform"
+  })
 }
 
 resource "google_service_account" "sa" {
@@ -45,7 +50,7 @@ EOD
 }
 
 resource "google_kms_key_ring" "keyring" {
-  for_each = setunion(var.replication_locations)
+  for_each = setunion(["global"], var.replication_locations)
   project  = var.project_id
   name     = format("%s-%s-test", random_uuid.key_prefix.id, each.value)
   location = each.value
@@ -60,15 +65,30 @@ resource "google_kms_crypto_key" "key" {
 }
 
 # Note: the identity cannot be destroyed once created
-resource "google_project_service_identity" "identity" {
+resource "google_project_service_identity" "secretmanager" {
   provider = google-beta
   project  = var.project_id
   service  = "secretmanager.googleapis.com"
 }
 
-resource "google_kms_crypto_key_iam_member" "identity" {
+resource "google_kms_crypto_key_iam_member" "secretmanager" {
   for_each      = google_kms_crypto_key.key
   crypto_key_id = each.value.id
   role          = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
-  member        = format("serviceAccount:%s", google_project_service_identity.identity.email)
+  member        = format("serviceAccount:%s", google_project_service_identity.secretmanager.email)
+}
+
+resource "google_pubsub_topic" "topic" {
+  project = var.project_id
+  name    = format("%s-test", random_pet.prefix.id)
+  # Set retention to minimum duration
+  message_retention_duration = "600s"
+  labels                     = local.labels
+}
+
+resource "google_pubsub_topic_iam_member" "topic" {
+  project = google_pubsub_topic.topic.project
+  topic   = google_pubsub_topic.topic.name
+  member  = format("serviceAccount:%s", google_project_service_identity.secretmanager.email)
+  role    = "roles/pubsub.publisher"
 }

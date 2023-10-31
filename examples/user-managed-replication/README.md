@@ -10,6 +10,8 @@ replication.
 |Access Control||Not managed by example; permissions to read the secret must be specified externally.|
 |Replication|&check;|User specified locations will be  used for replication.|
 |Secret Value||User specified.|
+|Pub/Sub Notifications||Not managed by example.|
+|TTL||Not managed by example.|
 
 <!-- spell-checker: disable -->
 ### Example terraform.tfvars

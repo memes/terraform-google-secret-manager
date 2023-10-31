@@ -16,7 +16,6 @@ See [GitHub](https://help.github.com/articles/about-pull-requests/) for more det
 consistent formatting and to avoid committing secrets. Please install and
 integrate the tool before pushing changes to GitHub.
 
-<!-- spell-checker: ignore venv -->
 1. Install `pre-commit` in venv or globally: see [instructions](https://pre-commit.com/#installation)
 2. Fork and clone this repo
 3. Install `pre-commit` hook to git

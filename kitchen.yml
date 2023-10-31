@@ -24,7 +24,36 @@ def tf_client(version)
   "#{client.chomp}/bin/terraform"
 end
 
+def hash_to_input_var(params)
+  "{#{params.map do |k, v|
+        case v
+        when nil
+          "\\\"#{k}\\\"=null"
+        when Hash
+          "\\\"#{k}\\\"=#{hash_to_input_var(v)}"
+        when Array
+          "\\\"#{k}\\\"=[#{v.map do |e|
+               case e
+               when nil
+                "null"
+               when Hash
+                 hash_to_input_var(e)
+               when String
+                 "\\\"#{e}\\\""
+               else
+                 "#{e}"
+               end
+             end.join(',')}]"
+        when String
+          "\\\"#{k}\\\"=\\\"#{v}\\\""
+        else
+          "\\\"#{k}\\\"=#{v}"
+        end
+      end.join(',')}}"
+end
+
 tf_clients = [0.14, 0.15, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6].map{ |v| ["tf#{v}".sub(/\W/, "-"), tf_client(v)]}.to_h
+regional_replication = harness_outputs['replication'].reject{|k,_| k == 'global'}
 %>
 ---
 driver:
@@ -74,19 +103,19 @@ suites:
       variables:
         test_name: root-all
         accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
-        labels: '{<%= harness_outputs['labels'].to_a.map{|pair| sprintf('%s=\"%s\"', pair[0], pair[1])}.join(',') %>}'
-        replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=\"%s\"}', pair[0], pair[1]['key'])}.join(',') %>}'
+        annotations: '<%= hash_to_input_var(harness_outputs['annotations']) %>'
+        labels: '<%= hash_to_input_var(harness_outputs['labels']) %>'
+        auto_replication_kms_key_name: '<%= harness_outputs['replication']['global']['kms_key_name'] %>'
+        replication: '<%= hash_to_input_var(regional_replication) %>'
         secret: terribleS3cr3t
-  - name: root-null-secret
+        topics: '[\"<%= harness_outputs['topic'] %>\"]'
+        ttl_secs: '120'
+  - name: root-secret-null
     transport:
-      root_module_directory: test/fixtures/root
+      root_module_directory: test/fixtures/root-secret-null
     driver:
       variables:
-        test_name: root-null-secret
-        # terraform-kitchen requires all values to be scalar, so use a flag in
-        # the fixture to force setting value to null
-        secret: 'null'
-        null_secret: 'true'
+        test_name: root-secret-null
   - name: root-empty-secret
     transport:
       root_module_directory: test/fixtures/root
@@ -94,13 +123,21 @@ suites:
       variables:
         test_name: root-empty-secret
         secret: ''
-  - name: root-replication-null-values
+  - name: root-replication
     transport:
       root_module_directory: test/fixtures/root
     driver:
       variables:
-        test_name: root-replication-null-keys
-        replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s=null', pair[0])}.join(',') %>}'
+        test_name: root-replication
+        replication: '<%= hash_to_input_var(regional_replication) %>'
+        secret: terribleS3cr3t
+  - name: root-replication-values-null
+    transport:
+      root_module_directory: test/fixtures/root
+    driver:
+      variables:
+        test_name: root-replication-values-null
+        replication: '<%= hash_to_input_var(regional_replication.map{|k,_| [k, nil]}.to_h) %>'
         secret: terribleS3cr3t
   - name: root-replication-keys-null
     transport:
@@ -108,7 +145,7 @@ suites:
     driver:
       variables:
         test_name: root-replication-keys-null
-        replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=null}', pair[0])}.join(',') %>}'
+        replication: '<%= hash_to_input_var(regional_replication.map{|k,_| [k, {'kms_key_name' => nil}]}.to_h) %>'
         secret: terribleS3cr3t
   - name: root-replication-keys-empty
     transport:
@@ -116,7 +153,89 @@ suites:
     driver:
       variables:
         test_name: root-replication-keys-empty
-        replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=\"\"}', pair[0])}.join(',') %>}'
+        replication: '<%= hash_to_input_var(regional_replication.map{|k,_| [k, {'kms_key_name' => ''}]}.to_h) %>'
+        secret: terribleS3cr3t
+  - name: root-replication-null
+    transport:
+      root_module_directory: test/fixtures/root-replication-null
+    driver:
+      variables:
+        test_name: root-replication-null
+        secret: terribleS3cr3t
+  - name: root-auto-replication-key
+    transport:
+      root_module_directory: test/fixtures/root
+    driver:
+      variables:
+        test_name: root-auto-replication-key
+        secret: terribleS3cr3t
+        auto_replication_kms_key_name: '<%= harness_outputs['replication']['global']['kms_key_name'] %>'
+  - name: root-auto-replication-null
+    transport:
+      root_module_directory: test/fixtures/root-auto-replication-null
+    driver:
+      variables:
+        test_name: root-auto-replication-null
+        secret: terribleS3cr3t
+  - name: root-topics
+    transport:
+      root_module_directory: test/fixtures/root
+    driver:
+      variables:
+        test_name: root-topics
+        secret: terribleS3cr3t
+        topics: '[\"<%= harness_outputs['topic'] %>\"]'
+  - name: root-topics-null
+    transport:
+      root_module_directory: test/fixtures/root-topics-null
+    driver:
+      variables:
+        test_name: root-topics-null
+        secret: terribleS3cr3t
+  - name: root-accessors
+    transport:
+      root_module_directory: test/fixtures/root
+    driver:
+      variables:
+        test_name: root-accessors
+        secret: terribleS3cr3t
+        accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
+  - name: root-accessors-null
+    transport:
+      root_module_directory: test/fixtures/root-accessors-null
+    driver:
+      variables:
+        test_name: root-accessors-null
+        secret: terribleS3cr3t
+  - name: root-annotations
+    transport:
+      root_module_directory: test/fixtures/root
+    driver:
+      variables:
+        test_name: root-annotations
+        secret: terribleS3cr3t
+        annotations: '<%= hash_to_input_var({'test.case' => 'root-accessors', 'long-key' => '01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789'}) %>'
+  - name: root-annotations-null
+    transport:
+      root_module_directory: test/fixtures/root-annotations-null
+    driver:
+      variables:
+        test_name: root-annotations-null
+        secret: terribleS3cr3t
+  - name: root-labels
+    transport:
+      root_module_directory: test/fixtures/root
+    driver:
+      variables:
+        test_name: root-labels
+        secret: terribleS3cr3t
+        labels: '<%= hash_to_input_var({'test_case' => 'root-accessors'}) %>'
+  - name: root-labels-null
+    transport:
+      root_module_directory: test/fixtures/root-labels-null
+    driver:
+      variables:
+        test_name: root-labels-null
         secret: terribleS3cr3t
   - name: example-accessors
     transport:
@@ -133,9 +252,12 @@ suites:
       variables:
         test_name: example-all-options
         accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
-        labels: '{<%= harness_outputs['labels'].to_a.map{|pair| sprintf('%s=\"%s\"', pair[0], pair[1])}.join(',') %>}'
-        replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=\"%s\"}', pair[0], pair[1]['key'])}.join(',') %>}'
+        annotations: '<%= hash_to_input_var(harness_outputs['annotations']) %>'
+        labels: '<%= hash_to_input_var(harness_outputs['labels']) %>'
+        replication: '<%= hash_to_input_var(regional_replication) %>'
         secret: terribleS3cr3t
+        topics: '[\"<%= harness_outputs['topic'] %>\"]'
+        ttl_secs: '120'
   - name: example-simple
     transport:
       root_module_directory: test/fixtures/examples/simple
@@ -145,8 +267,9 @@ suites:
         secret: terribleS3cr3t
   # Disabled - need to use -target to instantiate correctly
   # - name: example-with-random-provider
-  #   driver:
+  #   transport:
   #     root_module_directory: test/fixtures/examples/with-random-provider
+  #   driver:
   #     variables:
   #       test_name: example-with-random-provider
   - name: example-user-managed-replication
@@ -156,7 +279,7 @@ suites:
       variables:
         test_name: example-user-managed-replication
         secret: terribleS3cr3t
-        replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s=null', pair[0])}.join(',') %>}'
+        replication: '<%= hash_to_input_var(regional_replication.map{|k,_| [k, nil]}.to_h) %>'
   - name: example-user-managed-replication-accessors
     transport:
       root_module_directory: test/fixtures/examples/user-managed-replication-accessors
@@ -165,14 +288,14 @@ suites:
         test_name: example-user-managed-replication-accessors
         accessors: '[\"serviceAccount:<%= harness_outputs['service_account_email'] %>\"]'
         secret: terribleS3cr3t
-        replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s=null', pair[0])}.join(',') %>}'
+        replication: '<%= hash_to_input_var(regional_replication.map{|k,_| [k, nil]}.to_h) %>'
   - name: example-user-managed-replication-with-keys
     transport:
       root_module_directory: test/fixtures/examples/user-managed-replication-with-keys
     driver:
       variables:
         test_name: example-user-managed-replication-with-keys
-        replication: '{<%= harness_outputs['replication'].to_a.map{|pair| sprintf('%s={kms_key_name=\"%s\"}', pair[0], pair[1]['key'])}.join(',') %>}'
+        replication: '<%= hash_to_input_var(regional_replication) %>'
         secret: terribleS3cr3t
   - name: example-empty-secret-value
     transport:
@@ -189,3 +312,27 @@ suites:
       variables:
         test_name: issue-51
         secret: terribleS3cr3t
+  - name: example-auto-replication-with-key
+    transport:
+      root_module_directory: test/fixtures/examples/auto-replication-with-key
+    driver:
+      variables:
+        test_name: example-auto-replication-with-key
+        auto_replication_kms_key_name: '<%= harness_outputs['replication']['global']['kms_key_name'] %>'
+        secret: terribleS3cr3t
+  - name: example-pubsub
+    transport:
+      root_module_directory: test/fixtures/examples/pubsub
+    driver:
+      variables:
+        test_name: example-pubsub
+        secret: terribleS3cr3t
+        topics: '[\"<%= harness_outputs['topic'] %>\"]'
+  - name: example-ttl
+    transport:
+      root_module_directory: test/fixtures/examples/ttl
+    driver:
+      variables:
+        test_name: example-ttl
+        secret: terribleS3cr3t
+        ttl_secs: '120'

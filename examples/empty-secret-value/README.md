@@ -10,6 +10,8 @@ automatically, but without an initial secret value.
 |Access Control||Not managed by example; permissions to read the secret must be specified externally.|
 |Replication|&check;|Automatically managed by Secret Manager.|
 |Secret Value||Not managed by example; a versioned value must be added to the secret before it can be accessed|
+|Pub/Sub Notifications||Not managed by example.|
+|TTL||Not managed by example.|
 
 <!-- spell-checker: disable -->
 ### Example terraform.tfvars

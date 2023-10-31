@@ -1,6 +1,7 @@
 # Example TF vars file
 project_id = "my-project-id"
 id = "my-secret-id"
+secret = "T0pS3cretP@ssword!"
 replication = {
     "us-east1" = {
         kms_key_name = "projects/my-project-id/locations/us-east1/keyRings/my-east-keyring/cryptoKeys/east-key"
@@ -15,3 +16,12 @@ labels = {
     "cost_center": "product_dev",
     "owner": "jane_at_example_com"
 }
+annotations = {
+    "stage": "dev",
+    "cost_center": "product_dev",
+    "owner": "jane_at_example_com"
+}
+topics = [
+    "projects/my-project-id/topics/my-secret-topic",
+]
+ttl_secs = 86400

@@ -5,7 +5,7 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = ">= 4.18"
+      version = ">= 4.83"
     }
     random = {
       source  = "hashicorp/random"
@@ -21,7 +21,7 @@ resource "random_string" "secret" {
   min_upper        = 2
   lower            = true
   min_lower        = 2
-  number           = true
+  numeric          = true
   min_numeric      = 2
   special          = true
   min_special      = 2
@@ -30,7 +30,7 @@ resource "random_string" "secret" {
 
 module "secret" {
   source     = "memes/secret-manager/google"
-  version    = "2.1.2"
+  version    = "2.2.0"
   project_id = var.project_id
   id         = var.id
   secret     = random_string.secret.result

@@ -9,13 +9,24 @@ output "secret_id" {
   value = module.test.secret_id
 }
 
+output "expiration_timestamp" {
+  value = ""
+}
+
+output "secret_created" {
+  value = true
+}
+
 output "effective_inputs" {
   value = jsonencode({
-    project_id  = var.project_id
-    id          = format("%s-%s", var.prefix, var.test_name)
-    replication = {}
-    secret      = var.secret
-    accessors   = []
-    labels      = {}
+    project_id                    = var.project_id
+    id                            = format("%s-%s", var.prefix, var.test_name)
+    auto_replication_kms_key_name = ""
+    replication                   = {}
+    accessors                     = []
+    labels                        = {}
+    topics                        = []
+    ttl_secs                      = null
+    annotations                   = {}
   })
 }

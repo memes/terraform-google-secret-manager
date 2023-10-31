@@ -1,4 +1,4 @@
-# spell-checker: disable
+# Execute release-please action on every push to main.
 ---
 name: release-please
 

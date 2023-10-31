@@ -3,7 +3,7 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = ">= 4.18"
+      version = ">= 4.83"
     }
   }
 }
@@ -16,4 +16,7 @@ module "test" {
   project_id  = var.project_id
   replication = var.replication
   secret      = var.secret
+  annotations = var.annotations
+  topics      = var.topics
+  ttl_secs    = var.ttl_secs
 }

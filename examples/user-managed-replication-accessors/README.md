@@ -11,10 +11,12 @@ secret value.
 |Access Control|&check;|User specified accounts will be granted view access to secret.|
 |Replication|&check;|User specified regions will be used for replication.|
 |Secret Value||User specified.|
+|Pub/Sub Notifications||Not managed by example.|
+|TTL||Not managed by example.|
 
-<!-- spell-checker: disable -->
 ### Example terraform.tfvars
 
+<!-- spell-checker: disable -->
 ```properties
 # Example TF vars file
 project_id = "my-project-id"
@@ -26,3 +28,4 @@ replication = {
 }
 accessors = ["serviceAccount:my-service@my-project-id.iam.gserviceaccount.com", "user:jane@doe.com"]
 ```
+<!-- spell-checker: enable -->

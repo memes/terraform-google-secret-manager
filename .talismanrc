@@ -1,4 +1,6 @@
-# spell-checker: ignore fileignoreconfig tfvars
+# Talisman configuration for secret manager module
+---
+version: ""
 fileignoreconfig:
 - filename: .github/workflows/pre-commit.yml
   checksum: 079f171fdbd654d9e637f509bd9372cfc44f959ae4ff4d56d1cd810577f3ffd6
@@ -15,17 +17,17 @@ fileignoreconfig:
 - filename: examples/user-managed-replication/terraform.tfvars.example
   checksum: d619606a155c5b9a63def97d621913240b58f8d36672d005a0cb39bccda26c1b
 - filename: README.md
-  checksum: 92877d805e8077452846c87778b2a5db5394753e9287818828cd080a3728db70
+  checksum: f9a0ed259e71aa3fb728c5649afec9c327508a3931972348749a4bca7411a780
 - filename: examples/generated-secret/main.tf
   checksum: 37c8edd39b841077663467bd9053e4041092b05b040f107bd8fcb2b1adb04670
 - filename: modules/random/main.tf
   checksum: 64cbbdabd2a425a9e7fd9c1db9107b5d7874befb660dbe62c9b9c5d1be9f97f2
 - filename: main.tf
-  checksum: 5c1b49174ea34816fd635dbbd8c4e41d2109f045789be3c62d02f0e4bea2c2c9
+  checksum: 363761215db80e4a3c42ed13fb65a3065b6dcf76adc04c6e2a448ea0b912f52d
 - filename: examples/simple/main.tf
   checksum: b26086277af49d853473caea9f0bbbb62ebb6b7fd16ccde74f57f9d0d9b63444
 - filename: variables.tf
-  checksum: c58645b1901328c54b510d6464d803f9de4fc466ca49b94c496d46db34d5d4cc
+  checksum: 83e1f659c2fed1feacd49f7a1bb6af8c46d4770ec37fe805bc607997ffe60640
 - filename: examples/user-managed-replication-accessors/main.tf
   checksum: af29e994e68a7587c981ac1dc962a402e604caecf1942098272266706ee42d15
 - filename: modules/random/README.md
@@ -49,13 +51,13 @@ fileignoreconfig:
 - filename: examples/user-managed-replication
   checksum: 8312eafa25f040eaf87f070422f0d3270f4b775e42bde3e211ac4426134569e4
 - filename: Makefile
-  checksum: 88cce1135288125f41b2dd7f8a7bada98834dc5b4ce9e00461393fd3da850692
+  checksum: cfe37e47713ab634d70bccbac8fbca9d82cca49c0655daf074dfc547466a5839
 - filename: kitchen.yml
-  checksum: fafd1f43822a6610df4183f5f21fe6fa631d9aa028cba5c512e20d1b8adfaa0a
+  checksum: d289e8bef6921f504fb53a094c68708ecde7001c95c02b60ba168edbe361d95a
 - filename: test/setup/outputs.tf
-  checksum: 9c50d0aeea3dd946960161a60f841eea5b7d1f54b7f6594c0dcc04ab8c318023
+  checksum: 2ab6d037f163e7373709bf7cfc26b4a7c5d73d8f07774cc3993c3711bd44121b
 - filename: test/setup/README.md
-  checksum: 6f56e60e82314a012414c4ce78e1663aa13d691a369a831d139b43791fa4cdb3
+  checksum: d925803f3bc9dedd1431c98afc9da2c6022397ffef65e38a324163db76f3174b
 - filename: test/fixtures/examples/accessors/main.tf
   checksum: 2e7d5709f33bc3f95be33c54a24dae4722ce86c3b34fa93adcb9d9a3e28adfcb
 - filename: test/fixtures/examples/simple/main.tf
@@ -83,7 +85,7 @@ fileignoreconfig:
 - filename: CHANGELOG.md
   checksum: c65416e7d46d4c5fd6439a5b65d8352c729756deffb6c9632ef0e0ebaa695ac2
 - filename: examples/all-options/variables.tf
-  checksum: 9ac418a296be758e18f999197e3e4f57b41778e97b667e563961ecba76207daf
+  checksum: af986c416750a05afc2ca54e1ec5dec54e05b64c4c1b3e0267687c187a2453fa
 - filename: examples/all-options/main.tf
   checksum: 9ece2caccbaad2c1757c3f22efdf0524263828ec0169e071bdd7dbf609db723a
 - filename: examples/with-random-provider/main.tf
@@ -91,15 +93,15 @@ fileignoreconfig:
 - filename: test/fixtures/examples/all-options/main.tf
   checksum: af483e82b9201065124a9710b8a328bfb350cbb08bca21df60c7d63b10870b04
 - filename: test/fixtures/root/main.tf
-  checksum: 0a8d2ebd6a964d9d4299f3324ea1ec94da554109ab78008bb9c066987e18b863
+  checksum: 96a067dd3cda2dd5be023f57637f7fc0f95ad149561ff874b6dc5dc24a134008
 - filename: examples/all-options/terraform.tfvars.example
-  checksum: 244b9a19555925b7bede1e21fead0c46f99d7486cbf0fc66f3e77636e7ae0b7e
+  checksum: 108bba52493f2087b0473c7a7d7699e2c360d1aaca481c7abf4f19690100253a
 - filename: examples/user-managed-replication-with-keys/terraform.tfvars.example
   checksum: 79f5b2b606dd10da32bc52656e6dc84d1dfdbd99fb97eb28fcde1ec258cffcfa
 - filename: examples/user-managed-replication/main.tf
   checksum: 3d0bc5e4ad597079f7b610f807c4f99b88622089c167c06a8eebba290986e9dc
 - filename: examples/all-options/README.md
-  checksum: 758371447a65e07a77cd3f05587dbd6b4cae25a953579a08769da1f1ae1ac9d3
+  checksum: 2dc780a8f8ff037b8f31410e4ffceb70f8762f1bb4685d89b29cb8ac1a417046
 - filename: test/fixtures/issue-51/main.tf
   checksum: 8137269ccdf2c8a7331362d741f503688eee2aa1fb2d7400a94c16f2cd2bd4ad
 - filename: test/fixtures/examples/all-options/outputs.tf
@@ -107,7 +109,7 @@ fileignoreconfig:
 - filename: test/fixtures/issue-51/outputs.tf
   checksum: 11c982f1db6d85c39695798ae672c2533ac8dcd30d0c50136d6cc3f93e5f42d7
 - filename: test/fixtures/root/outputs.tf
-  checksum: 46c8d5c86a8c365f40d827d9dfaff8c61e5cbbd9ea49ab98be64edfd44f007dd
+  checksum: 82b40dce6ddee4a84d1c2475d6c9b0f4c0d05a51bba673c4e9aaa92f013ec250
 - filename: test/fixtures/examples/accessors/outputs.tf
   checksum: 83871d03d3593ca46eeee5117dae67fcaa6b81431b1629e9b4fbb1f706766ba8
 - filename: test/fixtures/examples/simple/outputs.tf
@@ -115,8 +117,48 @@ fileignoreconfig:
 - filename: test/fixtures/examples/user-managed-replication-with-keys/outputs.tf
   checksum: 08f9e84afe22337d5f2ee44d4fb1c49de5b00799276a7b2282fbf97d367fd816
 - filename: test/profiles/secrets/controls/secret.rb
-  checksum: b9402379146edf9ee22fe62010a3a31b2b8c14d51fe97871febff7eb708aef67
+  checksum: eccd4acaf0c4e69049f8de3a5c22b6acec153f0f339d2c6f48ba50b491860800
 - filename: test/fixtures/examples/user-managed-replication-accessors/outputs.tf
   checksum: 16d3ea66d4928cf49d1c4bd7548cf1229eac6147e6cea5861923244462ad9c6d
 - filename: test/fixtures/examples/user-managed-replication/outputs.tf
   checksum: 9feb5c2c831d2c4c9428764a47f6387f64137a4618af4c63b6f07a7aeac183ab
+- filename: examples/auto-replication-with-key/terraform.tfvars.example
+  checksum: 577e0024d50c1a082885f771532d277fff0d257744f5ff5f6e304b1f312654a8
+- filename: examples/auto-replication-with-key/README.md
+  checksum: 70755383374742276cba85d1419669fc1105ca8eb54240c7ce2052fe41f03aca
+- filename: examples/auto-replication-with-key/main.tf
+  checksum: fa05dae1cfe5adaaa444f7e778845c3334d9b09a3c0ab3de4e8c8185d4b51e72
+- filename: test/fixtures/examples/auto-replication-with-key/outputs.tf
+  checksum: 3430a05581607d940fb65e5720498b033984155345fb724e7ad35b3f28f93f61
+- filename: test/fixtures/examples/auto-replication-with-key/main.tf
+  checksum: 4c4b25e645df7fc8140565ee2e01b0b72a0ed4ea1470e03d979b7c2dfc457895
+- filename: examples/pubsub/terraform.tfvars.example
+  checksum: 5173bce0fbcfb1728ffd1515db1389fc20ba80b8252db9a25cbdf458dd0c8e9d
+- filename: examples/ttl/terraform.tfvars.example
+  checksum: 74373765ab2c5a006a9f561ee7cfdaae7c4890573c6a0ae6e4639f2be7c9b6e0
+- filename: outputs.tf
+  checksum: 07abdebb46fbf17754c88d9ef10429b0046af6207f40ddcd0e4ff23eca7ce102
+- filename: examples/pubsub/README.md
+  checksum: f2bb26c07e1aa24cc8a5d0be79e1873a2051232143d3cfe41a3b0193d96efc99
+- filename: examples/ttl/README.md
+  checksum: 3011d0f431827f8da971a1cc570722a0d551056ce0e017a789374016d3baddf8
+- filename: examples/pubsub/main.tf
+  checksum: fa405ed23543fffae8d201e4bdc77529617e913cfc9ee9b7d9da71bc02f53b33
+- filename: test/fixtures/examples/pubsub/main.tf
+  checksum: 10cc079ad0bc050785c079544c96d35378d5f20bc25f1830810f55284952f26b
+- filename: test/fixtures/examples/ttl/main.tf
+  checksum: bd60080c0a8c21f590fad9bd256646335fb169e911841496aec814f764aca974
+- filename: examples/ttl/main.tf
+  checksum: 7b74153a9b2da33b88ef0e16c840df9005789af97cd114a3b84afe715e83928a
+- filename: test/fixtures/root-topics-null/main.tf
+  checksum: 743295e83bcecb76d1faf3331ce5682ac2c46e9a8dbfe9257541814a22d3b2b2
+- filename: test/fixtures/root-accessors-null/main.tf
+  checksum: 83d0d1555d2486b0a9ed7f427160c4c1d09e96d8201029253d77b05439a90301
+- filename: test/fixtures/root-auto-replication-null/main.tf
+  checksum: 04ec9b1710f868b75bc83ffe45a1b97a954f2d62bf814388ea3e5383caf2e216
+- filename: test/fixtures/root-annotations-null/main.tf
+  checksum: ffb5cd64117baba3ec0c2b19ed64d17dc1d1fc8dec543949fb4c3c9eec5bfb8a
+- filename: test/fixtures/root-labels-null/main.tf
+  checksum: 32b015e4b8732402024e0b3be46dabe36cce1454e37a88b814afb16849031e97
+- filename: test/fixtures/root-replication-null/main.tf
+  checksum: 3be334bdd0bc9f75901f56f006eea795a78affa77c3a3364b9436c1083c3558c
