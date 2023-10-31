@@ -67,7 +67,7 @@ test/ephemeral/%/main.tf: $(wildcard examples/%/*.tf)
 
 .PHONY: clean
 clean: $(wildcard test/setup/terraform.tfstate)
-	if test -n "$<" && test -f "$<"; then bundle exec kitchen destroy; fi
+	if test -n "$<" && test -f "$<"; then ulimit -n 1024 && bundle exec kitchen destroy; fi
 	if test -n "$<" && test -f "$<"; then terraform -chdir=$(<D) destroy -auto-approve; fi
 	if test -n "$<" && test -f "$<"; then rm "$<"; fi
 
