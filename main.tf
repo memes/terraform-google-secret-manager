@@ -59,6 +59,11 @@ resource "google_secret_manager_secret" "secret" {
       # and the API prevents assignment of aliases until the secret value exists. Users of the module may add aliases
       # after the fact, so make sure this module ignores them.
       version_aliases,
+      # Ignore any changes in `rotation` value; this module will NOT set or modify these values since they will cause
+      # unintentional drift when used in the real-world. For example, a secret created with rotation_period of 1h and
+      # next_rotation_time of now + 61m will show a diff in 2 hours time, should a `terraform plan` or `terraform apply`
+      # be executed. This will be unintentional and I argue that the incorrect action would be to reset the secret.
+      rotation,
     ]
   }
 }
