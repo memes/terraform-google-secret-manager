@@ -7,6 +7,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0](https://github.com/memes/terraform-google-secret-manager/compare/v2.1.2...v2.2.0) (2023-10-31)
+
+
+### Features
+
+* Add Pub/Sub topic support ([1c4b2a4](https://github.com/memes/terraform-google-secret-manager/commit/1c4b2a41c844f6a518bd176a8a3b2c1f2e267a1e))
+* Add support for Google provider v5 ([2880be2](https://github.com/memes/terraform-google-secret-manager/commit/2880be22236351558dc2c317dc86a8d96d474bb8)), closes [#76](https://github.com/memes/terraform-google-secret-manager/issues/76)
+* Set TTL on secrets ([bd27278](https://github.com/memes/terraform-google-secret-manager/commit/bd272786755c3bd279cc5bdb7965bfee440dbc8b))
+
+
+### Bug Fixes
+
+* Ignore changes in `rotation` ([7d79ea5](https://github.com/memes/terraform-google-secret-manager/commit/7d79ea5da85c7c754a06f6c6b15b25a170146813))
+* Make variables more robust ([27b9324](https://github.com/memes/terraform-google-secret-manager/commit/27b93241f592b5b414776f79d9424dae4355dd7a))
+* Update random provider example ([b34bccf](https://github.com/memes/terraform-google-secret-manager/commit/b34bccffc41abeb820cb62b7eac485b72a52092f))
+
 ## [2.1.2](https://github.com/memes/terraform-google-secret-manager/compare/v2.1.1...v2.1.2) (2023-10-18)
 
 
