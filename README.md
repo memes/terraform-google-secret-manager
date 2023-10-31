@@ -11,12 +11,12 @@ in GCP [Secret Manager](https://cloud.google.com/secret-manager) with Terraform
 > NOTE: The random sub-module has been removed from v2.x releases; use Terraform's
 > random provider or other method to generate a suitable secret password.
 
-<!-- spell-checker: ignore secretmanager cret -->
 Given a project identifier, the module will create a new secret, or update an
 existing secret version, so that it contains the value provided. An optional list
 of IAM user, group, or service account identifiers can be provided and each of
 the identifiers will be granted `roles/secretmanager.secretAccessor` on the secret.
 
+<!-- spell-checker: disable -->
 ```hcl
 module "secret" {
   source     = "memes/secret-manager/google"
@@ -27,8 +27,8 @@ module "secret" {
   accessors  = ["group:team@example.com"]
 }
 ```
+<!-- spell-checker: enable -->
 
-<!-- spell-checker:ignore markdownlint -->
 <!-- markdownlint-disable MD033 MD034-->
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements

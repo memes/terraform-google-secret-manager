@@ -14,9 +14,9 @@ encryption key to use for secret encryption.
 |Pub/Sub Notifications||Not managed by example.|
 |TTL||Not managed by example.|
 
-<!-- spell-checker: disable -->
 ### Example terraform.tfvars
 
+<!-- spell-checker: disable -->
 ```properties
 # Example TF vars file
 project_id = "my-project-id"
@@ -24,3 +24,4 @@ id = "my-secret-id"
 secret = "T0pS3cretP@ssword!"
 auto_replication_kms_key_name = "projects/my-project-id/locations/global/keyRings/my-global-keyring/cryptoKeys/global-key"
 ```
+<!-- spell-checker: enable -->

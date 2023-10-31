@@ -13,14 +13,15 @@ provider to generate a random secret value which is replication automatically.
 |Pub/Sub Notifications||Not managed by example.|
 |TTL||Not managed by example.|
 
-<!-- spell-checker: disable -->
 ### Example terraform.tfvars
 
+<!-- spell-checker: disable -->
 ```properties
 # Example TF vars file
 project_id = "my-project-id"
 id = "my-secret-id"
 ```
+<!-- spell-checker: enable -->
 
 ### Example commands
 

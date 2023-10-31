@@ -14,9 +14,9 @@ for more details.
 |Pub/Sub Notifications|&check;|Notifications sent to Pub/Sub Topic provided.|
 |TTL||Not managed by example.|
 
-<!-- spell-checker: disable -->
 ### Example terraform.tfvars
 
+<!-- spell-checker: disable -->
 ```properties
 # Example TF vars file
 project_id = "my-project-id"
@@ -26,3 +26,4 @@ topics = [
     'projects/my-project-id/topics/my-secret-notifications'
 ]
 ```
+<!-- spell-checker: enable -->

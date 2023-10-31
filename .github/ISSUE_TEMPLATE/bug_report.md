@@ -30,7 +30,6 @@ How can we reproduce this behaviour? Which version of F5's product was used?
 
 ## Additional context
 
-<!-- spell-checker: ignore Pastebin -->
 Add any other context about the problem here. Sanitised snippets of logs are
 welcome, but I prefer that you upload larger files to a third-party host
 (Pastebin, GCS bucket, etc.) and provide a link instead.

@@ -1,4 +1,4 @@
-# spell-checker: ignore fileignoreconfig tfvars
+# Talisman configuration for secret manager module
 ---
 version: ""
 fileignoreconfig:

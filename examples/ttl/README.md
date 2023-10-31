@@ -12,9 +12,9 @@ This example shows how to specify a secret that will be automatically deleted af
 |Pub/Sub Notifications||Not managed by example.|
 |TTL|&check;|Automatically deleted after specified number of seconds.|
 
-<!-- spell-checker: disable -->
 ### Example terraform.tfvars
 
+<!-- spell-checker: disable -->
 ```properties
 # Example TF vars file
 project_id = "my-project-id"
@@ -22,3 +22,4 @@ id = "my-secret-id"
 secret = "T0pS3cretP@ssword!"
 ttl_secs = 300
 ```
+<!-- spell-checker: enable -->

@@ -2,7 +2,6 @@
 # perform linting using pre-commit.
 ---
 # yamllint disable rule:line-length
-# spell-checker: ignore yamllint chmod
 name: pre-commit
 
 # yamllint disable-line rule:truthy
