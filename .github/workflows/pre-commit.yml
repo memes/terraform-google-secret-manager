@@ -32,4 +32,4 @@ jobs:
         with:
           ruby-version: 3.0.6
           bundler-cache: true
-      - uses: pre-commit/action@v3.0.0
+      - uses: pre-commit/action@v3.0.1
