@@ -13,6 +13,12 @@ updates:
       interval: "weekly"
     reviewers:
       - memes
+  - package-ecosystem: "pip"
+    directory: /
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - memes
   - package-ecosystem: "terraform"
     directory: "/"
     schedule:

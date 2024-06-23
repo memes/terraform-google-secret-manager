@@ -1,0 +1,3 @@
+# Python requirements for hacking on this repo
+pre-commit==3.7.1
+-r requirements.txt
