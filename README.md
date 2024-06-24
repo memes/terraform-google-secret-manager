@@ -10,6 +10,7 @@ in GCP [Secret Manager](https://cloud.google.com/secret-manager) with Terraform
 
 > NOTE: The random sub-module has been removed from v2.x releases; use Terraform's
 > random provider or other method to generate a suitable secret password.
+> See [Random provider](examples/with-random-provider/) for an example.
 
 Given a project identifier, the module will create a new secret, or update an
 existing secret version, so that it contains the value provided. An optional list
@@ -20,7 +21,7 @@ the identifiers will be granted `roles/secretmanager.secretAccessor` on the secr
 ```hcl
 module "secret" {
   source     = "memes/secret-manager/google"
-  version    = "2.2.0"
+  version    = "2.2.1"
   project_id = "my-project-id"
   id         = "my-secret"
   secret     = "T0pS3cret!"
