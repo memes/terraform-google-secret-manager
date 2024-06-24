@@ -21,7 +21,7 @@ the identifiers will be granted `roles/secretmanager.secretAccessor` on the secr
 ```hcl
 module "secret" {
   source     = "memes/secret-manager/google"
-  version    = "2.2.0"
+  version    = "2.2.1"
   project_id = "my-project-id"
   id         = "my-secret"
   secret     = "T0pS3cret!"
