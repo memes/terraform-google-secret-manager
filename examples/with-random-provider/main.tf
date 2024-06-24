@@ -16,16 +16,19 @@ terraform {
 
 # Create a random value for secret
 resource "random_string" "secret" {
-  length           = 16
-  upper            = true
-  min_upper        = 2
-  lower            = true
-  min_lower        = 2
-  numeric          = true
-  min_numeric      = 2
-  special          = true
-  min_special      = 2
-  override_special = "!@#$%&*()-_=+[]{}<>:?"
+  length      = 16
+  upper       = true
+  min_upper   = 2
+  lower       = true
+  min_lower   = 2
+  numeric     = true
+  min_numeric = 2
+  special     = true
+  min_special = 2
+  # Since I use this example often with F5 BIG-IP, set the default set of special characters to those listed in
+  # https://my.f5.com/manage/s/article/K2873, excluding all forms of quotation, apostrophe and backslash to avoid
+  # potential issues when quoting the string.
+  override_special = "!$%^&*()~-+=[]{}:./<>|"
 }
 
 # Allow module to create the secret without a value
