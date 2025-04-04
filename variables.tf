@@ -88,7 +88,7 @@ variable "accessors" {
   type    = list(string)
   default = []
   validation {
-    condition     = var.accessors == null ? true : length(join("", [for acct in var.accessors : can(regex("^(?:group|serviceAccount|user):[^@]+@[^@]*$", acct)) ? "x" : ""])) == length(var.accessors)
+    condition     = var.accessors == null ? true : length(join("", [for acct in var.accessors : can(regex("^(?:group|serviceAccount|user):[^@]+@[^@]*$", acct)) || can(regex("^principal://iam.googleapis.com/projects/", acct)) ? "x" : ""])) == length(var.accessors)
     error_message = "Each accessors value must be a valid IAM account identifier; e.g. user:jdoe@company.com, group:admins@company.com, serviceAccount:service@project.iam.gserviceaccount.com."
   }
   description = <<EOD
