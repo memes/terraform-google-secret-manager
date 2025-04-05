@@ -1,7 +1,7 @@
 # Secret Manager for Terraform 0.14+
 
 ![GitHub release](https://img.shields.io/github/v/release/memes/terraform-google-secret-manager?sort=semver)
-![Maintenance](https://img.shields.io/maintenance/yes/2024)
+![Maintenance](https://img.shields.io/maintenance/yes/2025)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
 This module provides an opinionated wrapper around creating and managing secret values
@@ -21,7 +21,7 @@ the identifiers will be granted `roles/secretmanager.secretAccessor` on the secr
 ```hcl
 module "secret" {
   source     = "memes/secret-manager/google"
-  version    = "2.2.1"
+  version    = "2.3.0"
   project_id = "my-project-id"
   id         = "my-secret"
   secret     = "T0pS3cret!"
