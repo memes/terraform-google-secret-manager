@@ -34,7 +34,7 @@ resource "random_string" "secret" {
 # Allow module to create the secret without a value
 module "secret" {
   source     = "memes/secret-manager/google"
-  version    = "2.3.0"
+  version    = "2.2.2"
   project_id = var.project_id
   id         = var.id
   secret     = null
