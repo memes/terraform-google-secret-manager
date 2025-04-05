@@ -7,6 +7,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.2](https://github.com/memes/terraform-google-secret-manager/compare/v2.2.1...v2.2.2) (2025-04-05)
+
+
+### Bug Fixes
+
+* Workload identity principals as accessors ([dbf2229](https://github.com/memes/terraform-google-secret-manager/commit/dbf22290ea37a07567d0bdb2454a12698193e7a0))
+* Workload identity principals as accessors ([97cf873](https://github.com/memes/terraform-google-secret-manager/commit/97cf873b30dcbdf1ddcdd3a1fffde54864cd4d9b)), closes [#103](https://github.com/memes/terraform-google-secret-manager/issues/103)
+
 ## [2.2.1](https://github.com/memes/terraform-google-secret-manager/compare/v2.2.0...v2.2.1) (2024-06-24)
 
 
