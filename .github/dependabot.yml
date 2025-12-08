@@ -1,27 +1,19 @@
 ---
 version: 2
 updates:
-  - package-ecosystem: "bundler"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    reviewers:
-      - memes
-  - package-ecosystem: "github-actions"
+  - packageecosystem: bundler
     directory: /
     schedule:
-      interval: "weekly"
-    reviewers:
-      - memes
-  - package-ecosystem: "pip"
+      interval: weekly
+  - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: "weekly"
-    reviewers:
-      - memes
-  - package-ecosystem: "terraform"
-    directory: "/"
+      interval: weekly
+  - package-ecosystem: pip
+    directory: /
     schedule:
-      interval: "weekly"
-    reviewers:
-      - memes
+      interval: weekly
+  - package-ecosystem: terraform
+    directory: /
+    schedule:
+      interval: weekly
