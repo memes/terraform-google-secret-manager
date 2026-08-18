@@ -17,7 +17,7 @@ jobs:
     env:
       BUNDLE_WITH: dev
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Install talisman
         run: |
           sudo curl -sLo /usr/local/bin/talisman https://github.com/thoughtworks/talisman/releases/download/v1.32.0/talisman_linux_amd64
